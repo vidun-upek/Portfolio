@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand-red: rgb(192, 53, 64);
+}
+
+@layer utilities {
+  /* --- Scroll Snap Logic --- */
+  .snap-container {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .snap-section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hide Scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* --- 3D Text Effect --- */
+  .text-3d {
+    text-shadow: 
+      0 1px 0 #444, 0 2px 0 #333, 0 3px 0 #222, 
+      0 4px 0 #111, 0 5px 0 #000, 0 6px 1px rgba(0,0,0,.1), 
+      0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 
+      0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25);
+  }
+
+  /* --- Sword Slash Animation --- */
+  .sword-slash {
+    position: relative;
+    overflow: hidden;
+  }
+  .sword-slash::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+    transform: skewX(-25deg);
+    transition: none;
+    pointer-events: none;
+  }
+  .group:hover .sword-slash::after {
+    left: 200%;
+    transition: left 0.7s ease-in-out;
+  }
+}

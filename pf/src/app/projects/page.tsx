@@ -1,20 +1,13 @@
-import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ProjectsSection from "@/components/ProjectsSection";
 
-export default function ProjectsPage() {
+export default function Home() {
   return (
-    <main style={{ padding: 40 }}>
-      <h1>Projects</h1>
-
-      <ul>
-        <li>
-          <Link href="/projects/meditrace">MediTrace</Link>
-        </li>
-        <li>
-          <Link href="/projects/crackcode">CrackCode</Link>
-        </li>
-      </ul>
+    <main className="snap-container no-scrollbar bg-black text-white">
+      <Navbar />
+      <HeroSection />
+      <ProjectsSection />
     </main>
   );
 }
-
-
