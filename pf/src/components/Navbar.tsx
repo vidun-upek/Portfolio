@@ -1,20 +1,48 @@
+"use client";
+
 import Link from "next/link";
 
 export default function Navbar() {
+  const scrollToProjects = () => {
+    const section = document.getElementById("projects");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const itemClass =
+    "text-[12px] font-semibold uppercase tracking-[0.25em] text-white/90 hover:text-[rgb(192,53,64)] transition-colors";
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-8 pointer-events-none text-white mix-blend-difference">
-      <div className="w-24 pointer-events-auto"></div>
-      <ul className="flex gap-12 text-xs font-bold uppercase tracking-[0.2em] pointer-events-auto">
-        <li className="hover:text-brand-red transition-colors cursor-pointer">
-          <Link href="/about">About</Link>
-        </li>
-        <li className="hover:text-brand-red transition-colors cursor-pointer">
-          <a href="#socials">Socials</a>
-        </li>
-        <li className="hover:text-brand-red transition-colors cursor-pointer flex items-center gap-2">
-          More <span>↓</span>
-        </li>
-      </ul>
-    </nav>
+    /* Increased right spacing from 20 to 32 to move navbar further left */
+    <div className="absolute right-32 top-8 z-30">
+      <nav>
+        <ul className="flex items-center gap-8">
+          <li>
+            <Link href="/about" className={itemClass}>
+              About
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/socials" className={itemClass}>
+              Socials
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/techstack" className={itemClass}>
+              Tech Stack ↓
+            </Link>
+          </li>
+
+          <li>
+            <button onClick={scrollToProjects} className={itemClass}>
+              Projects ↓
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }
