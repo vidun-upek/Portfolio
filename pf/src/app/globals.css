@@ -62,4 +62,36 @@
     left: 200%;
     transition: left 0.7s ease-in-out;
   }
+/* Hard extruded 3D text (white face + black offset) */
+.text-extrude-black {
+  /* Optional crisp edge */
+  -webkit-text-stroke: 1px rgba(0,0,0,0.25);
+
+  /* Extrusion (stacked shadows) */
+  text-shadow:
+    1px 1px 0 #000,
+    2px 2px 0 #000,
+    3px 3px 0 #000,
+    4px 4px 0 #000,
+    5px 5px 0 #000,
+    6px 6px 0 #000,
+    7px 7px 0 #000,
+    8px 8px 0 #000,
+    10px 10px 16px rgba(0,0,0,0.55);
+}
+/* Hard extruded 3D text (white face + brand offset) */
+.text-extrude-brand {
+  -webkit-text-stroke: 1px rgba(0,0,0,0.22);
+
+  text-shadow:
+    1px 1px 0 rgb(var(--brand)),
+    2px 2px 0 rgb(var(--brand)),
+    3px 3px 0 rgb(var(--brand)),
+    4px 4px 0 rgb(var(--brand)),
+    5px 5px 0 rgb(var(--brand)),
+    6px 6px 0 rgb(var(--brand)),
+    8px 8px 14px rgba(0,0,0,0.55);
+}
+
+
 }
