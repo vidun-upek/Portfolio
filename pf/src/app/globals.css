@@ -2,96 +2,128 @@
 
 @theme {
   --color-brand-red: rgb(192, 53, 64);
+  --color-brand-red-light: rgb(220, 80, 90);
+  --color-surface: rgb(8, 8, 8);
+  --color-surface-light: rgb(14, 14, 14);
 }
 
-@layer utilities {
-  /* --- Scroll Snap Logic --- */
-  .snap-container {
-    height: 100vh;
-    width: 100vw;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-  }
-  
-  .snap-section {
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    overflow: hidden;
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Hide Scrollbar */
-  .no-scrollbar::-webkit-scrollbar {
+  ::selection {
+    background: rgb(192, 53, 64);
+    color: white;
+  }
+
+  /* Body scrolls naturally — NO overflow hidden */
+  /* Smooth native scrolling for anchors and programmatic scrolls */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    font-family: "Outfit", sans-serif;
+    background: #000;
+    color: #fff;
+  }
+
+  /* Hide scrollbar globally */
+  body::-webkit-scrollbar {
     display: none;
   }
-  .no-scrollbar {
+  body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  /* --- 3D Text Effect --- */
-  .text-3d {
-    text-shadow: 
-      0 1px 0 #444, 0 2px 0 #333, 0 3px 0 #222, 
-      0 4px 0 #111, 0 5px 0 #000, 0 6px 1px rgba(0,0,0,.1), 
-      0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 
-      0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25);
-  }
-
-  /* --- Sword Slash Animation --- */
-  .sword-slash {
-    position: relative;
-    overflow: hidden;
-  }
-  .sword-slash::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
-    transform: skewX(-25deg);
-    transition: none;
-    pointer-events: none;
-  }
-  .group:hover .sword-slash::after {
-    left: 200%;
-    transition: left 0.7s ease-in-out;
-  }
-/* Hard extruded 3D text (white face + black offset) */
-.text-extrude-black {
-  /* Optional crisp edge */
-  -webkit-text-stroke: 1px rgba(0,0,0,0.25);
-
-  /* Extrusion (stacked shadows) */
-  text-shadow:
-    1px 1px 0 #000,
-    2px 2px 0 #000,
-    3px 3px 0 #000,
-    4px 4px 0 #000,
-    5px 5px 0 #000,
-    6px 6px 0 #000,
-    7px 7px 0 #000,
-    8px 8px 0 #000,
-    10px 10px 16px rgba(0,0,0,0.55);
-}
-/* Hard extruded 3D text (white face + brand offset) */
-.text-extrude-brand {
-  -webkit-text-stroke: 1px rgba(0,0,0,0.22);
-
-  text-shadow:
-    1px 1px 0 rgb(var(--brand)),
-    2px 2px 0 rgb(var(--brand)),
-    3px 3px 0 rgb(var(--brand)),
-    4px 4px 0 rgb(var(--brand)),
-    5px 5px 0 rgb(var(--brand)),
-    6px 6px 0 rgb(var(--brand)),
-    8px 8px 14px rgba(0,0,0,0.55);
 }
 
+@layer utilities {
+  .font-display {
+    font-family: "Bebas Neue", sans-serif;
+  }
 
+  .font-body {
+    font-family: "Outfit", sans-serif;
+  }
+}
+
+/* ─── Splash / Shine animation ─── */
+.splash-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-container .splash-effect {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  opacity: 0;
+  transform: translateX(-120%) skewX(-18deg);
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 65%,
+    transparent 100%
+  );
+}
+
+.splash-container:hover .splash-effect {
+  animation: splashMove 750ms ease-out forwards;
+}
+
+@keyframes splashMove {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  12% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(140%) skewX(-18deg);
+  }
+}
+
+/* ─── Strip hover ─── */
+.strip-card {
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.strip-card .strip-image {
+  filter: grayscale(100%);
+  transition: filter 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.strip-card:hover .strip-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.strip-card .strip-overlay {
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.strip-card:hover .strip-overlay {
+  opacity: 0.3 !important;
+}
+
+/* ─── Hero GIF overlay ─── */
+.gif-overlay {
+  transition: opacity 0.5s ease;
+}
+
+.gif-wrapper:hover .gif-overlay {
+  opacity: 0 !important;
 }
