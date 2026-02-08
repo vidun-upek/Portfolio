@@ -1,44 +1,53 @@
 "use client";
 
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroSection from "@/components/HeroSection";
 import EducationSection from "@/components/EducationSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
-import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  // This ensures that when sections are pinned, GSAP recalculates positions
   useEffect(() => {
     window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <main className="snap-container">
-      {/* Page 1: About - Explicitly marked as a snap-section */}
-      <section id="about" className="snap-section">
+    <main>
+      {/* Page 1: Hero */}
+      <section id="about">
         <HeroSection />
       </section>
 
-      {/* Page 2: Education (Horizontal) - GSAP handles its own pinning */}
-      <section id="education" className="snap-section">
+      {/* Page 2: Education — GSAP pins this internally */}
+      <section id="education" className="py-12 md:py-24">
         <EducationSection />
       </section>
 
-      {/* Page 3: Tech Stack (Horizontal) */}
-      <section id="techstack" className="snap-section">
+      {/* Page 3: Skills — GSAP pins this internally */}
+      <section id="techstack" className="py-12 md:py-24">
         <SkillsSection />
       </section>
 
-      {/* Page 4: Projects (Horizontal) */}
-      <section id="projects" className="snap-section">
+      {/* Page 4: Projects — GSAP pins this internally */}
+      <section id="projects" className="py-12 md:py-24">
         <ProjectsSection />
       </section>
 
-      {/* Page 5: Contact (Final) */}
-      <section id="contact" className="snap-section">
+      {/* Page 5: Contact */}
+      <section id="contact">
         <ContactSection />
       </section>
     </main>

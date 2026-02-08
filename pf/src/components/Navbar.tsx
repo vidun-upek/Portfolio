@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 export default function Navbar() {
   const scrollTo = (id: string) => {
     const section = document.getElementById(id);
@@ -10,40 +8,28 @@ export default function Navbar() {
     }
   };
 
-  const itemClass =
-    "text-[12px] font-semibold uppercase tracking-[0.25em] text-white/90 hover:text-[rgb(192,53,64)] transition-colors cursor-pointer";
+  const links = [
+    { label: "About", id: "about" },
+    { label: "Education", id: "education" },
+    { label: "Skills", id: "techstack" },
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
+  ];
 
   return (
-    <div className="absolute right-32 top-8 z-50">
-      <nav>
-        <ul className="flex items-center gap-8">
-          <li>
-            <button onClick={() => scrollTo("about")} className={itemClass}>
-              About
+    <nav className="absolute top-0 right-0 z-50 p-6 pr-10">
+      <ul className="flex items-center gap-8">
+        {links.map((link) => (
+          <li key={link.id}>
+            <button
+              onClick={() => scrollTo(link.id)}
+              className="font-display text-[14px] tracking-[0.18em] uppercase text-white/80 hover:text-brand-red transition-colors duration-300 cursor-pointer"
+            >
+              {link.label}
             </button>
           </li>
-          <li>
-            <button onClick={() => scrollTo("contact")} className={itemClass}>
-              Contact ↓
-            </button>
-          </li>
-          <li>
-            <button onClick={() => scrollTo("education")} className={itemClass}>
-              Education ↓
-            </button>
-          </li>
-          <li>
-            <button onClick={() => scrollTo("techstack")} className={itemClass}>
-              Tech Stack ↓
-            </button>
-          </li>
-          <li>
-            <button onClick={() => scrollTo("projects")} className={itemClass}>
-              Projects ↓
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        ))}
+      </ul>
+    </nav>
   );
 }
