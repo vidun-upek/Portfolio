@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,27 +13,19 @@ export default function ProjectsSection() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const scroller = document.querySelector(".snap-container");
-    
+    if (!trackRef.current || !containerRef.current) return;
+
     const ctx = gsap.context(() => {
-      if (!trackRef.current || !containerRef.current) return;
+      const track = trackRef.current!;
+      const container = containerRef.current!;
 
-      // Calculate the exact width of the track
-      const totalWidth = trackRef.current.scrollWidth;
-      const windowWidth = window.innerWidth;
-      
-      // Stop the scroll exactly at the end of the last card
-      const scrollAmount = totalWidth - windowWidth;
-
-      gsap.to(trackRef.current, {
-        x: -scrollAmount,
+      gsap.to(track, {
+        x: () => -(track.scrollWidth - container.clientWidth),
         ease: "none",
         scrollTrigger: {
-          trigger: containerRef.current,
-          scroller: scroller || document.body, 
+          trigger: container,
           start: "top top",
-          end: `+=${scrollAmount}`, 
+          end: () => `+=${track.scrollWidth - container.clientWidth}`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -45,105 +38,86 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <div id="projects" ref={containerRef} className="snap-section bg-[#050505] overflow-hidden flex items-center">
-      {/* Height increased to 85vh for taller cards */}
-      <div ref={trackRef} className="flex h-[85vh] w-fit px-[10vw] gap-12 items-center">
-        
-        {/* Intro Section */}
-        <div className="w-[400px] h-full flex flex-col justify-center shrink-0 pr-20">
-             <span className="text-brand-red text-xs font-bold tracking-[0.4em] uppercase block mb-4">
-                02 — Projects
-             </span>
-             <h2 className="text-6xl font-black text-white uppercase italic tracking-tighter leading-[0.9] mb-6">
-               Selected<br/>Works
-             </h2>
-             <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest">
-               End-to-end engineering from cloud architecture to pixel-perfect interfaces.
-             </p>
+    <div
+      ref={containerRef}
+      className="h-screen w-full bg-[#050505] flex items-stretch overflow-hidden"
+    >
+      <div ref={trackRef} className="flex h-screen w-fit items-stretch">
+        {/* Title Strip */}
+        <div className="relative w-[35vw] shrink-0 flex flex-col justify-center border-r border-white/5 px-16 bg-[#050505]">
+          <span className="font-display text-[13px] tracking-[0.5em] text-brand-red block mb-6">
+            04 — Projects
+          </span>
+          <h2 className="font-display text-[7vw] leading-[0.85] text-white uppercase">
+            Selected
+            <br />
+            Works
+          </h2>
+          <p className="mt-8 font-body text-sm text-white/30 tracking-wide max-w-xs leading-relaxed">
+            End-to-end engineering from cloud architecture to pixel-perfect
+            interfaces.
+          </p>
+          <div className="absolute bottom-16 left-16 right-16 h-px bg-gradient-to-r from-brand-red/40 to-transparent" />
         </div>
 
-        {/* Vertical Project Cards (5 cards) */}
-        {stripProjects.slice(0, 5).map((p, i) => (
-          <div 
-            key={p.slug} 
-            className="projectCard relative w-[380px] h-full shrink-0 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden group cursor-pointer"
-          >
-            <div className="splash" />
+        {/* Project Strips */}
+        {stripProjects.map((project, i) => {
+          const techList = project.tech || [];
 
-            <div className="absolute inset-0 z-0">
-              <Image 
-                src={p.image} 
-                alt={p.title} 
-                fill 
-                className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 opacity-40 group-hover:opacity-100" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-            </div>
+          return (
+            <div
+              key={project.slug}
+              className="strip-card splash-container relative w-[30vw] shrink-0 border-r border-white/5 cursor-pointer group"
+            >
+              <div className="splash-effect" />
 
-            <div className="absolute inset-0 p-10 flex flex-col justify-end z-10">
-              <span className="text-brand-red text-[10px] font-bold tracking-[0.4em] uppercase mb-2">
-                Project 0{i + 1}
-              </span>
-              <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter mb-4 leading-none">
-                {p.title}
-              </h3>
-              
-              <div className="space-y-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <p className="text-white/60 text-xs uppercase tracking-widest line-clamp-2">
-                  {p.description || "Scalable system architecture and automated deployment pipelines."}
-                </p>
-                <div className="flex flex-wrap gap-2 pt-2">
-                    {p.tech?.slice(0, 3).map(t => (
-                        <span key={t} className="text-[9px] border border-white/20 px-2 py-1 text-white/40 uppercase tracking-tighter">{t}</span>
-                    ))}
+              <div className="strip-image absolute inset-0">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="strip-overlay absolute inset-0 bg-black/55" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none z-[1]" />
+
+              <div className="relative z-10 h-full flex flex-col justify-between p-10">
+                <div className="flex justify-between items-start">
+                  <span className="font-display text-[11px] tracking-[0.4em] text-brand-red/70 group-hover:text-brand-red transition-colors duration-500">
+                    {project.category || "Project"}
+                  </span>
+                  <span className="font-display text-5xl text-white/5 group-hover:text-white/15 transition-colors duration-500 leading-none">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white uppercase leading-[0.9] transition-colors duration-500 mb-4">
+                    {project.title}
+                  </h3>
+                  <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    <p className="font-body text-sm text-white/50 leading-relaxed mb-4 line-clamp-2">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {techList.slice(0, 4).map((t) => (
+                        <span
+                          key={t}
+                          className="font-body text-[10px] border border-white/20 px-3 py-1 text-white/40 uppercase tracking-wider"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-
-        {/* Spacer removed to prevent scrolling into empty space */}
-      </div>
-
-      <style jsx global>{`
-        .projectCard .splash {
-          pointer-events: none;
-          position: absolute;
-          inset: 0;
-          z-index: 20;
-          opacity: 0;
-          transform: translateX(-120%) skewX(-18deg);
-          background: linear-gradient(
-            115deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0) 35%,
-            rgba(255, 255, 255, 0.7) 50%,
-            rgba(255, 255, 255, 0) 65%,
-            transparent 100%
           );
-        }
-
-        .projectCard:hover .splash {
-          animation: splashMove 850ms ease-out forwards;
-        }
-
-        @keyframes splashMove {
-          0% {
-            opacity: 0;
-            transform: translateX(-120%) skewX(-18deg);
-          }
-          12% {
-            opacity: 0.8;
-          }
-          70% {
-            opacity: 0.4;
-          }
-          100% {
-            opacity: 0;
-            transform: translateX(140%) skewX(-18deg);
-          }
-        }
-      `}</style>
+        })}
+      </div>
     </div>
   );
 }
