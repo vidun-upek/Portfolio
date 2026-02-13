@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "VSU | Portfolio",
-  description: "Vidun Shanuka Upek — FullStack, DevOps, ML",
+  title: "Vidun Shanuka | Portfolio",
+  description: "Full Stack Developer, DevOps, & ML Enthusiast",
 };
 
 export default function RootLayout({
@@ -13,19 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-black text-white antialiased">
+      <body className={inter.className}>
+        <Navbar />
         {children}
       </body>
     </html>
