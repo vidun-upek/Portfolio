@@ -40,6 +40,18 @@
   animation: splashMove 850ms ease-out forwards;
 }
 
+  @layer 
+  utilities {
+  /* Hides the scrollbar for horizontal scrolling */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
 @keyframes splashMove {
   0% {
     opacity: 0;
@@ -55,4 +67,7 @@
     opacity: 0;
     transform: translateX(140%) skewX(-18deg);
   }
+
+
+
 }
