@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -18,7 +18,7 @@ export default function CertificationsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!trackRef.current || !containerRef.current) return;
     const ctx = gsap.context(() => {
       const scrollAmount = Math.max(0, trackRef.current!.scrollWidth - window.innerWidth);
@@ -35,7 +35,16 @@ export default function CertificationsPage() {
         },
       });
     }, containerRef);
-    return () => ctx.revert();
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill(true));
+      document.querySelectorAll(".pin-spacer").forEach(spacer => {
+        const parent = spacer.parentElement;
+        if (!parent) return;
+        while (spacer.firstChild) parent.insertBefore(spacer.firstChild, spacer);
+        parent.removeChild(spacer);
+      });
+      try { ctx.revert(); } catch (_) {}
+    };
   }, []);
 
   return (
