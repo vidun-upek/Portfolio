@@ -48,4 +48,12 @@ export const stripProjects: StripProject[] = [
     description: "Initial portfolio showcasing projects and case studies.",
     tech: ["HTML", "CSS", "JavaScript"],
   },
+  {
+    slug: "food-delivery",
+    title: "Food Delivery",
+    image: "/strips/bg1.png",
+    category: "Full Stack",
+    description: "Food delivery company website with real-time order tracking.",
+    tech: ["Next.js", "React", "TypeScript"],
+  },
 ];
