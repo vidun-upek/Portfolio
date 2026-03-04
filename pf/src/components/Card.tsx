@@ -19,6 +19,12 @@ interface CardProps {
     skills: string[];
     tags: string[];
     motto: string;
+    bio?: string;
+    subheading?: string;
+    ctaLink?: string;
+    quickFacts?: Array<{ icon: string; label: string; value: string }>;
+    techBadges?: string[];
+    status?: string;
   };
 }
 
@@ -123,17 +129,19 @@ export default function Card({
       {/* Splash Animation */}
       <div className="splash z-20" />
 
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/strips/bg1.png" 
-          alt={title} 
-          fill 
-          className="object-cover opacity-40 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
-        <div className="absolute inset-y-0 right-0 w-16 bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
-      </div>
+      {/* Background Image - Only for non-profile cards */}
+      {!isProfile && (
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/strips/bg1.png" 
+            alt={title} 
+            fill 
+            className="object-cover opacity-40 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-16 bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
+        </div>
+      )}
 
       {/* Card Number - Top Section */}
       <div className="absolute top-0 left-0 w-full p-8 md:p-12 flex justify-between items-start z-10 mt-20 md:mt-16">
@@ -145,55 +153,91 @@ export default function Card({
 
       {/* Profile Card Content */}
       {isProfile && profileData ? (
-        <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10 pb-10">
+        <div className="relative z-10 h-full flex flex-col justify-center p-8 md:p-12">
 
-          {/* Logo — absolute top-left */}
+          {/* BLACK BACKGROUND */}
+          <div className="absolute inset-0 z-0 bg-black" />
+
+          {/* LOGO CONTAINER */}
           <div className="absolute top-6 left-6 z-30 w-12 h-12">
             <Image src="/logo.jpg" alt="logo" fill className="object-contain rounded-lg" />
           </div>
 
-          {/* Main row: profile picture (left) + all details (right) */}
-          <div className="flex gap-6 items-end">
+          {/* MAIN LAYOUT CONTAINER - Left (Picture + Name + Button) + Right (Facts) */}
+          <div className="relative z-20 flex flex-col md:flex-row items-start gap-8 md:gap-16">
 
-            {/* Left — profile picture, sits below logo naturally */}
-            <div className="flex-shrink-0">
-              <div className="w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden border-2 border-white/20 relative shadow-2xl hover:border-brand-red hover:shadow-[0_0_30px_rgba(192,53,64,0.3)] transition-all duration-500 bg-white/5">
+            {/* LEFT SECTION: PROFILE IMAGE + NAME + BUTTON */}
+            <div className="flex flex-col items-center md:items-start gap-4 flex-shrink-0">
+
+              {/* PROFILE IMAGE */}
+              <div className="w-64 h-64 rounded-2xl overflow-hidden border border-white/10 relative shadow-2xl bg-white/5">
                 <Image src="/profilepic.jpg" alt={profileData.name} fill className="object-cover" />
               </div>
-            </div>
 
-            {/* Right — text content */}
-            <div className="flex-1 min-w-0">
-
-              {/* Name */}
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white leading-[0.9]">
+              {/* NAME */}
+              <h2 className="text-4xl font-bold tracking-tight text-white text-center md:text-left">
                 {profileData.name}
               </h2>
 
-              {/* Age */}
-              <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] mt-2">
-                Age&nbsp;{profileData.age}
-              </p>
+              {/* BUTTON */}
+              <button
+                onClick={() => window.location.href = "/about"}
+                className="px-6 py-2 bg-brand-red text-white font-semibold text-sm rounded hover:bg-red-600 transition-colors duration-300 hover:shadow-lg"
+              >
+                More About Me
+              </button>
+            </div>
 
-              {/* Engagement types */}
-              <div className="mt-4 space-y-[5px]">
-                {["Internships", "Freelance", "Collaborations"].map((item) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <span className="w-[5px] h-[5px] rounded-full bg-brand-red flex-shrink-0" />
-                    <span className="text-[10px] text-white/60 uppercase tracking-[0.25em]">{item}</span>
+            {/* RIGHT SECTION: STATUS + TEXT CONTENT */}
+            <div className="flex-1 min-w-0">
+
+              {/* STATUS INDICATOR SECTION - Different Style */}
+              {profileData.status && (
+                <div className="mb-6 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/10 border border-green-500/30 rounded-lg">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-green-400 inline-block animate-pulse" />
+                    <span className="text-green-300 text-sm font-semibold uppercase tracking-wide">
+                      {profileData.status}
+                    </span>
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
 
-              {/* Descriptor */}
-              <p className="text-[11px] text-white/45 mt-4 leading-relaxed">
-                Full&#8202;Stack&nbsp;Dev&nbsp;·&nbsp;ML&nbsp;Model&nbsp;Training&nbsp;·&nbsp;Agent&nbsp;Buildup&nbsp;·&nbsp;DevOps&nbsp;/&nbsp;CI·CD
-              </p>
+              {/* QUICK FACTS SECTION */}
+              {profileData.quickFacts && (
+                <div className="space-y-4">
+                  {profileData.quickFacts.map((fact, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      {/* Fact Icon */}
+                      <span className="text-lg flex-shrink-0">{fact.icon}</span>
+                      
+                      {/* Fact Content */}
+                      <div className="min-w-0">
+                        <p className="text-xs text-white/50 uppercase tracking-wider font-semibold">
+                          {fact.label}
+                        </p>
+                        <p className="text-sm text-white/80 whitespace-pre-line break-words">
+                          {fact.value}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-              {/* Motto */}
-              <p className="text-brand-red text-[10px] font-black uppercase tracking-[0.3em] mt-5">
-                {profileData.motto}
-              </p>
+              {/* TECH BADGES SECTION */}
+              {profileData.techBadges && profileData.techBadges.length > 0 && (
+                <div className="flex gap-2 flex-wrap mt-6">
+                  {profileData.techBadges.map((badge, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 text-xs font-semibold text-white/80 bg-white/10 border border-white/20 rounded-full hover:bg-brand-red/20 hover:border-brand-red transition-all duration-300"
+                    >
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
