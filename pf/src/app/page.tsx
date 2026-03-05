@@ -54,6 +54,17 @@ export default function Home() {
 
   return (
     <>
+      {/* Scroll-to-top button - Fixed on right side, hidden on hero */}
+      {activeSection !== "hero" && (
+        <button
+          onClick={() => sectionRefs.current["hero"]?.scrollIntoView({ behavior: "smooth" })}
+          className="fixed bottom-8 right-8 z-40 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-[#C03540] text-white shadow-lg hover:bg-[#E05060] transition-all duration-300 hover:scale-110"
+          title="Back to top"
+        >
+          ↑
+        </button>
+      )}
+
       <main className="relative z-10 text-black dark:text-white min-h-screen overflow-x-hidden">
 
       {/* ── SIDE PROGRESS DOTS ──────────────────────────────────────── */}
@@ -73,88 +84,101 @@ export default function Home() {
       </div>
 
       {/* ══════════════════════════════════════════
-          1. HERO
+          1. HERO  –  Full viewport: 100vw × 100vh
       ══════════════════════════════════════════ */}
       <section
         ref={setRef("hero")}
         id="hero"
-        className="min-h-screen flex flex-col justify-center px-8 md:px-16 xl:px-32 pt-28 pb-24 relative overflow-hidden border-b border-black/10 dark:border-white/10"
+        className="h-screen w-full relative overflow-hidden border-b border-black/10 dark:border-white/10"
       >
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#C03540]/30 bg-[#C03540]/5 rounded-full mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#C03540] animate-pulse shrink-0" />
-            <span className="text-[#C03540] text-[9px] font-bold uppercase tracking-wider">{profileData.status}</span>
+        <div className="relative z-30 w-full h-full flex text-white">
+
+          {/* ── LEFT: Vertical portrait with padding and rounded edges ── */}
+          <div className="w-[28%] min-w-[220px] max-w-[360px] h-full shrink-0 p-5 pr-2 pt-20">
+            <div className="w-full h-[88%] mt-[6%] rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="/strips/myself01.png"
+                alt="Vidun Shanuka"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
           </div>
 
-          {/* Name + Tagline Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-10 items-start">
-            {/* Left: Name */}
-            <div>
-              <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none mb-3">
-                <div className="flex flex-wrap justify-start" style={{ gap: "0.1em" }}>
-                  {["V", "I", "D", "U", "N"].map((ch, i) => (
-                    <SpringLetter key={`f-${i}`} char={ch} mouse={mouse} fontSize="clamp(32px, 5vw, 72px)" />
-                  ))}
-                </div>
-                <div className="flex flex-wrap justify-start -mt-1" style={{ gap: "0.1em" }}>
-                  {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
-                    <SpringLetter key={`l-${i}`} char={ch} mouse={mouse} fontSize="clamp(32px, 5vw, 72px)" />
-                  ))}
-                </div>
-              </h1>
-              {/* Subtitle - More Prominent */}
-              <p className="text-black/50 dark:text-white/50 text-sm md:text-base uppercase tracking-[0.2em] font-semibold max-w-2xl">{profileData.subheading}</p>
+          {/* ── RIGHT: All content ── */}
+          <div className="flex-1 h-full flex flex-col justify-center gap-5 px-10 pr-16 pt-16">
+
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#C03540]/40 bg-[#C03540]/10 rounded-full w-fit">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C03540] animate-pulse shrink-0" />
+              <span className="text-[#C03540] text-xs font-bold uppercase tracking-wider">{profileData.status}</span>
             </div>
 
-            {/* Right: Tagline */}
-            <div className="flex items-start pt-4">
-              <p className="text-3xl md:text-4xl leading-relaxed text-black/70 dark:text-white/70 max-w-lg">
-                I <span className="font-bold text-[#C03540]">build</span>, <span className="font-bold text-[#C03540]">ship</span> & <span className="font-bold text-[#C03540]">scale</span> software that <span className="font-semibold text-black/90 dark:text-white/90">solves real-world problems</span>.
+            {/* Name + Tagline inline */}
+            <div className="flex items-start gap-6">
+              <div>
+                <h1 className="font-black uppercase italic tracking-tighter leading-none">
+                  <div className="flex flex-wrap" style={{ gap: "0.05em" }}>
+                    {["V", "I", "D", "U", "N"].map((ch, i) => (
+                      <div key={`f-${i}`} className={i === 0 ? "animate-bounce" : ""}>
+                        <SpringLetter char={ch} mouse={mouse} fontSize="clamp(40px, 5.5vw, 72px)" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap -mt-2" style={{ gap: "0.05em" }}>
+                    {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
+                      <div key={`l-${i}`} className={i === 6 ? "animate-bounce" : ""} style={i === 6 ? { animationDelay: "0.3s" } : {}}>
+                        <SpringLetter char={ch} mouse={mouse} fontSize="clamp(40px, 5.5vw, 72px)" />
+                      </div>
+                    ))}
+                  </div>
+                </h1>
+                <p className="text-black/50 dark:text-white/50 text-sm uppercase tracking-widest font-semibold mt-3">{profileData.subheading}</p>
+              </div>
+              <p className="text-2xl leading-relaxed text-black/70 dark:text-white/60 pt-2 flex-1">
+                I{" "}
+                <span className="font-bold text-[#C03540] animate-pulse" style={{ animationDelay: "0s" }}>
+                  build
+                </span>
+                , <span className="font-bold text-[#C03540] animate-pulse" style={{ animationDelay: "0.3s" }}>
+                  ship
+                </span> &amp;{" "}
+                <span className="font-bold text-[#C03540] animate-pulse" style={{ animationDelay: "0.6s" }}>
+                  scale
+                </span> software that{" "}
+                <span className="font-semibold text-black/90 dark:text-white/90">solves real-world problems</span>.
               </p>
             </div>
-          </div>
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mb-10">
-            {/* Left: Photo */}
-            <div className="flex justify-center lg:justify-start">
-              <div className="w-56 h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-[#C03540]/30 dark:border-[#C03540]/20 relative shadow-xl dark:bg-black/40">
-                <Image src="/profilepic.jpg" alt="Vidun Shanuka" fill className="object-cover" priority />
-              </div>
-            </div>
-
-            {/* Middle: Info Cards */}
-            <div className="lg:col-span-2 flex flex-col justify-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                {profileData.quickFacts.map((fact, i) => (
-                  <div key={i} className="flex items-start gap-4 p-5 rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-[#0A0A0A] hover:border-[#C03540]/40 dark:hover:border-[#C03540]/40 hover:bg-white/80 dark:hover:bg-[#121212] transition-all duration-300">
-                    <span className="text-2xl shrink-0 mt-0.5">{fact.icon}</span>
-                    <div className="flex-1">
-                      <p className="text-[10px] text-[#C03540] uppercase tracking-widest font-bold mb-2">{fact.label}</p>
-                      <p className="text-sm text-black/70 dark:text-white/70 leading-relaxed whitespace-pre-line">{fact.value}</p>
-                    </div>
+            {/* Quick Fact Cards */}
+            <div className="grid grid-cols-2 gap-3">
+              {profileData.quickFacts.map((fact, i) => (
+                <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:border-[#C03540]/40 transition-all duration-300">
+                  <span className="text-2xl shrink-0 leading-none pt-0.5">{fact.icon}</span>
+                  <div className="min-w-0">
+                    <p className="text-[11px] text-[#C03540] uppercase tracking-wider font-bold leading-none mb-1">{fact.label}</p>
+                    <p className="text-sm text-black/70 dark:text-white/70 leading-snug">{fact.value}</p>
                   </div>
-                ))}
-              </div>
-
-              {/* CTAs - Side by Side */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="flex-1 px-8 py-3.5 bg-[#C03540] text-white font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-[#E05060] transition-all duration-300 text-center shadow-lg shadow-[#C03540]/20 hover:shadow-lg hover:shadow-[#C03540]/40">
-                  Get In Touch
-                </Link>
-                <Link href="/about" className="flex-1 px-8 py-3.5 border border-[#C03540]/40 text-[#C03540] font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-[#C03540]/5 hover:border-[#C03540]/60 transition-all duration-300 text-center dark:border-[#C03540]/30 dark:text-[#C03540] dark:hover:bg-[#C03540]/10">
-                  More About Me
-                </Link>
-              </div>
+                </div>
+              ))}
             </div>
+
+            {/* CTAs */}
+            <div className="flex gap-4">
+              <Link href="/contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#E05060] transition-all duration-300 shadow-lg shadow-[#C03540]/30">
+                Get In Touch
+              </Link>
+              <Link href="/about" className="px-8 py-3 border border-[#C03540]/50 text-[#C03540] font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#C03540]/10 transition-all duration-300">
+                More About Me
+              </Link>
+            </div>
+
           </div>
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-black/20 dark:text-white/20">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-black/20 dark:text-white/20">
           <span className="text-[9px] uppercase tracking-[0.4em]">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-black/20 dark:from-white/20 to-transparent animate-pulse" />
+          <div className="w-px h-8 bg-linear-to-b from-black/20 dark:from-white/20 to-transparent animate-pulse" />
         </div>
       </section>
 
@@ -163,30 +187,118 @@ export default function Home() {
       ══════════════════════════════════════════ */}
       <section ref={setRef("techstack")} id="techstack" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 01 — Tech Stack" title="Tech Stack" desc="The tools, languages, and frameworks I use to build scalable systems." />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {techData.map((tech) => (
-              <div key={tech.id} className="group relative h-72 rounded-2xl border border-black/8 dark:border-white/10 overflow-hidden bg-gray-50 dark:bg-black hover:border-[rgb(192,53,64)]/40 transition-all duration-500">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 0%, rgba(192,53,64,0.1) 0%, transparent 70%)" }} />
-                <div className="relative z-10 h-full p-8 flex flex-col justify-between">
-                  <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em]">Stack {tech.label}</span>
-                  <div>
-                    <h3 className="text-3xl font-black text-black dark:text-white uppercase italic tracking-tighter leading-none mb-2">{tech.title}</h3>
-                    <p className="text-[11px] text-black/35 dark:text-white/35 mb-5 leading-relaxed">{tech.desc}</p>
-                    <div className="flex flex-col gap-2">
-                      {tech.skills.map((skill) => (
-                        <div key={skill} className="flex items-center gap-3">
-                          <div className="h-px w-4 bg-[rgb(192,53,64)] shrink-0" />
-                          <span className="text-[11px] font-bold text-black/65 dark:text-white/65 uppercase tracking-wider">{skill}</span>
-                        </div>
+          <SectionHeader module="Module 01 — Tech Stack" title="Tech Stack" desc="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering." />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {techData.map((tech, idx) => {
+              const categoryColors: Record<string, string> = {
+                front: "#FF6B6B",
+                back: "#4ECDC4",
+                ml: "#FFE66D",
+                database: "#95E1D3",
+                devops: "#A8E6CF",
+                core: "#FF8B94",
+              };
+
+              const categoryIcons: Record<string, string> = {
+                Frontend: "🎨",
+                Backend: "⚙️",
+                "Machine Learning": "🧠",
+                Database: "💾",
+                "DevOps & Cloud": "☁️",
+                "Software Architecture": "🏗️",
+              };
+
+              return (
+                <div
+                  key={tech.id}
+                  className="tech-card-group group relative rounded-2xl overflow-hidden border border-black/8 dark:border-white/10 bg-white/50 dark:bg-black/50 hover:border-black/20 dark:hover:border-white/20 transition-all duration-500"
+                  style={{
+                    animation: `slideInUp 0.6s ease-out ${idx * 0.1}s backwards`,
+                  }}
+                >
+                  {/* Animated gradient glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 30% 30%, ${categoryColors[tech.id]}30, transparent 70%)`,
+                    }}
+                  />
+
+                  <div className="relative p-8 h-full flex flex-col">
+                    {/* Top section with icon */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="text-3xl">{categoryIcons[tech.title]}</div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl font-black mb-2 transition-all duration-500 group-hover:translate-x-1 text-black dark:text-white uppercase italic tracking-tighter">
+                      {tech.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs leading-relaxed mb-6 flex-grow text-black/45 dark:text-white/45">
+                      {tech.desc}
+                    </p>
+
+                    {/* Divider */}
+                    <div className="h-px mb-4 bg-black/10 dark:bg-white/10" />
+
+                    {/* Skills - Display all */}
+                    <div className="flex flex-wrap gap-2">
+                      {tech.skills.map((skill, i) => (
+                        <span
+                          key={skill}
+                          className="text-xs font-bold px-2.5 py-1 rounded border transition-all duration-300 group-hover:scale-105 uppercase tracking-wider"
+                          style={{
+                            borderColor: categoryColors[tech.id],
+                            color: categoryColors[tech.id],
+                            backgroundColor: `${categoryColors[tech.id]}08`,
+                            fontFamily: "'JetBrains Mono', monospace",
+                          }}
+                        >
+                          {skill.replace(/\(.*\)/, "").trim()}
+                        </span>
                       ))}
                     </div>
                   </div>
+
+                  {/* Hover border gradient */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: `linear-gradient(135deg, ${categoryColors[tech.id]}25, transparent 70%)`,
+                    }}
+                  />
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .tech-card-group:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+          }
+
+          @media (prefers-color-scheme: dark) {
+            .tech-card-group:hover {
+              box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            }
+          }
+        `}</style>
       </section>
 
       {/* ══════════════════════════════════════════
@@ -202,19 +314,27 @@ export default function Home() {
                   <Image src={p.image} alt={p.title} fill className="object-cover opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
                 </div>
-                <div className="relative z-10 h-full p-7 flex flex-col justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em]">Project {p.label}</span>
-                    <span className="text-white/25 text-[10px] uppercase tracking-wider">{p.category}</span>
-                  </div>
-                  <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter leading-none mb-3">{p.title}</h3>
-                    <p className="text-[11px] text-white/50 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{p.description}</p>
+
+                {/* Center-left title + tech tags */}
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                  <div className="flex flex-col gap-3 max-w-[60vw]">
+                    <span className="text-white text-2xl md:text-3xl font-black drop-shadow-sm truncate">{p.title}</span>
                     <div className="flex flex-wrap gap-2">
                       {p.tech.map((t) => (
-                        <span key={t} className="text-[9px] border border-white/20 px-2 py-0.5 uppercase tracking-wider text-white/45">{t}</span>
+                        <span key={t} className="text-[10px] text-white/90 bg-white/10 px-2 py-0.5 rounded uppercase tracking-wider">{t}</span>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                <div className="relative z-10 h-full p-7 flex flex-col justify-between">
+                  <div className="flex justify-end items-start">
+                    <span className="text-white text-[10px] uppercase tracking-wider">{p.category}</span>
+                  </div>
+                  <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    {/* title displayed at top-left; removed duplicate heading for consistency */}
+                    <p className="text-[11px] text-white/50 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{p.description}</p>
+                    {/* tech tags moved to left title block above */}
                   </div>
                 </div>
               </div>
@@ -235,7 +355,6 @@ export default function Home() {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 0%, rgba(192,53,64,0.07) 0%, transparent 60%)" }} />
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-6">
-                    <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em]">Academic {edu.label}</span>
                     <span className="text-black/25 dark:text-white/25 text-[10px] font-bold uppercase tracking-widest">{edu.year}</span>
                   </div>
                   <h3 className="text-xl font-black text-black dark:text-white uppercase italic tracking-tighter leading-tight mb-2">{edu.title}</h3>
@@ -261,15 +380,28 @@ export default function Home() {
           <SectionHeader module="Module 04 — Certifications" title="Certifications" desc="Verified expertise from industry leaders in Cloud, AI, and Software Engineering." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {certData.map((cert) => (
-              <div key={cert.id} className="group relative h-56 rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500">
+              <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 100%, rgba(192,53,64,0.09) 0%, transparent 60%)" }} />
-                <div className="relative z-10 h-full p-7 flex flex-col justify-between">
-                  <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em]">License {cert.label}</span>
-                  <div className="translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-2xl font-black text-black dark:text-white uppercase italic tracking-tighter leading-none mb-1">{cert.title}</h3>
-                    <p className="text-[10px] font-bold text-black/35 dark:text-white/35 uppercase tracking-wide mb-3">{cert.subtitle}</p>
-                    <p className="text-[11px] text-black/25 dark:text-white/25 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">{cert.desc}</p>
-                  </div>
+
+                {/* Image area */}
+                <div className="w-full h-40 bg-slate-800/10 flex items-center justify-center overflow-hidden">
+                  {cert.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={cert.image} alt={cert.title} className="w-full h-40 object-cover" />
+                  ) : (
+                    <div className="w-full h-40 flex items-center justify-center text-white/60">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="#fff" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="text-lg font-black text-black dark:text-white uppercase tracking-tight mb-1">{cert.title}</h3>
+                  {cert.subtitle && <p className="text-[10px] font-bold text-[rgb(192,53,64)] uppercase tracking-wider mb-2">{cert.subtitle}</p>}
+                  <p className="text-[11px] text-black/45 dark:text-white/45 leading-relaxed line-clamp-3">{cert.desc}</p>
                 </div>
               </div>
             ))}
