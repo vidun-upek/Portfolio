@@ -54,10 +54,10 @@ export default function Home() {
 
   return (
     <>
-      <main className="relative z-10 bg-white text-black dark:bg-black dark:text-white min-h-screen overflow-x-hidden">
+      <main className="relative z-10 text-black dark:text-white min-h-screen overflow-x-hidden">
 
       {/* ── SIDE PROGRESS DOTS ──────────────────────────────────────── */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3 items-center">
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4 items-center">
         {sections.map(({ id, label }) => (
           <button
             key={id}
@@ -65,8 +65,8 @@ export default function Home() {
             title={label}
             className={`transition-all duration-300 rounded-full ${
               activeSection === id
-                ? "w-2 h-6 bg-[#C03540]"
-                : "w-2 h-2 bg-black/20 dark:bg-white/20 hover:bg-black/50 dark:hover:bg-white/50"
+                ? "w-3 h-8 bg-[#C03540] shadow-lg shadow-[#C03540]/50"
+                : "w-3 h-3 bg-black/30 dark:bg-white/30 hover:bg-[#C03540]/60 dark:hover:bg-[#C03540]/60 hover:w-3 hover:h-6"
             }`}
           />
         ))}
@@ -80,52 +80,73 @@ export default function Home() {
         id="hero"
         className="min-h-screen flex flex-col justify-center px-8 md:px-16 xl:px-32 pt-28 pb-24 relative overflow-hidden border-b border-black/10 dark:border-white/10"
       >
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start md:items-center gap-14 md:gap-24">
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#C03540]/30 bg-[#C03540]/5 rounded-full mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#C03540] animate-pulse shrink-0" />
+            <span className="text-[#C03540] text-[9px] font-bold uppercase tracking-wider">{profileData.status}</span>
+          </div>
 
-          {/* Left — Photo + CTA */}
-          <div className="flex flex-col items-center md:items-start gap-5 shrink-0">
-            <div className="w-52 h-52 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 relative shadow-2xl">
-              <Image src="/profilepic.jpg" alt="Vidun Shanuka" fill className="object-cover" priority />
+          {/* Name + Tagline Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-10 items-start">
+            {/* Left: Name */}
+            <div>
+              <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none mb-3">
+                <div className="flex flex-wrap justify-start" style={{ gap: "0.1em" }}>
+                  {["V", "I", "D", "U", "N"].map((ch, i) => (
+                    <SpringLetter key={`f-${i}`} char={ch} mouse={mouse} fontSize="clamp(32px, 5vw, 72px)" />
+                  ))}
+                </div>
+                <div className="flex flex-wrap justify-start -mt-1" style={{ gap: "0.1em" }}>
+                  {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
+                    <SpringLetter key={`l-${i}`} char={ch} mouse={mouse} fontSize="clamp(32px, 5vw, 72px)" />
+                  ))}
+                </div>
+              </h1>
+              {/* Subtitle - More Prominent */}
+              <p className="text-black/50 dark:text-white/50 text-sm md:text-base uppercase tracking-[0.2em] font-semibold max-w-2xl">{profileData.subheading}</p>
             </div>
-            <div className="flex flex-col gap-3 w-full">
-              <Link href="/contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-[10px] uppercase tracking-widest rounded hover:bg-[#E05060] transition-colors duration-300 text-center">
-                Get In Touch
-              </Link>
-              <Link href="/about" className="px-8 py-3 border border-black/15 dark:border-white/15 text-black dark:text-white font-bold text-[10px] uppercase tracking-widest rounded hover:border-black/40 dark:hover:border-white/40 transition-colors duration-300 text-center">
-                More About Me
-              </Link>
+
+            {/* Right: Tagline */}
+            <div className="flex items-start pt-4">
+              <p className="text-3xl md:text-4xl leading-relaxed text-black/70 dark:text-white/70 max-w-lg">
+                I <span className="font-bold text-[#C03540]">build</span>, <span className="font-bold text-[#C03540]">ship</span> & <span className="font-bold text-[#C03540]">scale</span> software that <span className="font-semibold text-black/90 dark:text-white/90">solves real-world problems</span>.
+              </p>
             </div>
           </div>
 
-          {/* Right — Info */}
-          <div className="flex-1 min-w-0">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-8">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
-              <span className="text-green-600 dark:text-green-300 text-[10px] font-bold uppercase tracking-wide">{profileData.status}</span>
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mb-10">
+            {/* Left: Photo */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="w-56 h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-[#C03540]/30 dark:border-[#C03540]/20 relative shadow-xl dark:bg-black/40">
+                <Image src="/profilepic.jpg" alt="Vidun Shanuka" fill className="object-cover" priority />
+              </div>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter leading-none mb-3">
-              <div className="flex flex-wrap justify-start" style={{ gap: "0.1em" }}>
-                {["V", "I", "D", "U", "N"].map((ch, i) => (
-                  <SpringLetter key={`f-${i}`} char={ch} mouse={mouse} fontSize="clamp(40px, 8vw, 100px)" />
-                ))}
-              </div>
-              <div className="flex flex-wrap justify-start -mt-2" style={{ gap: "0.1em" }}>
-                {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
-                  <SpringLetter key={`l-${i}`} char={ch} mouse={mouse} fontSize="clamp(40px, 8vw, 100px)" />
-                ))}
-              </div>
-            </h1>
-            <p className="text-black/35 dark:text-white/35 text-xs uppercase tracking-[0.3em] mb-12">{profileData.subheading}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {profileData.quickFacts.map((fact, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="text-base shrink-0 mt-0.5">{fact.icon}</span>
-                  <div>
-                    <p className="text-[10px] text-black/30 dark:text-white/30 uppercase tracking-wider font-bold mb-0.5">{fact.label}</p>
-                    <p className="text-sm text-black/75 dark:text-white/75 whitespace-pre-line leading-relaxed">{fact.value}</p>
+
+            {/* Middle: Info Cards */}
+            <div className="lg:col-span-2 flex flex-col justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                {profileData.quickFacts.map((fact, i) => (
+                  <div key={i} className="flex items-start gap-4 p-5 rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-[#0A0A0A] hover:border-[#C03540]/40 dark:hover:border-[#C03540]/40 hover:bg-white/80 dark:hover:bg-[#121212] transition-all duration-300">
+                    <span className="text-2xl shrink-0 mt-0.5">{fact.icon}</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] text-[#C03540] uppercase tracking-widest font-bold mb-2">{fact.label}</p>
+                      <p className="text-sm text-black/70 dark:text-white/70 leading-relaxed whitespace-pre-line">{fact.value}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* CTAs - Side by Side */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/contact" className="flex-1 px-8 py-3.5 bg-[#C03540] text-white font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-[#E05060] transition-all duration-300 text-center shadow-lg shadow-[#C03540]/20 hover:shadow-lg hover:shadow-[#C03540]/40">
+                  Get In Touch
+                </Link>
+                <Link href="/about" className="flex-1 px-8 py-3.5 border border-[#C03540]/40 text-[#C03540] font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-[#C03540]/5 hover:border-[#C03540]/60 transition-all duration-300 text-center dark:border-[#C03540]/30 dark:text-[#C03540] dark:hover:bg-[#C03540]/10">
+                  More About Me
+                </Link>
+              </div>
             </div>
           </div>
         </div>
