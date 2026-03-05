@@ -3,27 +3,9 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { education } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const educationData = [
-  {
-    id: "uni",
-    title: "University of Westminster",
-    subtitle: "BEng (Hons) Software Engineering",
-    description: "Undergraduate degree pursued at IIT Sri Lanka. Second-year focus on Software Architecture, Advanced Data Structures, and Object-Oriented Programming (OOP).",
-    year: "2024 — Present",
-    skills: ["Java", "System Architecture", "Algorithms"]
-  },
-  {
-    id: "school",
-    title: "High School Education",
-    subtitle: "Advanced Level / Ordinary Level",
-    description: "Strong foundation in Mathematics, Physics, and analytical problem-solving, setting the groundwork for an engineering career.",
-    year: "Graduated",
-    skills: ["Mathematics", "Physics", "Analytical Thinking"]
-  }
-];
 
 export default function EducationPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,7 +60,7 @@ export default function EducationPage() {
         </div>
 
         {/* Education Cards */}
-        {educationData.map((edu, i) => (
+        {education.map((edu, i) => (
           <div key={edu.id} className="group relative w-[450px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700">
             <div className="splash" />
             

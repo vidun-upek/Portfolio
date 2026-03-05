@@ -3,17 +3,9 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { techStack } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const techData = [
-  { id: "front", title: "Frontend", desc: "Building pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "GSAP"] },
-  { id: "back", title: "Backend", desc: "Architecting scalable and secure server-side applications.", skills: ["Node.js", "Express", "Python", "MongoDB", "PostgreSQL", "REST APIs"] },
-  { id: "ml", title: "Machine Learning", desc: "Training intelligent models and deep neural networks.", skills: ["PyTorch", "TensorFlow", "Pandas", "Scikit-Learn", "Jupyter"] },
-  { id: "devops", title: "DevOps & Cloud", desc: "Automating zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"] },
-  { id: "core", title: "Core & Soft", desc: "The engineering principles behind the code.", skills: ["System Design", "Agile Workflow", "Data Structures", "OOP (Java)"] },
-  { id: "design", title: "UI/UX & Design", desc: "Creating beautiful, intuitive user experiences with modern design systems.", skills: ["Figma", "Adobe XD", "Design Systems", "User Research", "Prototyping"] }
-];
 
 export default function TechStackPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,7 +52,7 @@ export default function TechStackPage() {
           </p>
         </div>
 
-        {techData.map((tech, i) => (
+        {techStack.map((tech, i) => (
           <div
             key={tech.id}
             className="tech-card group relative w-[380px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700"

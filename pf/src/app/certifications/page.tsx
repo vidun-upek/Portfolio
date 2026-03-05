@@ -3,16 +3,9 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { certifications } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const certData = [
-  { id: "ibm", title: "IBM Cloud", subtitle: "Docker & Kubernetes Specialist", desc: "Container orchestration, building images, and cloud-native deployment." },
-  { id: "meta", title: "Meta", subtitle: "Frontend Developer Professional", desc: "Advanced React, UI/UX principles, and modern frontend architecture." },
-  { id: "deeplearning", title: "DeepLearning.AI", subtitle: "Neural Networks & Deep Learning", desc: "Model training, backpropagation, and AI engineering." },
-  { id: "google", title: "Google IT", subtitle: "Automation with Python", desc: "System administration and infrastructure automation using Python scripting." },
-  { id: "aws", title: "AWS Academy", subtitle: "Cloud Foundations", desc: "Infrastructure design, serverless architecture, and cloud security." }
-];
 
 export default function CertificationsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,7 +53,7 @@ export default function CertificationsPage() {
           </p>
         </div>
 
-        {certData.map((cert, i) => (
+        {certifications.map((cert, i) => (
           <div key={cert.id} className="group relative w-[380px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700">
             <div className="splash" />
             
