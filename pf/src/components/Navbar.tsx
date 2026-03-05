@@ -10,6 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
   const { theme, toggle } = useTheme();
 
   useEffect(() => {
@@ -17,6 +18,30 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Track active section on homepage
+  useEffect(() => {
+    if (!isHome) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const sectionIds = ["techstack", "projects", "education", "certifications", "learnings", "contact"];
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [isHome]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -49,7 +74,7 @@ export default function Navbar() {
       <div className="px-8 md:px-16 xl:px-32 h-16 flex items-center justify-between max-w-screen-2xl mx-auto">
 
         {/* Logo */}
-        <Link href="/" className="relative w-9 h-9 rounded-lg overflow-hidden border dark:border-white/10 border-black/10 hover:dark:border-white/30 hover:border-black/30 transition-all duration-300 flex-shrink-0">
+        <Link href="/" className="relative w-7 h-7 rounded-lg overflow-hidden border dark:border-white/10 border-black/10 hover:dark:border-white/30 hover:border-black/30 transition-all duration-300 flex-shrink-0">
           <Image src="/logo.jpg" alt="logo" fill className="object-contain" />
         </Link>
 
@@ -60,9 +85,11 @@ export default function Navbar() {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollTo(link.id)}
-                    className="text-[10px] font-bold uppercase tracking-[0.3em] dark:text-white/50 text-black/50 dark:hover:text-white hover:text-black transition-colors duration-300"
+                    className="text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group dark:text-white/50 text-black/50 dark:hover:text-white hover:text-black"
                   >
                     {link.label}
+                    {/* Hover underline */}
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                   </button>
                 </li>
               ))
@@ -70,13 +97,19 @@ export default function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-300 ${
+                    className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group ${
                       pathname === link.href
-                        ? "text-[rgb(192,53,64)]"
+                        ? "dark:text-white text-black"
                         : "dark:text-white/50 text-black/50 dark:hover:text-white hover:text-black"
                     }`}
                   >
                     {link.label}
+                    {/* Hover underline */}
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    {/* Active page underline */}
+                    {pathname === link.href && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgb(192,53,64)]" />
+                    )}
                   </Link>
                 </li>
               ))}
