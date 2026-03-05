@@ -25,7 +25,6 @@ export default function CertificationsPage() {
           scrub: 0.5,
           pin: true,
           invalidateOnRefresh: true,
-          fastKill: true,
         },
       });
     }, containerRef);
