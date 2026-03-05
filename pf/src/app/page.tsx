@@ -3,74 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { SpringLetter, useMouse } from "@/components/InteractiveHero";
+import { profileData, techStack, stripProjects, education, certifications, learnings, navSections } from "@/data/projects";
 
-// ─── DATA ─────────────────────────────────────────────────────────────────────
-
-const profileData = {
-  name: "Vidun Shanuka",
-  subheading: "Full Stack Developer & DevOps Enthusiast",
-  status: "Available for Internships — DevOps / Full Stack / ML",
-  quickFacts: [
-    { icon: "📍", label: "Location", value: "Colombo, Sri Lanka" },
-    { icon: "🎓", label: "Education", value: "CS Undergraduate @ IIT\nAnanda College · Vidara College" },
-    { icon: "💼", label: "Looking For", value: "DevOps / Full Stack / ML Internships" },
-    { icon: "🚀", label: "Current Focus", value: "ML Integration into GitHub Workflows" },
-  ],
-};
-
-const techData = [
-  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "GSAP"] },
-  { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server-side applications.", skills: ["Node.js", "Express", "Python", "MongoDB", "PostgreSQL"] },
-  { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["PyTorch", "TensorFlow", "Pandas", "Scikit-Learn", "Jupyter"] },
-  { id: "devops", label: "04", title: "DevOps & Cloud", desc: "Zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"] },
-  { id: "core", label: "05", title: "Core Skills", desc: "Engineering principles behind the code.", skills: ["System Design", "Agile", "Data Structures", "OOP (Java)"] },
-];
-
-const projectsData = [
-  { slug: "meditrace", label: "01", title: "MediTrace", category: "Full Stack", description: "Healthcare data tracing and lineage platform built for hospitals and clinics.", tech: ["React", "Node.js", "PostgreSQL"], image: "/strips/bg1.png" },
-  { slug: "crackcode", label: "02", title: "CrackCode", category: "EdTech", description: "Interactive coding challenge platform for learners of all levels.", tech: ["Next.js", "TypeScript", "Tailwind"], image: "/strips/bg1.png" },
-  { slug: "rag-fyp", label: "03", title: "RAG FYP", category: "AI / ML", description: "Retrieval-augmented generation research project using open-source LLMs.", tech: ["Python", "PyTorch", "LangChain"], image: "/strips/bg1.png" },
-  { slug: "devops-pipelines", label: "04", title: "DevOps Pipelines", category: "Infrastructure", description: "Automated CI/CD and IaC pipelines for production-grade systems.", tech: ["Docker", "Kubernetes", "Terraform"], image: "/strips/bg1.png" },
-  { slug: "portfolio-v1", label: "05", title: "Portfolio V1", category: "Frontend", description: "My first personal portfolio showcasing projects, skills, and case studies.", tech: ["HTML", "CSS", "JavaScript"], image: "/strips/bg1.png" },
-];
-
-const educationData = [
-  { id: "uni", label: "01", title: "University of Westminster", subtitle: "BEng (Hons) Software Engineering — IIT Sri Lanka", year: "2024 — Present", description: "Second-year focus on Software Architecture, Advanced Data Structures, and Object-Oriented Programming with Java.", skills: ["Java", "System Architecture", "Algorithms", "OOP"] },
-  { id: "al", label: "02", title: "Ananda College", subtitle: "G.C.E. Advanced Level — Physical Science Stream", year: "2021 — 2023", description: "Strong academic foundation in Mathematics and Physics, paving the way for a computer science career.", skills: ["Mathematics", "Physics", "Analytical Thinking"] },
-  { id: "ol", label: "03", title: "Vidara College", subtitle: "G.C.E. Ordinary Level", year: "2011 — 2021", description: "Completed O/L examinations with strong results across core academic subjects including ICT and Mathematics.", skills: ["Mathematics", "Science", "ICT"] },
-];
-
-const certData = [
-  { id: "ibm", label: "01", title: "IBM Cloud", subtitle: "Docker & Kubernetes Specialist", desc: "Container orchestration, building images, and cloud-native deployment strategies." },
-  { id: "meta", label: "02", title: "Meta", subtitle: "Frontend Developer Professional", desc: "Advanced React patterns, UI/UX principles, and modern frontend architecture." },
-  { id: "deeplearning", label: "03", title: "DeepLearning.AI", subtitle: "Neural Networks & Deep Learning", desc: "Model training, backpropagation theory, and practical AI engineering." },
-  { id: "google", label: "04", title: "Google IT", subtitle: "Automation with Python", desc: "System administration and infrastructure automation using Python scripting." },
-  { id: "aws", label: "05", title: "AWS Academy", subtitle: "Cloud Foundations", desc: "Infrastructure design, serverless architecture, and cloud security principles." },
-];
-
-const learningsData = [
-  { label: "01", title: "React & TypeScript", description: "Building scalable, type-safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
-  { label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end-to-end solutions.", tags: ["Node.js", "APIs", "Databases"] },
-  { label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud-native tools.", tags: ["AWS", "Docker", "CI/CD"] },
-  { label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
-];
-
-const sections = [
-  { id: "hero", label: "Profile" },
-  { id: "techstack", label: "Tech Stack" },
-  { id: "projects", label: "Projects" },
-  { id: "education", label: "Education" },
-  { id: "certifications", label: "Certifications" },
-  { id: "learnings", label: "Learnings" },
-  { id: "contact", label: "Contact" },
-];
+// Aliases for backwards compatibility with page structure
+const techData = techStack;
+const projectsData = stripProjects;
+const educationData = education;
+const certData = certifications;
+const learningsData = learnings;
+const sections = navSections;
 
 // ─── COMPONENTS ──────────────────────────────────────────────────────────────
 
 function SectionHeader({ module, title, desc }: { module: string; title: string; desc: string }) {
   return (
     <div className="mb-16 md:mb-20">
-      <span className="text-[rgb(192,53,64)] text-xs font-bold uppercase tracking-[0.4em] block mb-3">{module}</span>
+      <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.4em] block mb-3">{module}</span>
       <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-none mb-5">{title}</h2>
       <p className="text-xs text-black/40 dark:text-white/40 uppercase tracking-widest max-w-md leading-relaxed">{desc}</p>
     </div>
@@ -82,6 +31,7 @@ function SectionHeader({ module, title, desc }: { module: string; title: string;
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const mouse = useMouse();
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -103,7 +53,8 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-white text-black dark:bg-black dark:text-white min-h-screen overflow-x-hidden">
+    <>
+      <main className="relative z-10 bg-white text-black dark:bg-black dark:text-white min-h-screen overflow-x-hidden">
 
       {/* ── SIDE PROGRESS DOTS ──────────────────────────────────────── */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3 items-center">
@@ -114,7 +65,7 @@ export default function Home() {
             title={label}
             className={`transition-all duration-300 rounded-full ${
               activeSection === id
-                ? "w-2 h-6 bg-[rgb(192,53,64)]"
+                ? "w-2 h-6 bg-[#C03540]"
                 : "w-2 h-2 bg-black/20 dark:bg-white/20 hover:bg-black/50 dark:hover:bg-white/50"
             }`}
           />
@@ -129,9 +80,6 @@ export default function Home() {
         id="hero"
         className="min-h-screen flex flex-col justify-center px-8 md:px-16 xl:px-32 pt-28 pb-24 relative overflow-hidden border-b border-black/10 dark:border-white/10"
       >
-        {/* Subtle dot grid */}
-        <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-
         <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start md:items-center gap-14 md:gap-24">
 
           {/* Left — Photo + CTA */}
@@ -140,7 +88,7 @@ export default function Home() {
               <Image src="/profilepic.jpg" alt="Vidun Shanuka" fill className="object-cover" priority />
             </div>
             <div className="flex flex-col gap-3 w-full">
-              <Link href="/contact" className="px-8 py-3 bg-[rgb(192,53,64)] text-white font-bold text-[10px] uppercase tracking-widest rounded hover:bg-red-700 transition-colors duration-300 text-center">
+              <Link href="/contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-[10px] uppercase tracking-widest rounded hover:bg-[#E05060] transition-colors duration-300 text-center">
                 Get In Touch
               </Link>
               <Link href="/about" className="px-8 py-3 border border-black/15 dark:border-white/15 text-black dark:text-white font-bold text-[10px] uppercase tracking-widest rounded hover:border-black/40 dark:hover:border-white/40 transition-colors duration-300 text-center">
@@ -156,7 +104,16 @@ export default function Home() {
               <span className="text-green-600 dark:text-green-300 text-[10px] font-bold uppercase tracking-wide">{profileData.status}</span>
             </div>
             <h1 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter leading-none mb-3">
-              Vidun<br />Shanuka
+              <div className="flex flex-wrap justify-start" style={{ gap: "0.1em" }}>
+                {["V", "I", "D", "U", "N"].map((ch, i) => (
+                  <SpringLetter key={`f-${i}`} char={ch} mouse={mouse} fontSize="clamp(40px, 8vw, 100px)" />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-start -mt-2" style={{ gap: "0.1em" }}>
+                {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
+                  <SpringLetter key={`l-${i}`} char={ch} mouse={mouse} fontSize="clamp(40px, 8vw, 100px)" />
+                ))}
+              </div>
             </h1>
             <p className="text-black/35 dark:text-white/35 text-xs uppercase tracking-[0.3em] mb-12">{profileData.subheading}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -382,5 +339,6 @@ export default function Home() {
       </section>
 
     </main>
+    </>
   );
 }
