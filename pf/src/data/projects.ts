@@ -1,4 +1,4 @@
-// ─── TYPES ────────────────────────────────────────────────────────
+// TYPES
 
 export type StripProject = {
   slug: string;
@@ -50,85 +50,87 @@ export type ProfileData = {
   quickFacts: Array<{ icon: string; label: string; value: string }>;
 };
 
-// ─── PROJECTS DATA ────────────────────────────────────────────────
+// PROJECTS DATA 
 
 export const stripProjects: StripProject[] = [
-  {
-    slug: "meditrace",
-    title: "MediTrace",
-    image: "/strips/bg1.png",
-    category: "Full Stack",
-    description: "Healthcare data tracing and lineage platform built for hospitals and clinics.",
-    tech: ["React", "Node.js", "PostgreSQL"],
-    label: "01",
-  },
   {
     slug: "crackcode",
     title: "CrackCode",
     image: "/strips/bg1.png",
-    category: "EdTech",
-    description: "Interactive coding challenge platform for learners of all levels.",
-    tech: ["Next.js", "TypeScript", "Tailwind"],
+    category: "Full Stack & ML",
+    description: "Gamified Narrative Driven Educational Platform.",
+    tech: ["React", "Node.js","Express", "MongoDB","Tailwind","Redis"],
+    label: "01",
+  },
+  {
+    slug: "HotelBooking",
+    title: " QuickStay",
+    image: "/strips/bg1.png",
+    category: "Full Stack",
+    description: "seamless experience for users to discover and book rooms, while offering a robust dashboard for hotel owners to manage their properties, track revenue, and handle room availability in real-time.",
+    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind"],
     label: "02",
   },
   {
-    slug: "rag-fyp",
-    title: "RAG FYP",
+    slug: "Demensia",
+    title: "Demensia Insight",
     image: "/strips/bg1.png",
     category: "AI / ML",
-    description: "Retrieval-augmented generation research project using open-source LLMs.",
-    tech: ["Python", "PyTorch", "LangChain"],
+    description: "This project is a submission for the MODE-LX hackathon. The goal is to build a binary classification model that predicts a person's risk of dementia using only non-medical variables.",
+    tech: ["Python", "pandas", "numpy","matplotlib", "seaborn","lightgbm","pickle","jupyter"],
     label: "03",
   },
   {
     slug: "devops-pipelines",
-    title: "DevOps Pipelines",
+    title: "Volt Drive",
     image: "/strips/bg1.png",
-    category: "Infrastructure",
-    description: "Automated CI/CD and IaC pipelines for production-grade systems.",
-    tech: ["Docker", "Kubernetes", "Terraform"],
+    category: "Infrastructure , Full Stack ",
+    description: "Car Rental Website Integrated with Automated CI/CD and IaC pipelines for production grade systems.",
+    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind","Docker", "Kubernetes"],
     label: "04",
   },
   {
-    slug: "portfolio-v1",
-    title: "Portfolio V1",
+    slug: "Divinotaste",
+    title: "DivinoTaste",
     image: "/strips/bg1.png",
-    category: "Frontend",
-    description: "My first personal portfolio showcasing projects, skills, and case studies.",
-    tech: ["HTML", "CSS", "JavaScript"],
+    category: "Full Stack , Freelance",
+    description: "Built Web Application for a Local Food service.",
+    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind"],
     label: "05",
   },
 ];
 
-// ─── TECH STACK DATA ───────────────────────────────────────────────
+// TECH STACK DATA 
 
 export const techStack: TechStack[] = [
-  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "GSAP"] },
-  { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server-side applications.", skills: ["Node.js", "Express", "Python", "MongoDB", "PostgreSQL"] },
-  { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["PyTorch", "TensorFlow", "Pandas", "Scikit-Learn", "Jupyter"] },
-  { id: "devops", label: "04", title: "DevOps & Cloud", desc: "Zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"] },
-  { id: "core", label: "05", title: "Core Skills", desc: "Engineering principles behind the code.", skills: ["System Design", "Agile", "Data Structures", "OOP (Java)"] },
+  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "Figma","Photoshop"] },
+  { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server side applications.", skills: ["Node.js", "Express","javascript", "Spring Boot", "Postman"] },
+  { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["Numpy","pandas","Matplotlib","Seaborn","PyTorch", "TensorFlow", "Scikit Learn"] },
+  { id: "database", label: "04", title: "Database", desc: "Designing and managing relational and NoSQL databases.", skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
+  { id: "devops", label: "05", title: "DevOps & Cloud", desc: "Zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"] },
+  { id: "core", label: "06", title: "Software Architecture", desc: "Engineering principles behind the code.", skills: ["System Design(UC Diagrams/Activity/Sequence/Class Diagrams)", "Agile Methodologies", "DB Design(ERD,EERD,Logical ERD)"] },
 ];
 
-// ─── EDUCATION DATA ────────────────────────────────────────────────
+// EDUCATION DATA 
 
 export const education: Education[] = [
-  { id: "uni", label: "01", title: "University of Westminster", subtitle: "BEng (Hons) Software Engineering — IIT Sri Lanka", year: "2024 — Present", description: "Second-year focus on Software Architecture, Advanced Data Structures, and Object-Oriented Programming with Java.", skills: ["Java", "System Architecture", "Algorithms", "OOP"] },
-  { id: "al", label: "02", title: "Ananda College", subtitle: "G.C.E. Advanced Level — Physical Science Stream", year: "2021 — 2023", description: "Strong academic foundation in Mathematics and Physics, paving the way for a computer science career.", skills: ["Mathematics", "Physics", "Analytical Thinking"] },
-  { id: "ol", label: "03", title: "Vidara College", subtitle: "G.C.E. Ordinary Level", year: "2011 — 2021", description: "Completed O/L examinations with strong results across core academic subjects including ICT and Mathematics.", skills: ["Mathematics", "Science", "ICT"] },
+  { id: "uni", label: "01", title: "University of Westminster", subtitle: "BEng (Hons) Computer Science — IIT Sri Lanka", year: "2024 — 2028", description: "Experience on Software Design and Architecture,Web design and Deployment,Database Design,Programming", skills: ["Java", "Python","Software/Database Architecture","Web Development", "Machine Learning & AI", "Client/Server develpment(Socket,Testing,DB,Node.js)" ] },
+  { id: "course", label: "02", title: "University of Colombo - School of Computing", subtitle: "Java Foundation Course", year: "2024", description: "Completed Java Course - fundamentals & OOP", skills: ["OOP","Java Foundation programming"] },
+  { id: "al", label: "03", title: "Ananda College - Colombo", subtitle: "G.C.E. Advanced Level — Physical Science Stream", year: "2021 — 2023", description: "Strong academic foundation in Mathematics and Physics, paving the way for a computer science career.", skills: ["Mathematics", "Physics", "Chemistry"] },
+  { id: "ol", label: "04", title: "Vidara College - Colombo", subtitle: "G.C.E. Ordinary Level", year: "2011 — 2021", description: "Completed O/L examinations with 9 A's across core academic subjects including ICT, Literature.", skills: ["English Literature", "Business Studies", "ICT"] },
 ];
 
-// ─── CERTIFICATIONS DATA ───────────────────────────────────────────
+// CERTIFICATIONS DATA
 
 export const certifications: Certification[] = [
-  { id: "ibm", label: "01", title: "IBM Cloud", subtitle: "Docker & Kubernetes Specialist", desc: "Container orchestration, building images, and cloud-native deployment strategies." },
-  { id: "meta", label: "02", title: "Meta", subtitle: "Frontend Developer Professional", desc: "Advanced React patterns, UI/UX principles, and modern frontend architecture." },
-  { id: "deeplearning", label: "03", title: "DeepLearning.AI", subtitle: "Neural Networks & Deep Learning", desc: "Model training, backpropagation theory, and practical AI engineering." },
-  { id: "google", label: "04", title: "Google IT", subtitle: "Automation with Python", desc: "System administration and infrastructure automation using Python scripting." },
-  { id: "aws", label: "05", title: "AWS Academy", subtitle: "Cloud Foundations", desc: "Infrastructure design, serverless architecture, and cloud security principles." },
+  { id: "aws", label: "01", title: "AWS Cloud Essentials - Coursera", image: "/strips/bg1.png", subtitle: "AWS Workflows", desc: "Learn about core AWS services including EC2, VPC, IAM, and S3 to architect secure, high-availability cloud infrastructure." },
+  { id: "ibm", label: "02", title: "Introduction to Containers w/ Docker, Kubernetes & OpenShift - Coursera", image: "/strips/bg1.png", subtitle: "Docker & Kubernetes", desc: "Container orchestration, building images, and cloud-native deployment strategies." },
+  { id: "ibm2", label: "03", title: "Introduction to DevOps - Coursera", image: "/strips/bg1.png", subtitle: "DevOps", desc: "Learn about GitHub Workflows and Agile strategies." },
+  { id: "deeplearning", label: "04", title: "Linear Algebra And ML for Data Science - Coursera", image: "/strips/bg1.png", subtitle: "Mathematics for ML", desc: "Linear algebra, matrices, graphs, differentiation & integration." },
+  { id: "coursera-rest", label: "05", title: "REST API Backend Application Development - Coursera", image: "/strips/bg1.png", subtitle: "Backend foundations", desc: "" },
 ];
 
-// ─── LEARNINGS DATA ────────────────────────────────────────────────
+// LEARNINGS DATA
 
 export const learnings: Learning[] = [
   { label: "01", title: "React & TypeScript", description: "Building scalable, type-safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
@@ -137,21 +139,21 @@ export const learnings: Learning[] = [
   { label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
 ];
 
-// ─── PROFILE DATA ──────────────────────────────────────────────
+//  PROFILE DATA 
 
 export const profileData: ProfileData = {
   name: "Vidun Shanuka",
   subheading: "Full Stack Developer & DevOps Enthusiast",
-  status: "Available for Internships — DevOps / Full Stack / ML",
+  status: "Available for Internships —> DevOps / Full Stack / ML",
   quickFacts: [
     { icon: "📍", label: "Location", value: "Colombo, Sri Lanka" },
-    { icon: "🎓", label: "Education", value: "CS Undergraduate @ IIT\nAnanda College · Vidara College" },
+    { icon: "🎓", label: "Education", value: "CS Undergraduate @ IIT\nAnanda College · Vidura College" },
     { icon: "💼", label: "Looking For", value: "DevOps / Full Stack / ML Internships" },
     { icon: "🚀", label: "Current Focus", value: "ML Integration into GitHub Workflows" },
   ],
 };
 
-// ─── NAVIGATION SECTIONS ───────────────────────────────────────────
+//  NAVIGATION SECTIONS 
 
 export const navSections = [
   { id: "hero", label: "Profile" },
