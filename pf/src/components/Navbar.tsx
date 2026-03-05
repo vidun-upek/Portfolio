@@ -71,12 +71,7 @@ export default function Navbar() {
           : ""
       }`}
     >
-      <div className="px-8 md:px-16 xl:px-32 h-16 flex items-center justify-between max-w-screen-2xl mx-auto">
-
-        {/* Logo */}
-        <Link href="/" className="relative w-7 h-7 rounded-lg overflow-hidden border dark:border-white/10 border-black/10 hover:dark:border-white/30 hover:border-black/30 transition-all duration-300 flex-shrink-0">
-          <Image src="/logo.jpg" alt="logo" fill className="object-contain" />
-        </Link>
+      <div className="px-8 md:px-16 xl:px-32 h-16 flex items-center justify-center max-w-screen-2xl mx-auto w-full">
 
         {/* Centre links */}
         <ul className="hidden md:flex items-center gap-10">
@@ -115,8 +110,8 @@ export default function Navbar() {
               ))}
         </ul>
 
-        {/* Right CTA */}
-        <div className="flex items-center gap-3">
+        {/* Right CTA: CV and Theme toggle - absolute positioned */}
+        <div className="absolute right-8 md:right-16 xl:right-32 flex items-center gap-3">
           {!isHome && (
             <Link href="/" className="text-[10px] font-bold uppercase tracking-[0.3em] dark:text-white/40 text-black/40 dark:hover:text-white hover:text-black transition-colors duration-300">
               ← Home
