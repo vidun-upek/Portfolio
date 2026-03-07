@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { learnings as learningsData } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -53,34 +54,44 @@ export default function LearningsPage() {
         </div>
 
         {learningsData.map((learning, i) => (
-          <div key={i} className="group relative w-[400px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700">
-            <div className="splash" />
-            
-            <div className="absolute inset-0 z-0">
-              <Image 
-                src="/strips/bg1.png" 
-                alt={learning.title} 
-                fill 
-                className="object-cover opacity-40 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black to-black/20" />
-            </div>
+          <Link key={i} href={`/learnings/${learning.slug}`}>
+            <div className="group relative w-[400px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="splash" />
+              
+              <div className="absolute inset-0 z-0">
+                <Image 
+                  src="/strips/bg1.png" 
+                  alt={learning.title} 
+                  fill 
+                  className="object-cover opacity-40 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-black/20" />
+              </div>
 
-            <div className="relative z-10 h-full p-8 flex flex-col justify-end">
-              <span className="text-brand-red text-xs font-bold uppercase tracking-[0.4em] block mb-2">Learning {learning.label}</span>
-              <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-brand-red transition-colors duration-500">
-                {learning.title}
-              </h3>
-              <p className="text-xs text-white/60 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                {learning.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                {learning.tags.map(tag => (
-                  <span key={tag} className="text-[9px] border border-white/20 px-2 py-1 uppercase text-white/60">{tag}</span>
-                ))}
+              <div className="relative z-10 h-full p-8 flex flex-col justify-between">
+                <div />
+                <div>
+                  <span className="text-brand-red text-xs font-bold uppercase tracking-[0.4em] block mb-2">Learning {learning.label}</span>
+                  <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-brand-red transition-colors duration-500">
+                    {learning.title}
+                  </h3>
+                  <p className="text-xs text-white/60 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    {learning.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    {learning.tags.map(tag => (
+                      <span key={tag} className="text-[9px] border border-white/20 px-2 py-1 uppercase text-white/60">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-xs text-brand-red font-semibold uppercase tracking-widest flex items-center gap-2">
+                      <span>✨ Click to explore more</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
 
         <div className="w-[10vw] shrink-0" />

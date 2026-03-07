@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { SpringLetter, useMouse } from "@/components/InteractiveHero";
 import { profileData, techStack, stripProjects, education, certifications, learnings, navSections } from "@/data/projects";
 
-// Aliases for backwards compatibility with page structure
+// Data aliases
 const techData = techStack;
 const projectsData = stripProjects;
 const educationData = education;
@@ -14,7 +14,7 @@ const certData = certifications;
 const learningsData = learnings;
 const sections = navSections;
 
-// ─── COMPONENTS ──────────────────────────────────────────────────────────────
+// Components
 
 function SectionHeader({ module, title, desc }: { module: string; title: string; desc: string }) {
   return (
@@ -26,7 +26,187 @@ function SectionHeader({ module, title, desc }: { module: string; title: string;
   );
 }
 
-// ─── MAIN PAGE ───────────────────────────────────────────────────────────────
+// Tech stack section
+
+const TechStackSection = ({ ref }: { ref: (el: HTMLElement | null) => void }) => {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
+  const categoryIcons: Record<string, string> = {
+    Frontend: "🎨",
+    Backend: "⚙️",
+    "Machine Learning": "🧠",
+    Database: "💾",
+    "DevOps & Cloud": "☁️",
+    "Software Architecture": "🏗️",
+  };
+
+  const displayTitles: Record<string, string> = {
+    Frontend: "User Interfaces",
+    Backend: "Server & APIs",
+    "Machine Learning": "Intelligent Systems",
+    Database: "Data Persistence",
+    "DevOps & Cloud": "Infrastructure",
+    "Software Architecture": "Engineering Principles",
+  };
+
+  return (
+    <section ref={ref} id="techstack" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeader module="Module 01 — Tech Stack" title="Tech Stack" desc="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering." />
+        
+        {/* Grid of tech cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {techData.map((tech, idx) => (
+            <div
+              key={tech.id}
+              className="tech-card relative h-80 rounded-xl border overflow-hidden transition-all duration-500"
+              style={{
+                borderColor: hoveredCard === tech.id ? "#C03540" : undefined,
+                transform: hoveredCard === tech.id ? "translateY(-8px)" : "translateY(0)",
+                boxShadow: hoveredCard === tech.id ? "0 20px 50px rgba(192, 53, 64, 0.15)" : "none",
+                animation: `slideInUp 0.6s ease-out ${idx * 0.1}s backwards`,
+              }}
+              onMouseEnter={() => setHoveredCard(tech.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="splash-tech" style={{ animation: hoveredCard === tech.id ? "splashMove 850ms ease-out forwards" : "none" }} />
+
+              {/* Accent bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "2px",
+                  background: "linear-gradient(to right, #C03540, transparent)",
+                  opacity: hoveredCard === tech.id ? 1 : 0,
+                  transition: "opacity 0.5s",
+                }}
+              />
+
+              {/* Card content */}
+              <div className="relative h-full p-6 flex flex-col justify-between z-10">
+                {/* Top: icon & headings */}
+                <div>
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="text-3xl">{categoryIcons[tech.title]}</span>
+                  </div>
+
+                  <h3 className="text-xl font-black mb-1" style={{ color: "currentColor" }}>
+                    {displayTitles[tech.title] || tech.title}
+                  </h3>
+                  <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: "#C03540" }}>
+                    {tech.title}
+                  </p>
+                </div>
+
+                {/* Skills list */}
+                <div>
+                  <p className="text-xs uppercase tracking-widest font-semibold mb-3 text-black/50 dark:text-white/50">
+                    Key Technologies
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {tech.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-xs px-2 py-1 rounded border text-black/60 dark:text-white/60"
+                        style={{
+                          borderColor: "rgba(192, 53, 64, 0.3)",
+                          backgroundColor: "rgba(192, 53, 64, 0.05)",
+                        }}
+                      >
+                        {skill.replace(/\(.*\)/, "").trim()}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Hover brief */}
+              {hoveredCard === tech.id && (
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "58%",
+                    background: "linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.88) 100%)",
+                    padding: "24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    animation: `slideUpBrief 0.5s ease-out forwards`,
+                    zIndex: 20,
+                  }}
+                  className="dark:bg-gradient-to-t"
+                >
+                  <p className="text-xs leading-relaxed text-white/90" style={{ lineHeight: "1.6" }}>
+                    {tech.brief}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideUpBrief {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .splash-tech {
+          pointer-events: none;
+          position: absolute;
+          inset: 0;
+          z-index: 15;
+          opacity: 0;
+          transform: translateX(-120%) skewX(-18deg);
+          background: linear-gradient(
+            115deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0) 35%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 65%,
+            transparent 100%
+          );
+        }
+
+        .tech-card {
+          border-color: rgba(0, 0, 0, 0.07);
+          background: rgba(0, 0, 0, 0.02);
+        }
+
+        :global(.dark) .tech-card {
+          border-color: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.025);
+        }
+      `}</style>
+    </section>
+  );
+};
+
+// Main page
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -67,7 +247,7 @@ export default function Home() {
 
       <main className="relative z-10 text-black dark:text-white min-h-screen overflow-x-hidden">
 
-      {/* ── SIDE PROGRESS DOTS ──────────────────────────────────────── */}
+      {/* Side progress dots */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4 items-center">
         {sections.map(({ id, label }) => (
           <button
@@ -83,9 +263,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ══════════════════════════════════════════
-          1. HERO  –  Full viewport: 100vw × 100vh
-      ══════════════════════════════════════════ */}
+        {/* 1. Hero */}
       <section
         ref={setRef("hero")}
         id="hero"
@@ -93,7 +271,7 @@ export default function Home() {
       >
         <div className="relative z-30 w-full h-full flex text-white">
 
-          {/* ── LEFT: Vertical portrait with padding and rounded edges ── */}
+          {/* Left: portrait */}
           <div className="w-[28%] min-w-[220px] max-w-[360px] h-full shrink-0 p-5 pr-2 pt-20">
             <div className="w-full h-[88%] mt-[6%] rounded-2xl overflow-hidden shadow-2xl">
               <img
@@ -104,7 +282,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ── RIGHT: All content ── */}
+          {/* Right: content */}
           <div className="flex-1 h-full flex flex-col justify-center gap-5 px-10 pr-16 pt-16">
 
             {/* Status Badge */}
@@ -164,9 +342,9 @@ export default function Home() {
 
             {/* CTAs */}
             <div className="flex gap-4">
-              <Link href="/contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#E05060] transition-all duration-300 shadow-lg shadow-[#C03540]/30">
+              <a href="#contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#E05060] transition-all duration-300 shadow-lg shadow-[#C03540]/30">
                 Get In Touch
-              </Link>
+              </a>
               <Link href="/about" className="px-8 py-3 border border-[#C03540]/50 text-[#C03540] font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#C03540]/10 transition-all duration-300">
                 More About Me
               </Link>
@@ -182,134 +360,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          2. TECH STACK
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("techstack")} id="techstack" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 01 — Tech Stack" title="Tech Stack" desc="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering." />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {techData.map((tech, idx) => {
-              const categoryColors: Record<string, string> = {
-                front: "#FF6B6B",
-                back: "#4ECDC4",
-                ml: "#FFE66D",
-                database: "#95E1D3",
-                devops: "#A8E6CF",
-                core: "#FF8B94",
-              };
+        {/* 2. Tech stack */}
+        <TechStackSection ref={setRef("techstack")} />
 
-              const categoryIcons: Record<string, string> = {
-                Frontend: "🎨",
-                Backend: "⚙️",
-                "Machine Learning": "🧠",
-                Database: "💾",
-                "DevOps & Cloud": "☁️",
-                "Software Architecture": "🏗️",
-              };
-
-              return (
-                <div
-                  key={tech.id}
-                  className="tech-card-group group relative rounded-2xl overflow-hidden border border-black/8 dark:border-white/10 bg-white/50 dark:bg-black/50 hover:border-black/20 dark:hover:border-white/20 transition-all duration-500"
-                  style={{
-                    animation: `slideInUp 0.6s ease-out ${idx * 0.1}s backwards`,
-                  }}
-                >
-                  {/* Animated gradient glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle at 30% 30%, ${categoryColors[tech.id]}30, transparent 70%)`,
-                    }}
-                  />
-
-                  <div className="relative p-8 h-full flex flex-col">
-                    {/* Top section with icon */}
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="text-3xl">{categoryIcons[tech.title]}</div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-2xl font-black mb-2 transition-all duration-500 group-hover:translate-x-1 text-black dark:text-white uppercase italic tracking-tighter">
-                      {tech.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-xs leading-relaxed mb-6 flex-grow text-black/45 dark:text-white/45">
-                      {tech.desc}
-                    </p>
-
-                    {/* Divider */}
-                    <div className="h-px mb-4 bg-black/10 dark:bg-white/10" />
-
-                    {/* Skills - Display all */}
-                    <div className="flex flex-wrap gap-2">
-                      {tech.skills.map((skill, i) => (
-                        <span
-                          key={skill}
-                          className="text-xs font-bold px-2.5 py-1 rounded border transition-all duration-300 group-hover:scale-105 uppercase tracking-wider"
-                          style={{
-                            borderColor: categoryColors[tech.id],
-                            color: categoryColors[tech.id],
-                            backgroundColor: `${categoryColors[tech.id]}08`,
-                            fontFamily: "'JetBrains Mono', monospace",
-                          }}
-                        >
-                          {skill.replace(/\(.*\)/, "").trim()}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Hover border gradient */}
-                  <div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(135deg, ${categoryColors[tech.id]}25, transparent 70%)`,
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <style jsx>{`
-          @keyframes slideInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .tech-card-group:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-          }
-
-          @media (prefers-color-scheme: dark) {
-            .tech-card-group:hover {
-              box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            }
-          }
-        `}</style>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          3. PROJECTS
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("projects")} id="projects" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
+        {/* 3. Projects */}
+        <section ref={setRef("projects")} id="projects" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
           <SectionHeader module="Module 02 — Projects" title="Projects" desc="Scalable architecture, pixel-perfect UI, and automated deployments." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((p) => (
               <div key={p.slug} className="group relative h-80 rounded-2xl border border-black/10 dark:border-white/10 overflow-hidden cursor-pointer grayscale hover:grayscale-0 hover:border-black/25 dark:hover:border-white/25 transition-all duration-500">
+                {/* Splash Animation */}
+                <div className="splash" />
+                
                 <div className="absolute inset-0 z-0">
                   <Image src={p.image} alt={p.title} fill className="object-cover opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
@@ -319,11 +382,13 @@ export default function Home() {
                 <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
                   <div className="flex flex-col gap-3 max-w-[60vw]">
                     <span className="text-white text-2xl md:text-3xl font-black drop-shadow-sm truncate">{p.title}</span>
-                    <div className="flex flex-wrap gap-2">
-                      {p.tech.map((t) => (
-                        <span key={t} className="text-[10px] text-white/90 bg-white/10 px-2 py-0.5 rounded uppercase tracking-wider">{t}</span>
-                      ))}
-                    </div>
+                    {p.tech && (
+                      <div className="flex flex-wrap gap-2">
+                        {p.tech.map((t) => (
+                          <span key={t} className="text-[10px] text-white/90 bg-white/10 px-2 py-0.5 rounded uppercase tracking-wider">{t}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -332,9 +397,8 @@ export default function Home() {
                     <span className="text-white text-[10px] uppercase tracking-wider">{p.category}</span>
                   </div>
                   <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    {/* title displayed at top-left; removed duplicate heading for consistency */}
+                    {/* Title displayed at top-left */}
                     <p className="text-[11px] text-white/50 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{p.description}</p>
-                    {/* tech tags moved to left title block above */}
                   </div>
                 </div>
               </div>
@@ -343,15 +407,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          4. EDUCATION
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("education")} id="education" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
+        {/* 4. Education */}
+        <section ref={setRef("education")} id="education" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
           <SectionHeader module="Module 03 — Education" title="Education" desc="The academic foundation of algorithms, architecture, and engineering principles." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {educationData.map((edu) => (
               <div key={edu.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 p-8">
+                {/* Splash Animation */}
+                <div className="splash" />
+                
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 0%, rgba(192,53,64,0.07) 0%, transparent 60%)" }} />
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-6">
@@ -372,33 +437,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          5. CERTIFICATIONS
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("certifications")} id="certifications" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
+        {/* 5. Certifications */}
+        <section ref={setRef("certifications")} id="certifications" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
           <SectionHeader module="Module 04 — Certifications" title="Certifications" desc="Verified expertise from industry leaders in Cloud, AI, and Software Engineering." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {certData.map((cert) => (
-              <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500">
+              <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 grayscale hover:grayscale-0 cursor-pointer">
+                {/* Splash Animation */}
+                <div className="splash" />
+                
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 100%, rgba(192,53,64,0.09) 0%, transparent 60%)" }} />
 
                 {/* Image area */}
                 <div className="w-full h-40 bg-slate-800/10 flex items-center justify-center overflow-hidden">
-                  {cert.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={cert.image} alt={cert.title} className="w-full h-40 object-cover" />
-                  ) : (
-                    <div className="w-full h-40 flex items-center justify-center text-white/60">
+                  <div className="w-full h-40 flex items-center justify-center text-white/60">
                       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="#fff" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
-                  )}
                 </div>
 
                 {/* Content */}
-                <div className="p-4">
+                <div className="p-4 relative z-10">
                   <h3 className="text-lg font-black text-black dark:text-white uppercase tracking-tight mb-1">{cert.title}</h3>
                   {cert.subtitle && <p className="text-[10px] font-bold text-[rgb(192,53,64)] uppercase tracking-wider mb-2">{cert.subtitle}</p>}
                   <p className="text-[11px] text-black/45 dark:text-white/45 leading-relaxed line-clamp-3">{cert.desc}</p>
@@ -409,36 +470,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          6. LEARNINGS
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("learnings")} id="learnings" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
+        {/* 6. Learnings */}
+        <section ref={setRef("learnings")} id="learnings" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
           <SectionHeader module="Module 05 — Learnings" title="Learnings" desc="Key technologies and insights gained through hands-on experience." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {learningsData.map((item) => (
-              <div key={item.label} className="group relative h-72 rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 p-7 flex flex-col justify-between">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(192,53,64,0.07) 0%, transparent 70%)" }} />
-                <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em] relative z-10">Learn {item.label}</span>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-black text-black dark:text-white uppercase italic tracking-tighter leading-tight mb-3 group-hover:text-[rgb(192,53,64)] transition-colors duration-500">{item.title}</h3>
-                  <p className="text-[11px] text-black/35 dark:text-white/35 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{item.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag) => (
-                      <span key={tag} className="text-[9px] border border-black/10 dark:border-white/10 px-2 py-0.5 uppercase tracking-wider text-black/35 dark:text-white/35">{tag}</span>
-                    ))}
+              <Link key={item.label} href={`/learnings/${item.slug}`}>
+                <div className="group relative h-72 rounded-2xl border border-black/8 dark:border-white/10 overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 flex flex-col justify-between grayscale hover:grayscale-0 cursor-pointer">
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src="/strips/bg1.png"
+                      alt={item.title}
+                      fill
+                      className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30 dark:from-black dark:via-black/70 dark:to-black/40" />
+                  </div>
+
+                  {/* Splash Animation */}
+                  <div className="splash" />
+                  
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(192,53,64,0.07) 0%, transparent 70%)" }} />
+                  
+                  <div className="relative z-10 p-7 flex flex-col justify-between h-full">
+                    <div>
+                      <span className="text-[rgb(192,53,64)] text-[10px] font-bold uppercase tracking-[0.4em] block">Learn {item.label}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-black text-white dark:text-white uppercase italic tracking-tighter leading-tight mb-3 group-hover:text-[rgb(192,53,64)] transition-colors duration-500">{item.title}</h3>
+                      <p className="text-[11px] text-white/60 dark:text-white/60 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{item.description}</p>
+                      <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {item.tags.map((tag) => (
+                          <span key={tag} className="text-[9px] border border-white/20 px-2 py-0.5 uppercase tracking-wider text-white/60">{tag}</span>
+                        ))}
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p className="text-[9px] text-[rgb(192,53,64)] font-semibold uppercase tracking-widest flex items-center gap-2">
+                          <span>→</span> Explore More
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          7. CONTACT
-      ══════════════════════════════════════════ */}
-      <section ref={setRef("contact")} id="contact" className="py-24 lg:py-40 px-8 md:px-16 xl:px-32">
+        {/* 7. Contact */}
+        <section ref={setRef("contact")} id="contact" className="py-24 lg:py-40 px-8 md:px-16 xl:px-32">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-start justify-between gap-16">
 
