@@ -16,6 +16,7 @@ export type TechStack = {
   title: string;
   desc: string;
   skills: string[];
+  brief: string;
 };
 
 export type Education = {
@@ -34,9 +35,11 @@ export type Certification = {
   title: string;
   subtitle: string;
   desc: string;
+  image?: string;
 };
 
 export type Learning = {
+  slug: string;
   label: string;
   title: string;
   description: string;
@@ -103,12 +106,12 @@ export const stripProjects: StripProject[] = [
 // TECH STACK DATA 
 
 export const techStack: TechStack[] = [
-  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "Figma","Photoshop"] },
-  { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server side applications.", skills: ["Node.js", "Express","javascript", "Spring Boot", "Postman"] },
-  { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["Numpy","pandas","Matplotlib","Seaborn","PyTorch", "TensorFlow", "Scikit Learn"] },
-  { id: "database", label: "04", title: "Database", desc: "Designing and managing relational and NoSQL databases.", skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
-  { id: "devops", label: "05", title: "DevOps & Cloud", desc: "Zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"] },
-  { id: "core", label: "06", title: "Software Architecture", desc: "Engineering principles behind the code.", skills: ["System Design(UC Diagrams/Activity/Sequence/Class Diagrams)", "Agile Methodologies", "DB Design(ERD,EERD,Logical ERD)"] },
+  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "Figma","Photoshop"], brief: "Built responsive, accessible UI components with modern frameworks. Integrated GSAP for smooth animations and Tailwind for rapid styling. Implemented pixel-perfect designs from Figma prototypes with interactive hover states." },
+  { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server side applications.", skills: ["Node.js", "Express","javascript", "Spring Boot", "Postman"], brief: "Developed RESTful APIs and microservices using Node.js and Express. Implemented authentication, database optimization, and real-time data handling. Tested endpoints with Postman and deployed on cloud platforms." },
+  { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["Numpy","pandas","Matplotlib","Seaborn","PyTorch", "TensorFlow", "Scikit Learn"], brief: "Developed predictive models using PyTorch and TensorFlow. Performed data preprocessing and feature engineering with Pandas and NumPy. Visualized model performance with Matplotlib and Seaborn for insights." },
+  { id: "database", label: "04", title: "Database", desc: "Designing and managing relational and NoSQL databases.", skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"], brief: "Designed normalized schemas for PostgreSQL and document structures for MongoDB. Implemented caching strategies with Redis for performance optimization. Ensured data integrity and wrote complex queries for analytics." },
+  { id: "devops", label: "05", title: "DevOps & Cloud", desc: "Zero-touch deployment pipelines and infrastructure.", skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "GitHub Actions"], brief: "Containerized applications with Docker and orchestrated with Kubernetes. Automated deployments using GitHub Actions and CI/CD pipelines. Managed AWS infrastructure and implemented monitoring solutions." },
+  { id: "core", label: "06", title: "Software Architecture", desc: "Engineering principles behind the code.", skills: ["System Design(UC Diagrams/Activity/Sequence/Class Diagrams)", "Agile Methodologies", "DB Design(ERD,EERD,Logical ERD)"], brief: "Applied SOLID principles and design patterns in production code. Created comprehensive system diagrams for scalability planning. Led Agile sprints and designed normalized database architectures for optimal performance." },
 ];
 
 // EDUCATION DATA 
@@ -133,10 +136,10 @@ export const certifications: Certification[] = [
 // LEARNINGS DATA
 
 export const learnings: Learning[] = [
-  { label: "01", title: "React & TypeScript", description: "Building scalable, type-safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
-  { label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end-to-end solutions.", tags: ["Node.js", "APIs", "Databases"] },
-  { label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud-native tools.", tags: ["AWS", "Docker", "CI/CD"] },
-  { label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
+  { slug: "react-typescript", label: "01", title: "React & TypeScript", description: "Building scalable, type-safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
+  { slug: "full-stack-dev", label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end-to-end solutions.", tags: ["Node.js", "APIs", "Databases"] },
+  { slug: "cloud-devops", label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud-native tools.", tags: ["AWS", "Docker", "CI/CD"] },
+  { slug: "machine-learning", label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
 ];
 
 //  PROFILE DATA 
