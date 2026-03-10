@@ -78,10 +78,10 @@ export const learningsContent: Record<string, LearningDetail> = {
     ],
     projects: [
       {
-        name: "CrackCode - Gamified Learning Platform",
+        name: "CrackCode - Gamified Learning Platform (Sep 2025 — Mar 2026)",
         description:
-          "Built interactive React components with TypeScript for a gamified educational platform. Implemented complex state management for quiz flows, achievements, and user progress tracking.",
-        tools: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
+          "Educational web application built using the MERN stack. Served as Technical Lead — responsible for frontend, backend, ML integration, documentation (UML, system/class diagrams), and CI/CD. Integrated cloud-based code editing with real-time session management, mini-games, and an AI narration agent. Deployed with Docker & Kubernetes.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Docker", "Kubernetes", "LightGBM"],
       },
       {
         name: "This Portfolio Website",
@@ -92,8 +92,8 @@ export const learningsContent: Record<string, LearningDetail> = {
       {
         name: "QuickStay - Hotel Booking Platform",
         description:
-          "Developed reusable UI components for hotel listings, booking forms, and user dashboards. Used TypeScript interfaces for type-safe API integration.",
-        tools: ["React", "TypeScript", "Tailwind CSS", "APIs"],
+          "Developed reusable UI components for hotel listings, booking forms, and owner dashboards. Implemented secure auth, Stripe payments (with webhook verification), real-time availability checks, and admin analytics. Built scalable REST APIs and full CRUD operations.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Stripe", "Clerk", "Tailwind"],
       },
     ],
     tags: ["React", "TypeScript", "Frontend", "Hooks", "Components"],
@@ -154,16 +154,22 @@ export const learningsContent: Record<string, LearningDetail> = {
     ],
     projects: [
       {
-        name: "CrackCode Platform",
+        name: "CrackCode Platform (Sep 2025 — Mar 2026)",
         description:
-          "Complete learning platform with user authentication, quiz system, progress tracking, and real-time leaderboards. Built with React frontend and Node.js/Express backend.",
-        tools: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+          "Led the project as Technical Lead. Implemented end-to-end features across frontend, backend, and ML workflows. Designed system architecture and documentation; integrated CI/CD with Docker & Kubernetes and a cloud code-editor for collaborative sessions.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes"],
       },
       {
-        name: "QuickStay - Hotel Booking System",
+        name: "Hotelify - Hotel Booking Platform (Jan 2026 — Mar 2026)",
         description:
-          "Full-stack booking platform with hotel listings, user authentication, booking management, and admin dashboard. Integrated Stripe for payments and Redis for caching.",
-        tools: ["React", "Node.js", "MongoDB", "Stripe", "Redis"],
+          "Scalable reservation platform with real-time search and availability, secure auth and role management using Clerk, Stripe payment integration with webhook verification, and admin dashboards for hotel owners.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Stripe", "Clerk", "Redis"],
+      },
+      {
+        name: "RentRide - Car Rental Website (Dec 2025 — Feb 2026)",
+        description:
+          "Responsive MERN application for car rentals. Implemented JWT auth, booking management, and database-backed reservation flows. Containerized with Docker and deployed on Kubernetes; CI/CD via GitHub Actions.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes", "GitHub Actions"],
       },
       {
         name: "DivinoTaste - Food Service Platform",
@@ -236,6 +242,12 @@ export const learningsContent: Record<string, LearningDetail> = {
         tools: ["Docker", "Kubernetes", "GitHub Actions", "AWS"],
       },
       {
+        name: "RentRide - Containerized Deployment",
+        description:
+          "Containerized the RentRide application and deployed services on Kubernetes. Implemented GitHub Actions pipelines for build and deployment and ensured scaling and monitoring readiness.",
+        tools: ["Docker", "Kubernetes", "GitHub Actions"],
+      },
+      {
         name: "E-Commerce Platform Deployment",
         description:
           "Containerized full-stack application, created deployment manifests for Kubernetes, and established GitOps workflow for automatic deployments on code changes.",
@@ -306,16 +318,16 @@ export const learningsContent: Record<string, LearningDetail> = {
     ],
     projects: [
       {
-        name: "Dementia Risk Prediction Model",
+        name: "DementiaInsight - Non-Medical Dementia Risk Classifier (Dec 2025)",
         description:
-          "Binary classification model predicting dementia risk using non-medical variables. Achieved 85% accuracy using LightGBM. Finalist in MODE-LX hackathon.",
+          "Developed an automated ML pipeline to predict dementia risk using non-medical features. Implemented data processing, model training and evaluation, and a CLI prediction tool. Achieved strong performance with LightGBM and was a finalist at the ModelX Inter-University Hackathon.",
         tools: ["Python", "Pandas", "LightGBM", "Scikit-Learn", "Jupyter"],
       },
       {
-        name: "Customer Churn Prediction",
+        name: "MedPredict - Medical Cost Prediction Model (Nov 2025)",
         description:
-          "Built predictive model to identify customers likely to churn. Used feature engineering, various algorithms, and ensemble methods. Improved retention strategy.",
-        tools: ["Python", "Pandas", "Scikit-Learn", "XGBoost"],
+          "Developed a Random Forest regressor to predict medical insurance costs using lifestyle and demographic indicators. Deployed via Streamlit to provide a lightweight interactive web interface.",
+        tools: ["Python", "Scikit-Learn", "RandomForest", "Streamlit"],
       },
       {
         name: "Image Classification with Deep Learning",
