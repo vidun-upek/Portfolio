@@ -382,13 +382,13 @@ export default function Home() {
                 { label: "Email", href: "mailto:vidun.shanukaofficial@gmail.com", sub: "vidun.shanukaofficial@email.com" },
                 { label: "GitHub", href: "https://github.com/vidun-upek", sub: "github.com/vidun-upek" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/vidun-shanuka-17276a2b4/", sub: "linkedin.com/in/vidun-shanuka" },
-                { label: "CV / Resume", href: "/cv", sub: "View/Download PDF" },
+                { label: "CV / Resume", href: "/CW.pdf", sub: "View/Download PDF" },
               ].map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  target={link.href === "/cv" || link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href === "/cv" || link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={link.href === "/CW.pdf" || link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href === "/CW.pdf" || link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="group flex items-center justify-between px-6 py-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-[rgb(192,53,64)]/50 hover:bg-[rgb(192,53,64)]/5 transition-all duration-300"
                 >
                   <div>

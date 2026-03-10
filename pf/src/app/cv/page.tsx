@@ -11,14 +11,14 @@ export default function CVPage() {
 
         <div style={{ height: '80vh' }} className="border border-black/10 dark:border-white/10 rounded overflow-hidden">
           <iframe
-            src="/cv.pdf"
+            src="/CW.pdf"
             title="Curriculum Vitae"
             style={{ width: '100%', height: '100%', border: 0 }}
           />
         </div>
 
         <div className="mt-4">
-          <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="text-[rgb(192,53,64)] font-semibold">
+          <a href="/CW.pdf" target="_blank" rel="noopener noreferrer" className="text-[rgb(192,53,64)] font-semibold">
             Open CV in new tab / Download
           </a>
         </div>
