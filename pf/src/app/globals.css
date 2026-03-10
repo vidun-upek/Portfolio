@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── Color Theme Variables ─── */
+/* Color theme variables */
 :root {
   --color-brand-red: #C03540;
   --color-brand-red-light: #E05060;
@@ -47,7 +47,7 @@ html.dark {
   --tag-hover-bg: rgba(192,53,64,0.1);
 }
 
-/* ─── Custom Animations ─── */
+/* Custom animations */
 @keyframes bounceWithPause {
   0%, 100% {
     transform: translateY(0);
@@ -67,7 +67,7 @@ html.dark {
   animation: bounceWithPause 2.5s infinite;
 }
 
-/* ─── Dotted background ─── */
+/* Dotted background */
 html.dark {
   background-color: #050505;
   background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
@@ -87,10 +87,7 @@ body {
   transition: background-color 0.4s, color 0.4s;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TECH STACK — only parent→child hover effects (Tailwind can't do these)
-   Everything else is handled by Tailwind classes in the component.
-   ═══════════════════════════════════════════════════════════════ */
+/* Tech stack styles (parent → child hover rules) */
 
 /* Card: base + hover + accent bar */
 .ts-card {
@@ -171,7 +168,7 @@ body {
   }
 }
 
-/* ═══ END TECH STACK ═══ */
+/* End tech stack */
 
 @layer base {
   html {

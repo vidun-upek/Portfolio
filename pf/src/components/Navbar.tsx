@@ -79,7 +79,7 @@ export default function Navbar() {
               <li key={item.id}>
                 <button
                   onClick={() => scrollTo(item.id!)}
-                  className="text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group dark:text-white/50 text-black/50 dark:hover:text-white hover:text-black"
+                  className="text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group text-white"
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -89,11 +89,7 @@ export default function Navbar() {
               <li key={item.href}>
                 <Link
                   href={item.href!}
-                  className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group ${
-                    pathname === item.href
-                      ? "dark:text-white text-black"
-                      : "dark:text-white/50 text-black/50 dark:hover:text-white hover:text-black"
-                  }`}
+                  className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative pb-2 group text-white`}
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -109,16 +105,14 @@ export default function Navbar() {
         {/* Right CTA: Home link and CV - absolute positioned */}
         <div className="absolute right-8 md:right-16 xl:right-32 flex items-center gap-3">
           {!isHome && (
-            <Link href="/" className="text-[10px] font-bold uppercase tracking-[0.3em] dark:text-white/40 text-black/40 dark:hover:text-white hover:text-black transition-colors duration-300">
+            <Link href="/" className="text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-300 text-white">
               ← Home
             </Link>
           )}
 
-          <Link
-            href="/cv"
-            className="text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 border dark:border-white/20 border-black/20 dark:text-white/60 text-black/60 hover:border-[rgb(192,53,64)] hover:text-[rgb(192,53,64)] transition-all duration-300 rounded"
-          >
+          <Link href="/cv" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 border border-white/20 text-white transition-all duration-300 rounded relative group">
             CV
+            <span className="absolute bottom-0 left-4 right-4 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>
         </div>
       </div>

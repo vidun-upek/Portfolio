@@ -273,12 +273,24 @@ export default function Home() {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundImage: "radial-gradient(circle at 50% 100%, rgba(192,53,64,0.09) 0%, transparent 60%)" }} />
 
                 {/* Image area */}
-                <div className="w-full h-40 bg-slate-800/10 flex items-center justify-center overflow-hidden">
-                  <div className="w-full h-40 flex items-center justify-center text-white/60">
+                <div className="w-full h-40 bg-slate-800/10 flex items-center justify-center overflow-hidden relative">
+                  {cert.image ? (
+                    <>
+                      <Image
+                        src={cert.image}
+                        alt={cert.title}
+                        fill
+                        className="object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                    </>
+                  ) : (
+                    <div className="w-full h-40 flex items-center justify-center text-white/60">
                       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="#fff" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -323,13 +335,13 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="text-xl font-black text-white dark:text-white uppercase italic tracking-tighter leading-tight mb-3 group-hover:text-[rgb(192,53,64)] transition-colors duration-500">{item.title}</h3>
-                      <p className="text-[11px] text-white/60 dark:text-white/60 leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{item.description}</p>
-                      <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <p className="text-[11px] text-white/60 dark:text-white/60 leading-relaxed mb-4">{item.description}</p>
+                      <div className="flex flex-wrap gap-2">
                         {item.tags.map((tag) => (
                           <span key={tag} className="text-[9px] border border-white/20 px-2 py-0.5 uppercase tracking-wider text-white/60">{tag}</span>
                         ))}
                       </div>
-                      <div className="mt-3 pt-3 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="mt-3 pt-3 border-t border-white/10">
                         <p className="text-[9px] text-[rgb(192,53,64)] font-semibold uppercase tracking-widest flex items-center gap-2">
                           <span>→</span> Explore More
                         </p>
@@ -367,16 +379,16 @@ export default function Home() {
             {/* Right — links */}
             <div className="flex flex-col gap-3 w-full lg:w-80">
               {[
-                { label: "Email", href: "mailto:vidun@email.com", sub: "vidun@email.com" },
-                { label: "GitHub", href: "https://github.com", sub: "github.com/vidun" },
-                { label: "LinkedIn", href: "https://linkedin.com", sub: "linkedin.com/in/vidun" },
-                { label: "CV / Resume", href: "/cv", sub: "Download PDF" },
+                { label: "Email", href: "mailto:vidun.shanukaofficial@gmail.com", sub: "vidun.shanukaofficial@email.com" },
+                { label: "GitHub", href: "https://github.com/vidun-upek", sub: "github.com/vidun-upek" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/vidun-shanuka-17276a2b4/", sub: "linkedin.com/in/vidun-shanuka" },
+                { label: "CV / Resume", href: "/cv", sub: "View/Download PDF" },
               ].map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={link.href === "/cv" || link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href === "/cv" || link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="group flex items-center justify-between px-6 py-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-[rgb(192,53,64)]/50 hover:bg-[rgb(192,53,64)]/5 transition-all duration-300"
                 >
                   <div>
