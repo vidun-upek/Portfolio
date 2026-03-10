@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, useMemo, MutableRefObject } from "react";
 
-/* ═══════════════════════════════════════════════════════════════
-   TYPES & MOUSE TRACKING
-   ═══════════════════════════════════════════════════════════════ */
+/* Types & mouse tracking */
 export type Mouse = MutableRefObject<{ x: number; y: number }>;
 
 export function useMouse(): Mouse {
@@ -40,9 +38,7 @@ export function useMouse(): Mouse {
   return mouse;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PHYSICS CONSTANTS
-   ═══════════════════════════════════════════════════════════════ */
+/* Physics constants */
 const SPRING_STIFFNESS = 0.08;
 const SPRING_DAMPING = 0.72;
 const REPULSION_RADIUS = 120;
@@ -55,9 +51,7 @@ function springStep(pos: number, vel: number, target: number, force: number): [n
   return [pos, vel];
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SpringLetter — each letter runs its own physics loop
-   ═══════════════════════════════════════════════════════════════ */
+/* SpringLetter — per-letter physics loop */
 export function SpringLetter({ char, mouse, fontSize }: { char: string; mouse: Mouse; fontSize: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const state = useRef({ y: 0, vy: 0, x: 0, vx: 0, glow: 0 });
@@ -130,9 +124,7 @@ export function SpringLetter({ char, mouse, fontSize }: { char: string; mouse: M
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   AnimatedTagline — slide-up text reveal
-   ═══════════════════════════════════════════════════════════════ */
+/* AnimatedTagline — slide-up text reveal */
 function AnimatedTagline({ text, delay = 0 }: { text: string; delay?: number }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -156,11 +148,7 @@ function AnimatedTagline({ text, delay = 0 }: { text: string; delay?: number }) 
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ██  DEFAULT EXPORT — InteractiveHero
-   The name with cursor repulsion + corner brackets + labels.
-   Place inside a relative-positioned <section>.
-   ═══════════════════════════════════════════════════════════════ */
+/* InteractiveHero component — name with cursor repulsion and labels */
 export default function InteractiveHero({ mouse }: { mouse: Mouse }) {
   const nameChars = useMemo(() => "VIDUN SHANUKA".split(""), []);
   const [loaded, setLoaded] = useState(false);
@@ -200,7 +188,7 @@ export default function InteractiveHero({ mouse }: { mouse: Mouse }) {
         Software Engineer • DevOps • Full Stack
       </div>
 
-      {/* ═══ THE NAME ═══ */}
+      {/* THE NAME */}
       <div
         className="relative z-10 text-center flex flex-col items-center justify-center h-full px-4"
         style={{
