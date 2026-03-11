@@ -90,13 +90,13 @@ export default function Home() {
       <section
         ref={setRef("hero")}
         id="hero"
-        className="h-screen w-full relative overflow-hidden border-b border-black/10 dark:border-white/10"
+        className="min-h-screen w-full relative overflow-hidden border-b border-black/10 dark:border-white/10 md:h-screen"
       >
-        <div className="relative z-30 w-full h-full flex text-white">
+        <div className="relative z-30 w-full h-full flex flex-col md:flex-row text-white">
 
           {/* Left: portrait */}
-          <div className="w-[28%] min-w-[220px] max-w-[360px] h-full shrink-0 p-5 pr-2 pt-20">
-            <div className="w-full h-[88%] mt-[6%] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="w-full md:w-[28%] md:min-w-[220px] md:max-w-[360px] h-auto md:h-full shrink-0 p-5 md:pr-2 md:pt-20 pt-16 flex justify-center md:block">
+            <div className="w-64 h-80 md:w-full md:h-[88%] md:mt-[6%] rounded-2xl overflow-hidden shadow-2xl flex-shrink-0">
               <img
                 src="/strips/myself01.png"
                 alt="Vidun Shanuka"
@@ -106,26 +106,26 @@ export default function Home() {
           </div>
 
           {/* Right: content */}
-          <div className="flex-1 h-full flex flex-col justify-center gap-5 px-10 pr-16 pt-16">
+          <div className="flex-1 h-full flex flex-col justify-center md:justify-center gap-5 px-5 md:px-10 md:pr-16 pt-8 md:pt-16 pb-16 md:pb-0">
 
             {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#C03540]/40 bg-[#C03540]/10 rounded-full w-fit">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#C03540]/40 bg-[#C03540]/10 rounded-full w-fit mx-auto md:mx-0">
               <span className="w-2.5 h-2.5 rounded-full bg-[#C03540] animate-pulse shrink-0" />
               <span className="text-[#C03540] text-xs font-bold uppercase tracking-wider">{profileData.status}</span>
             </div>
 
             {/* Name + Tagline inline */}
-            <div className="flex items-start gap-6">
+            <div className="flex flex-col md:flex-row md:items-start gap-6">
               <div>
-                <h1 className="font-black uppercase italic tracking-tighter leading-none">
-                  <div className="flex flex-wrap" style={{ gap: "0.05em" }}>
+                <h1 className="font-black uppercase italic tracking-tighter leading-none text-center md:text-left">
+                  <div className="flex flex-wrap justify-center md:justify-start" style={{ gap: "0.05em" }}>
                     {["V", "I", "D", "U", "N"].map((ch, i) => (
                       <div key={`f-${i}`} className={i === 0 ? "animate-bounce" : ""}>
                         <SpringLetter char={ch} mouse={mouse} fontSize="clamp(40px, 5.5vw, 72px)" />
                       </div>
                     ))}
                   </div>
-                  <div className="flex flex-wrap -mt-2" style={{ gap: "0.05em" }}>
+                  <div className="flex flex-wrap justify-center md:justify-start -mt-2" style={{ gap: "0.05em" }}>
                     {["S", "H", "A", "N", "U", "K", "A"].map((ch, i) => (
                       <div key={`l-${i}`} className={i === 6 ? "animate-bounce" : ""} style={i === 6 ? { animationDelay: "0.3s" } : {}}>
                         <SpringLetter char={ch} mouse={mouse} fontSize="clamp(40px, 5.5vw, 72px)" />
@@ -133,9 +133,9 @@ export default function Home() {
                     ))}
                   </div>
                 </h1>
-                <p className="text-black/50 dark:text-white/50 text-sm uppercase tracking-widest font-semibold mt-3">{profileData.subheading}</p>
+                <p className="text-black/50 dark:text-white/50 text-sm uppercase tracking-widest font-semibold mt-3 text-center md:text-left">{profileData.subheading}</p>
               </div>
-              <p className="text-2xl leading-relaxed text-black/70 dark:text-white/60 pt-2 flex-1">
+              <p className="text-base md:text-2xl leading-relaxed text-black/70 dark:text-white/60 md:pt-2 flex-1 text-center md:text-left">
                 I{" "}
                 <span className="font-bold text-[#C03540] animate-pulse" style={{ animationDelay: "0s" }}>
                   build
@@ -151,7 +151,7 @@ export default function Home() {
             </div>
 
             {/* Quick Fact Cards */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {profileData.quickFacts.map((fact, i) => (
                 <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:border-[#C03540]/40 transition-all duration-300">
                   <span className="text-2xl shrink-0 leading-none pt-0.5">{fact.icon}</span>
@@ -164,11 +164,11 @@ export default function Home() {
             </div>
 
             {/* CTAs */}
-            <div className="flex gap-4">
-              <a href="#contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#E05060] transition-all duration-300 shadow-lg shadow-[#C03540]/30">
+            <div className="flex flex-col md:flex-row gap-4">
+              <a href="#contact" className="px-8 py-3 bg-[#C03540] text-white font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#E05060] transition-all duration-300 shadow-lg shadow-[#C03540]/30 text-center">
                 Get In Touch
               </a>
-              <Link href="/about" className="px-8 py-3 border border-[#C03540]/50 text-[#C03540] font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#C03540]/10 transition-all duration-300">
+              <Link href="/about" className="px-8 py-3 border border-[#C03540]/50 text-[#C03540] font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-[#C03540]/10 transition-all duration-300 text-center">
                 More About Me
               </Link>
             </div>
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-black/20 dark:text-white/20">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-black/20 dark:text-white/20">
           <span className="text-[9px] uppercase tracking-[0.4em]">Scroll</span>
           <div className="w-px h-8 bg-linear-to-b from-black/20 dark:from-white/20 to-transparent animate-pulse" />
         </div>
