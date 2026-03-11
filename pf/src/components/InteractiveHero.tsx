@@ -176,7 +176,7 @@ export default function InteractiveHero({ mouse }: { mouse: Mouse }) {
         }}
       >
         <span className="text-[10px] font-bold text-[#C03540] opacity-70 uppercase tracking-[0.5em] font-mono">
-          01 — Identity
+          Identity
         </span>
       </div>
 

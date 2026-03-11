@@ -189,7 +189,7 @@ export default function Home() {
         {/* 3. Projects */}
         <section ref={setRef("projects")} id="projects" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 02 — Projects" title="Projects" desc="Scalable architecture, pixel-perfect UI, and automated deployments." />
+          <SectionHeader module="Hands on Experience" title="Projects" desc="Scalable architecture, pixel perfect UI, and automated deployments." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((p) => (
               <div key={p.slug} className="group relative h-80 rounded-2xl border border-black/10 dark:border-white/10 overflow-hidden cursor-pointer grayscale hover:grayscale-0 hover:border-black/25 dark:hover:border-white/25 transition-all duration-500">
@@ -233,7 +233,7 @@ export default function Home() {
         {/* 4. Education */}
         <section ref={setRef("education")} id="education" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 03 — Education" title="Education" desc="The academic foundation of algorithms, architecture, and engineering principles." />
+          <SectionHeader module="Educational Qualifications" title="Education" desc="The academic foundation of algorithms, architecture, and engineering principles." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {educationData.map((edu) => (
               <div key={edu.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 p-8">
@@ -263,7 +263,7 @@ export default function Home() {
         {/* 5. Certifications */}
         <section ref={setRef("certifications")} id="certifications" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 04 — Certifications" title="Certifications" desc="Verified expertise from industry leaders in Cloud, AI, and Software Engineering." />
+          <SectionHeader module="Certification Courses Completed" title="Certifications" desc="Verified expertise from industry leaders in Cloud, AI, and Software Engineering." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {certData.map((cert) => (
               <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 grayscale hover:grayscale-0 cursor-pointer">
@@ -308,7 +308,7 @@ export default function Home() {
         {/* 6. Learnings */}
         <section ref={setRef("learnings")} id="learnings" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader module="Module 05 — Learnings" title="Learnings" desc="Key technologies and insights gained through hands-on experience." />
+          <SectionHeader module="What I Learn Through Projects" title="Learnings" desc="Key technologies and insights gained through hands-on experience." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {learningsData.map((item) => (
               <Link key={item.label} href={`/learnings/${item.slug}`}>
@@ -362,7 +362,7 @@ export default function Home() {
 
             {/* Left */}
             <div className="flex-1 max-w-lg">
-              <span className="text-[rgb(192,53,64)] text-xs font-bold uppercase tracking-[0.4em] block mb-4">Module 06 — Contact</span>
+              <span className="text-[rgb(192,53,64)] text-xs font-bold uppercase tracking-[0.4em] block mb-4">Contact</span>
               <h2 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none mb-6">
                 Let's Work<br />Together
               </h2>
@@ -379,7 +379,7 @@ export default function Home() {
             {/* Right — links */}
             <div className="flex flex-col gap-3 w-full lg:w-80">
               {[
-                { label: "Email", href: "mailto:vidun.shanukaofficial@gmail.com", sub: "vidun.shanukaofficial@email.com" },
+                { label: "Email", href: "mailto:vidun.shanukaofficial@gmail.com", sub: "vidun.shanukaofficial@gmail.com" },
                 { label: "GitHub", href: "https://github.com/vidun-upek", sub: "github.com/vidun-upek" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/vidun-shanuka-17276a2b4/", sub: "linkedin.com/in/vidun-shanuka" },
                 { label: "CV / Resume", href: "/CW.pdf", sub: "View/Download PDF" },

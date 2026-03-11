@@ -38,7 +38,7 @@ const TechStackSection = React.forwardRef<HTMLElement, {}>(function TechStackSec
   return (
     <section ref={ref as any} id="techstack" className="py-24 lg:py-32 px-8 md:px-16 xl:px-32 border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader module="Module 01 — Tech Stack" title="Tech Stack" desc="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering." />
+        <SectionHeader module="Tools / Languages / Frameworks" title="Tech Stack" desc="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering." />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {techData.map((tech, idx) => (
