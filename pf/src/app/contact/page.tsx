@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ContactPage() {
   const links = [
-    { label: "Email", href: "mailto:vidun.shanukaofficial@email.com", sub: "vidun.shanukaofficial@email.com" },
+    { label: "Email", href: "mailto:vidun.shanukaofficial@gmail.com", sub: "vidun.shanukaofficial@gmail.com" },
     { label: "GitHub", href: "https://github.com/vidun-upek", sub: "github.com/vidun-upek" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/vidun-shanuka-17276a2b4/", sub: "linkedin.com/in/vidun-shanuka" },
     { label: "CV / Resume", href: "/CW.pdf", sub: "View/Download PDF" },

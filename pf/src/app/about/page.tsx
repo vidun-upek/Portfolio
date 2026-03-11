@@ -165,7 +165,7 @@ export default function AboutPage() {
 
           <Reveal>
             <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-12 block">
-              02 — The Story
+              The Story
             </span>
           </Reveal>
 
@@ -189,8 +189,7 @@ export default function AboutPage() {
                 <br />
                 <br />
                 I believe in the &quot;Build, Ship, Scale&quot; philosophy.
-                Whether it&apos;s training an ML model for cost prediction or
-                designing a disaster management system, my goal is to create
+                Whether it&apos;s training an ML model or developing a software driven management system, my goal is to create
                 software that solves real world problems with precision and
                 speed.
               </p>
@@ -202,7 +201,7 @@ export default function AboutPage() {
         <section className="w-[100vw] md:w-[50vw] shrink-0 border-r border-white/[0.06] bg-[#070707] p-12 md:p-20 flex flex-col justify-center relative overflow-hidden text-white">
           <Reveal>
             <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-6 block">
-              03 — Leadership, Teamwork & Achievements
+              Leadership, Teamwork & Achievements
             </span>
           </Reveal>
 
@@ -244,7 +243,7 @@ export default function AboutPage() {
         <section className="w-[100vw] md:w-[40vw] shrink-0 border-r border-white/[0.06] bg-[#050505] p-12 flex flex-col justify-center">
           <Reveal>
             <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-16 block">
-              04 — Vitals
+              Info
             </span>
           </Reveal>
 
@@ -283,7 +282,7 @@ export default function AboutPage() {
 
           <Reveal className="relative z-10 text-center">
             <p className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-6">
-              05 — Vision
+              Vision
             </p>
             <h2
               className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter text-white leading-none"

@@ -62,7 +62,7 @@ export const stripProjects: StripProject[] = [
     image: "/strips/bg1.png",
     category: "Full Stack & ML",
     description: "Gamified Narrative Driven Educational Platform.",
-    tech: ["React", "Node.js","Express", "MongoDB","Tailwind","Redis","Docker", "Kubernetes"],
+    tech: ["React", "Node.js","Express", "MongoDB","Tailwind","Redis","Docker", "Kubernetes","CI/CD"],
     label: "01",
   },
   {
@@ -71,7 +71,7 @@ export const stripProjects: StripProject[] = [
     image: "/strips/bg1.png",
     category: "Full Stack",
     description: "Seamless Experience for users to discover and book rooms, while offering a robust dashboard for hotel owners to manage their properties, track revenue, and handle room availability in real time.",
-    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind"],
+    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind","stripe","clerk"],
     label: "02",
   },
   {
@@ -89,7 +89,7 @@ export const stripProjects: StripProject[] = [
     image: "/strips/bg1.png",
     category: "Infrastructure , Full Stack ",
     description: "Car Rental Website Integrated with Automated CI/CD and IaC pipelines for production grade systems.",
-    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind","Docker", "Kubernetes"],
+    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind","Docker", "Kubernetes","CI/CD"],
     label: "04",
   },
   {
@@ -115,7 +115,7 @@ export const stripProjects: StripProject[] = [
 // TECH STACK DATA 
 
 export const techStack: TechStack[] = [
-  { id: "front", label: "01", title: "Frontend", desc: "Pixel-perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "Figma","Photoshop"], brief: "Built responsive, accessible UI components with modern frameworks. Integrated GSAP for smooth animations and Tailwind for rapid styling. Implemented pixel perfect designs from Figma prototypes with interactive hover states." },
+  { id: "front", label: "01", title: "Frontend", desc: "Pixel perfect, highly animated user interfaces.", skills: ["Next.js 15", "React", "TypeScript", "Tailwind CSS", "Figma","Photoshop"], brief: "Built responsive, accessible UI components with modern frameworks. Integrated GSAP for smooth animations and Tailwind for rapid styling. Implemented pixel perfect designs from Figma prototypes with interactive hover states." },
   { id: "back", label: "02", title: "Backend", desc: "Scalable, secure server side applications.", skills: ["Node.js", "Express","javascript", "Spring Boot","PHP","ASP.NET", "Postman"], brief: "Developed RESTful APIs using Node.js and Express. Implemented authentication, database optimization, session management and real time data handling. Tested endpoints with Postman and deployed on database platforms." },
   { id: "ml", label: "03", title: "Machine Learning", desc: "Intelligent models and deep neural networks.", skills: ["Numpy","pandas","Matplotlib","Seaborn","Plotly Express", "Pycarat", "Scikit Learn"], brief: "Developed predictive models using Regression and Classification techniques. Performed data preprocessing and feature engineering with Pandas and NumPy. Visualized model performance with Matplotlib and Seaborn for insights." },
   { id: "database", label: "04", title: "Database", desc: "Designing and managing relational and NoSQL databases.", skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"], brief: "Designed normalized schemas for PostgreSQL and document structures for MongoDB. Implemented caching strategies with Redis for performance optimization. Ensured data integrity and wrote complex queries for analytics." },
@@ -137,7 +137,7 @@ export const certifications: Certification[] = [
   { id: "course", label: "02", title: "University of Colombo - School of Computing", image: "/strips/colombo.jpeg", subtitle: "Java Foundation Course", desc: "Completed Java Course - fundamentals & OOP" },
   { id: "aws", label: "01", title: "AWS Cloud Essentials - Coursera", image: "/strips/aws.png", subtitle: "AWS Workflows", desc: "Learn about core AWS services including EC2, VPC, IAM, and S3 to architect secure, high-availability cloud infrastructure." },
   { id: "ibm", label: "02", title: "Introduction to Containers w/ Docker, Kubernetes & OpenShift - Coursera", image: "/strips/docker.png", subtitle: "Docker & Kubernetes", desc: "Container orchestration, building images, and cloud-native deployment strategies." },
-  { id: "ibm2", label: "03", title: "Introduction to DevOps - Coursera", image: "/strips/backend.png", subtitle: "DevOps", desc: "Learn about GitHub Workflows and Agile strategies." },
+  { id: "ibm2", label: "03", title: "Introduction to DevOps - Coursera", image: "/strips/DevopsIntro.png", subtitle: "DevOps", desc: "Learn about GitHub Workflows and Agile strategies." },
   { id: "deeplearning", label: "04", title: "Linear Algebra And ML for Data Science - Coursera", image: "/strips/MLmaths.png", subtitle: "Mathematics for ML", desc: "Linear algebra, matrices, graphs, differentiation & integration." },
   { id: "coursera-rest", label: "05", title: "REST API Backend Application Development - Coursera", image: "/strips/backend.png", subtitle: "Backend foundations", desc: "" },
 ];
@@ -156,7 +156,7 @@ export const learnings: Learning[] = [
 export const profileData: ProfileData = {
   name: "Vidun Shanuka",
   subheading: "Full Stack Developer & DevOps Enthusiast",
-  status: "Available for Internships —> DevOps / Full Stack / ML",
+  status: "Available for Internships -DevOps / Full Stack / ML",
   quickFacts: [
     { icon: "📍", label: "Location", value: "Colombo, Sri Lanka" },
     { icon: "🎓", label: "Education", value: "CS Undergraduate @ IIT ·Ananda College ·Vidura College" },
