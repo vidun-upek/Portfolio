@@ -116,7 +116,7 @@ export default function Card({
         ${isProfile ? "w-[90vw] md:w-[600px]" : ""} 
         ${isClickable ? "cursor-pointer" : "cursor-default"} 
         transition-all duration-700 
-        ${isProfile ? "" : "grayscale hover:grayscale-0"}`}
+        ${isProfile ? "" : "md:grayscale md:hover:grayscale-0"}`}
       style={
         (tilt.x !== 0 || tilt.y !== 0)
           ? {

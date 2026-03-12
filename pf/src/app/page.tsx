@@ -192,7 +192,7 @@ export default function Home() {
           <SectionHeader module="Hands on Experience" title="Projects" desc="Scalable architecture, pixel perfect UI, and automated deployments." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((p) => (
-              <div key={p.slug} className="group relative h-80 rounded-2xl border border-black/10 dark:border-white/10 overflow-hidden cursor-pointer grayscale hover:grayscale-0 hover:border-black/25 dark:hover:border-white/25 transition-all duration-500">
+              <div key={p.slug} className="group relative h-80 rounded-2xl border border-black/10 dark:border-white/10 overflow-hidden cursor-pointer md:grayscale md:hover:grayscale-0 hover:border-black/25 dark:hover:border-white/25 transition-all duration-500">
                 {/* Splash Animation */}
                 <div className="splash" />
                 
@@ -266,7 +266,7 @@ export default function Home() {
           <SectionHeader module="Certification Courses Completed" title="Certifications" desc="Verified expertise from industry leaders in Cloud, AI, and Software Engineering." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {certData.map((cert) => (
-              <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 grayscale hover:grayscale-0 cursor-pointer">
+              <div key={cert.id} className="group relative rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-black overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 md:grayscale md:hover:grayscale-0 cursor-pointer">
                 {/* Splash Animation */}
                 <div className="splash" />
                 
@@ -310,9 +310,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <SectionHeader module="What I Learn Through Projects" title="Learnings" desc="Key technologies and insights gained through hands-on experience." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {learningsData.map((item) => (
-              <Link key={item.label} href={`/learnings/${item.slug}`}>
-                <div className="group relative h-72 rounded-2xl border border-black/8 dark:border-white/10 overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 flex flex-col justify-between grayscale hover:grayscale-0 cursor-pointer">
+              {learningsData.map((item) => (
+                <Link key={item.label} href={`/learnings/${item.slug}`}>
+                <div className="group relative h-72 rounded-2xl border border-black/8 dark:border-white/10 overflow-hidden hover:border-black/20 dark:hover:border-white/25 transition-all duration-500 flex flex-col justify-between md:grayscale md:hover:grayscale-0 cursor-pointer">
                   {/* Background Image */}
                   <div className="absolute inset-0 z-0">
                     <Image

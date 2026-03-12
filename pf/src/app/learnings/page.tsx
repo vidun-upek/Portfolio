@@ -55,7 +55,7 @@ export default function LearningsPage() {
 
         {learningsData.map((learning, i) => (
           <Link key={i} href={`/learnings/${learning.slug}`}>
-            <div className="group relative w-[400px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="group relative w-[400px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer md:grayscale md:hover:grayscale-0 transition-all duration-700">
               <div className="splash" />
               
               <div className="absolute inset-0 z-0">
