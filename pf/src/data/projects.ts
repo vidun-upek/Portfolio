@@ -67,7 +67,7 @@ export const stripProjects: StripProject[] = [
   },
   {
     slug: "HotelBooking",
-    title: " QuickStay",
+    title: " Hotelify",
     image: "/strips/bg1.png",
     category: "Full Stack",
     description: "Seamless Experience for users to discover and book rooms, while offering a robust dashboard for hotel owners to manage their properties, track revenue, and handle room availability in real time.",
@@ -85,7 +85,7 @@ export const stripProjects: StripProject[] = [
   },
   {
     slug: "devops-pipelines",
-    title: "Volt Drive",
+    title: "RentRide",
     image: "/strips/bg1.png",
     category: "Infrastructure , Full Stack ",
     description: "Car Rental Website Integrated with Automated CI/CD and IaC pipelines for production grade systems.",

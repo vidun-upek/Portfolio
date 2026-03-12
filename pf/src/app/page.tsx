@@ -146,7 +146,7 @@ export default function Home() {
                 <span className="font-bold text-[#C03540] animate-pulse" style={{ animationDelay: "0.6s" }}>
                   scale
                 </span> software that{" "}
-                <span className="font-semibold text-black/90 dark:text-white/90">solves real-world problems</span>.
+                <span className="font-semibold text-black/90 dark:text-white/90">solves real world problems</span>.
               </p>
             </div>
 
