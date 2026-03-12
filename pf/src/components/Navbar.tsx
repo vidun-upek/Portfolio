@@ -110,10 +110,10 @@ export default function Navbar() {
             </Link>
           )}
 
-          <Link href="/CW.pdf" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 border border-white/20 text-white transition-all duration-300 rounded relative group">
+          <a href="/cw.vidun.shanuka.pdf" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 border border-white/20 text-white transition-all duration-300 rounded relative group">
             CV
             <span className="absolute bottom-0 left-4 right-4 h-[2px] bg-[rgb(192,53,64)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
