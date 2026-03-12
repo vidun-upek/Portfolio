@@ -145,9 +145,9 @@ export const certifications: Certification[] = [
 // LEARNINGS DATA
 
 export const learnings: Learning[] = [
-  { slug: "react-typescript", label: "01", title: "React & TypeScript", description: "Building scalable, type-safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
-  { slug: "full-stack-dev", label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end-to-end solutions.", tags: ["Node.js", "APIs", "Databases"] },
-  { slug: "cloud-devops", label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud-native tools.", tags: ["AWS", "Docker", "CI/CD"] },
+  { slug: "react-typescript", label: "01", title: "React & TypeScript", description: "Building scalable, type safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
+  { slug: "full-stack-dev", label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end to end solutions.", tags: ["Node.js", "APIs", "Databases"] },
+  { slug: "cloud-devops", label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud native tools.", tags: ["AWS", "Docker", "CI/CD"] },
   { slug: "machine-learning", label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
 ];
 

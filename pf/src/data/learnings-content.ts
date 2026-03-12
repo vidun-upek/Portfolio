@@ -28,30 +28,30 @@ export const learningsContent: Record<string, LearningDetail> = {
     title: "React & TypeScript",
     subtitle: "Building Scalable, Type-Safe React Applications",
     category: "Frontend Development",
-    readTime: "8 min read",
+    readTime: "2 min read",
     date: "March 2026",
     intro:
-      "React has revolutionized frontend development with its component-based architecture, while TypeScript adds powerful static typing to prevent runtime errors. Together, they enable developers to build scalable, maintainable applications with confidence. I've mastered advanced hook patterns, component composition, and performance optimization techniques.",
+      "React has revolutionized frontend development with its component based architecture, while TypeScript adds powerful static typing to prevent runtime errors. Together, they enable developers to build scalable, maintainable applications with confidence. I've mastered advanced hook patterns, component composition, and performance optimization techniques.",
     keyPoints: [
       {
         title: "Component Composition",
         description:
-          "Building reusable, composable components with clear separation of concerns using TypeScript props interfaces.",
+          "Learned to build reusable, composable components with clear separation of concerns using TypeScript props interfaces.",
       },
       {
         title: "Advanced Hooks",
         description:
-          "Leveraging useCallback, useMemo, useContext, and custom hooks for state management and performance optimization.",
+          "Learned to leverage useCallback, useMemo, useContext, and custom hooks for state management and performance optimization.",
       },
       {
         title: "Type Safety",
         description:
-          "Using TypeScript to catch errors at compile time with strict typing, generics, and discriminated unions.",
+          "Learned to use TypeScript to catch errors at compile time with strict typing, generics, and discriminated unions.",
       },
       {
         title: "Performance Optimization",
         description:
-          "Implementing React.memo, code splitting, lazy loading, and proper re-render optimization strategies.",
+          "Learned to implement React.memo, code splitting, lazy loading, and proper re render optimization strategies.",
       },
     ],
     techTools: [
@@ -65,7 +65,7 @@ export const learningsContent: Record<string, LearningDetail> = {
       },
       {
         name: "Tailwind CSS",
-        description: "Utility-first CSS framework for rapid styling and responsive design implementation.",
+        description: "Utility first CSS framework for rapid styling and responsive design implementation.",
       },
       {
         name: "GSAP",
@@ -73,26 +73,26 @@ export const learningsContent: Record<string, LearningDetail> = {
       },
       {
         name: "Next.js 15",
-        description: "React framework with SSR, file-based routing, API routes, and built-in optimization.",
+        description: "React framework with SSR, file based routing, API routes, and built in optimization.",
       },
     ],
     projects: [
       {
-        name: "CrackCode - Gamified Learning Platform (Sep 2025 — Mar 2026)",
+        name: "CrackCode - Gamified Learning Platform (Nov 2025 — Mar 2026)",
         description:
-          "Educational web application built using the MERN stack. Served as Technical Lead — responsible for frontend, backend, ML integration, documentation (UML, system/class diagrams), and CI/CD. Integrated cloud-based code editing with real-time session management, mini-games, and an AI narration agent. Deployed with Docker & Kubernetes.",
-        tools: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Docker", "Kubernetes", "LightGBM"],
+          "Educational web application built using the MERN stack. Served as Technical Lead — responsible for frontend, backend, ML integration, documentation (UML, system/class diagrams), and CI/CD. Integrated cloud based code editing with real time session management, mini-games, and an AI narration agent. Deployed with Docker & Kubernetes.",
+        tools: ["React", "Node.js", "Express", "MongoDB","Redis", "Tailwind", "Docker", "Kubernetes","LLM","Ai Agent" ],
       },
       {
-        name: "This Portfolio Website",
+        name: "Portfolio Website",
         description:
           "Created responsive components using React hooks and TypeScript. Implemented smooth GSAP animations, theme switching with context, and interactive UI elements with proper type safety.",
         tools: ["Next.js", "React", "TypeScript", "Tailwind", "GSAP"],
       },
       {
-        name: "QuickStay - Hotel Booking Platform",
+        name: "Hotelify - Hotel Booking Platform",
         description:
-          "Developed reusable UI components for hotel listings, booking forms, and owner dashboards. Implemented secure auth, Stripe payments (with webhook verification), real-time availability checks, and admin analytics. Built scalable REST APIs and full CRUD operations.",
+          "Developed reusable UI components for hotel listings, booking forms, and owner dashboards. Implemented secure auth, Stripe payments (with webhook verification), real time availability checks, and admin analytics. Built scalable REST APIs and full CRUD operations.",
         tools: ["React", "Node.js", "Express", "MongoDB", "Stripe", "Clerk", "Tailwind"],
       },
     ],
@@ -102,32 +102,32 @@ export const learningsContent: Record<string, LearningDetail> = {
   "full-stack-dev": {
     slug: "full-stack-dev",
     title: "Full Stack Development",
-    subtitle: "End-to-End Web Application Development",
+    subtitle: "End to End Web Application Development",
     category: "Web Development",
-    readTime: "10 min read",
+    readTime: "2 min read",
     date: "March 2026",
     intro:
-      "Full-stack development requires expertise across the entire application lifecycle - from responsive frontend interfaces to scalable backend APIs and efficient database design. I've built complete production-ready applications handling authentication, real-time data, complex business logic, and deployment pipelines.",
+      "Full stack development requires expertise across the entire application lifecycle  from responsive frontend interfaces to scalable backend APIs and efficient database design. I've built complete production ready applications handling authentication, real time data, complex business logic, and deployment pipelines.",
     keyPoints: [
       {
         title: "API Design & Development",
         description:
-          "Creating RESTful APIs with proper authentication, authorization, error handling, and documentation.",
+          "Learned to create RESTful APIs with proper authentication, authorization, error handling, and documentation.",
       },
       {
         title: "Database Architecture",
         description:
-          "Designing normalized SQL schemas and document-based NoSQL structures with proper indexing and optimization.",
+          "Learned to design normalized SQL schemas and document based NoSQL structures with proper indexing and optimization.",
       },
       {
-        title: "Frontend-Backend Integration",
+        title: "Frontend Backend Integration",
         description:
-          "Seamless integration between frontend and backend with proper state management and data flow.",
+          "Learned to achieve seamless integration between frontend and backend with proper state management and data flow.",
       },
       {
-        title: "Real-time Features",
+        title: "Real time Features",
         description:
-          "Implementing WebSocket connections, live notifications, and real-time data synchronization.",
+          "Learned to implement WebSocket connections, live notifications, and real time data synchronization.",
       },
     ],
     techTools: [
@@ -156,25 +156,25 @@ export const learningsContent: Record<string, LearningDetail> = {
       {
         name: "CrackCode Platform (Sep 2025 — Mar 2026)",
         description:
-          "Led the project as Technical Lead. Implemented end-to-end features across frontend, backend, and ML workflows. Designed system architecture and documentation; integrated CI/CD with Docker & Kubernetes and a cloud code-editor for collaborative sessions.",
-        tools: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes"],
+          "Led the project as Technical Lead. Implemented end to end features across frontend, backend, and ML workflows. Designed system architecture and documentation; integrated CI/CD with Docker & Kubernetes and a cloud code editor for collaborative sessions.",
+        tools: ["React", "Node.js", "Express", "MongoDB", "Redis","Docker", "Kubernetes","CI/CD"],
       },
       {
         name: "Hotelify - Hotel Booking Platform (Jan 2026 — Mar 2026)",
         description:
-          "Scalable reservation platform with real-time search and availability, secure auth and role management using Clerk, Stripe payment integration with webhook verification, and admin dashboards for hotel owners.",
+          "Scalable reservation platform with real time search and availability, secure auth and role management using Clerk, Stripe payment integration with webhook verification, and admin dashboards for hotel owners.",
         tools: ["React", "Node.js", "Express", "MongoDB", "Stripe", "Clerk", "Redis"],
       },
       {
         name: "RentRide - Car Rental Website (Dec 2025 — Feb 2026)",
         description:
           "Responsive MERN application for car rentals. Implemented JWT auth, booking management, and database-backed reservation flows. Containerized with Docker and deployed on Kubernetes; CI/CD via GitHub Actions.",
-        tools: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes", "GitHub Actions"],
+        tools: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes", "GitHub Actions","CI/CD"],
       },
       {
         name: "DivinoTaste - Food Service Platform",
         description:
-          "Restaurant ordering system with menu management, order tracking, customer reviews, and admin analytics. Real-time order updates for restaurant staff.",
+          "Restaurant ordering system with menu management, order tracking, customer reviews, and admin analytics. Real time order updates for restaurant staff.",
         tools: ["React", "Express", "MongoDB", "WebSockets"],
       },
     ],
@@ -186,7 +186,7 @@ export const learningsContent: Record<string, LearningDetail> = {
     title: "Cloud & DevOps",
     subtitle: "Automated Deployment & Infrastructure Management",
     category: "Infrastructure & Deployment",
-    readTime: "9 min read",
+    readTime: "2 min read",
     date: "March 2026",
     intro:
       "Modern applications require reliable, automated deployment pipelines and cloud infrastructure. I've containerized applications with Docker, orchestrated them with Kubernetes, and automated CI/CD pipelines. This ensures applications are scalable, reliable, and can handle production workloads.",
@@ -194,53 +194,47 @@ export const learningsContent: Record<string, LearningDetail> = {
       {
         title: "Containerization",
         description:
-          "Packaging applications in Docker containers for consistent deployment across development, staging, and production environments.",
+          "Learned to package applications in Docker containers for consistent deployment across development, staging, and production environments.",
       },
       {
         title: "Orchestration",
         description:
-          "Managing containerized applications at scale with Kubernetes for high availability and automatic scaling.",
+          "Learned to manage containerized applications at scale with Kubernetes for high availability and automatic scaling.",
       },
       {
         title: "CI/CD Pipelines",
         description:
-          "Automating testing, building, and deployment using GitHub Actions for rapid and reliable releases.",
+          "Learned to automate testing, building, and deployment using GitHub Actions for rapid and reliable releases.",
       },
       {
         title: "Cloud Services",
         description:
-          "Leveraging AWS services for computing, storage, and managed databases for scalable infrastructure.",
+          "Learned to leverage AWS services for computing, storage, and managed databases for scalable infrastructure.",
       },
     ],
     techTools: [
       {
         name: "Docker",
-        description: "Container runtime for packaging applications with dependencies for consistent deployment.",
+        description: "Learned Container runtime for packaging applications with dependencies for consistent deployment.",
       },
       {
         name: "Kubernetes",
-        description: "Container orchestration platform for managing containerized applications at scale.",
+        description: "Learned Container orchestration platform for managing containerized applications at scale.",
       },
       {
         name: "GitHub Actions",
-        description: "CI/CD platform integrated with GitHub for automated testing and deployment workflows.",
+        description: "Learned CI/CD platform integrated with GitHub for automated testing and deployment workflows.",
       },
       {
         name: "AWS",
-        description: "Cloud computing services including EC2, S3, RDS, and Lambda for scalable infrastructure.",
+        description: "Learned Cloud computing services including EC2, S3, and Lambda for scalable infrastructure through coursera.",
       },
       {
         name: "Docker Compose",
-        description: "Multi-container orchestration tool for local development and simple deployments.",
+        description: "Learned multi-container orchestration tool for local development and simple deployments.",
       },
     ],
     projects: [
-      {
-        name: "Volt Drive - CI/CD Pipeline",
-        description:
-          "Implemented automated CI/CD pipeline for car rental platform. Containerized application with Docker, deployed to Kubernetes cluster, and set up GitHub Actions for automated testing and deployment.",
-        tools: ["Docker", "Kubernetes", "GitHub Actions", "AWS"],
-      },
       {
         name: "RentRide - Containerized Deployment",
         description:
@@ -248,16 +242,10 @@ export const learningsContent: Record<string, LearningDetail> = {
         tools: ["Docker", "Kubernetes", "GitHub Actions"],
       },
       {
-        name: "E-Commerce Platform Deployment",
+        name: "DockLens-npm package for Docker Management",
         description:
-          "Containerized full-stack application, created deployment manifests for Kubernetes, and established GitOps workflow for automatic deployments on code changes.",
-        tools: ["Docker", "Kubernetes", "GitOps", "AWS"],
-      },
-      {
-        name: "Microservices Infrastructure",
-        description:
-          "Designed and implemented microservices infrastructure with Docker containers, orchestrated with Kubernetes, and monitored with logging and alerting systems.",
-        tools: ["Docker", "Kubernetes", "Prometheus", "ELK Stack"],
+          "hat analyses Docker files to identify built inefficiencies and security risks.",
+        tools: ["Node.js", "Typescript", "CLI Development", "Docker", "Static Analysis", "CI/CD integration"],
       },
     ],
     tags: ["Docker", "Kubernetes", "AWS", "CI/CD", "DevOps"],
@@ -268,30 +256,30 @@ export const learningsContent: Record<string, LearningDetail> = {
     title: "Machine Learning",
     subtitle: "Data Analysis & Model Development",
     category: "AI & Machine Learning",
-    readTime: "11 min read",
+    readTime: "2 min read",
     date: "March 2026",
     intro:
-      "Machine learning enables computers to learn patterns from data and make intelligent predictions. I've built end-to-end ML pipelines including data preprocessing, feature engineering, model training, evaluation, and deployment. My work spans classification, regression, and deep learning tasks.",
+      "Machine learning enables computers to learn patterns from data and make intelligent predictions. I've built end to end ML pipelines including data preprocessing, feature engineering, model training, evaluation, and deployment. My work spans classification, regression, and deep learning tasks.",
     keyPoints: [
       {
         title: "Data Preprocessing",
         description:
-          "Cleaning, normalizing, and transforming raw data with handling of missing values, outliers, and feature scaling.",
+          "Learned Cleaning, normalizing, and transforming raw data with handling of missing values, outliers, and feature scaling.",
       },
       {
         title: "Feature Engineering",
         description:
-          "Creating meaningful features from raw data using domain knowledge and statistical techniques.",
+          "Learned Creating meaningful features from raw data using domain knowledge and statistical techniques.",
       },
       {
         title: "Model Training & Tuning",
         description:
-          "Training machine learning models with hyperparameter optimization and cross-validation for robust performance.",
+          "Learned Training machine learning models with hyperparameter optimization and cross-validation for robust performance.",
       },
       {
         title: "Model Evaluation",
         description:
-          "Comprehensive evaluation using appropriate metrics like precision, recall, F1-score, and confusion matrices.",
+          "Learned Comprehensive evaluation using appropriate metrics like precision, recall, F1 score, and confusion matrices.",
       },
     ],
     techTools: [
@@ -312,30 +300,28 @@ export const learningsContent: Record<string, LearningDetail> = {
         description: "Machine learning library with algorithms for classification, regression, and clustering.",
       },
       {
-        name: "PyTorch & TensorFlow",
-        description: "Deep learning frameworks for building and training neural networks.",
+        name: "PyCaret",
+        description: "Low-code machine learning library that simplifies model training, comparison, and deployment workflows."
       },
+      {
+        name: "Matplotlib",
+        description: "Data visualization library used to create static, animated, and interactive charts and graphs."
+      }
     ],
     projects: [
       {
         name: "DementiaInsight - Non-Medical Dementia Risk Classifier (Dec 2025)",
         description:
-          "Developed an automated ML pipeline to predict dementia risk using non-medical features. Implemented data processing, model training and evaluation, and a CLI prediction tool. Achieved strong performance with LightGBM and was a finalist at the ModelX Inter-University Hackathon.",
-        tools: ["Python", "Pandas", "LightGBM", "Scikit-Learn", "Jupyter"],
+          "Developed an automated ML pipeline to predict dementia risk using non medical features. Implemented data processing, model training and evaluation, and a CLI prediction tool. Achieved strong performance with LightGBM and was a finalist at the ModelX Inter University Hackathon.",
+        tools: ["Python", "Pandas", "LightGBM", "Scikit Learn", "Jupyter","Classification"],
       },
       {
         name: "MedPredict - Medical Cost Prediction Model (Nov 2025)",
         description:
           "Developed a Random Forest regressor to predict medical insurance costs using lifestyle and demographic indicators. Deployed via Streamlit to provide a lightweight interactive web interface.",
-        tools: ["Python", "Scikit-Learn", "RandomForest", "Streamlit"],
-      },
-      {
-        name: "Image Classification with Deep Learning",
-        description:
-          "Implemented CNN using PyTorch for image classification. Trained on custom dataset with data augmentation and achieved 92% validation accuracy.",
-        tools: ["PyTorch", "Python", "NumPy", "Matplotlib"],
+        tools: ["Python", "Scikit Learn", "RandomForest", "Streamlit","Classification"],
       },
     ],
-    tags: ["PyTorch", "Python", "Data Science", "AI", "Neural Networks"],
+    tags: ["Scikit Learn", "Python", "Data Science", "AI", "Data Visualization"],
   },
 };
