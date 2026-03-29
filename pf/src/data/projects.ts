@@ -76,7 +76,7 @@ export const stripProjects: StripProject[] = [
   },
   {
     slug: "Demensia",
-    title: "Demensia Insight",
+    title: "Dementia Insight",
     image: "/strips/bg1.png",
     category: "AI / ML",
     description: "This project is a submission for the MODELX hackathon. The goal is to build a binary classification model that predicts a person's risk of dementia using only non medical variables.",
@@ -93,12 +93,12 @@ export const stripProjects: StripProject[] = [
     label: "04",
   },
   {
-    slug: "Divinotaste",
-    title: "DivinoTaste",
+    slug: "Dockerlens",
+    title: "Dockerlens",
     image: "/strips/bg1.png",
-    category: "Full Stack , Freelance",
-    description: "Building a Web Application for a Local Food service - Under Implementation",
-    tech: ["React", "Node.js","Express", "MongoDB", "Tailwind"],
+    category: "Devops, CI/CD",
+    description: "Build a CI/CD pipeline that integrates Docker image scanning and vulnerability assessment into GitHub Workflows, ensuring secure and compliant container deployments.",
+    tech: ["React", "Typescript","NPM"],
     label: "05",
   },
   {
