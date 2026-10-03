@@ -1,302 +1,133 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { useMouse } from "@/components/InteractiveHero";
-import InteractiveHero from "@/components/InteractiveHero";
+import codeBg from "@/assets/images/code-bg.jpg";
+import HeroName from "@/components/hero/HeroName";
+import HorizontalScroll from "@/components/motion/HorizontalScroll";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { achievements, story, vitals } from "@/data/about";
 
-/* Scroll-triggered reveal */
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+export const metadata: Metadata = {
+  title: "About",
+  description: "The story, leadership, achievements and vision behind Vidun Shanuka's Build, Ship, Scale philosophy.",
+  alternates: { canonical: "/about" },
+};
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [delay]);
+const corners = ["left-6 top-20 border-l border-t", "right-6 top-20 border-r border-t", "bottom-6 left-6 border-b border-l", "bottom-6 right-6 border-b border-r"];
 
+function Panel({ children, className = "", label }: { children: React.ReactNode; className?: string; label?: string }) {
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(32px)",
-        transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-      }}
+    <section
+      aria-label={label}
+      className={`relative flex flex-col justify-center overflow-hidden border-b border-line px-gutter py-section hscroll:h-screen hscroll:shrink-0 hscroll:border-b-0 hscroll:border-r hscroll:px-[5vw] hscroll:py-24 ${className}`}
     >
       {children}
-    </div>
+    </section>
   );
 }
 
-/* Stat item with animated border */
-function StatItem({
-  label,
-  value,
-  sub,
-  delay,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  delay: number;
-}) {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [delay]);
-
-  return (
-    <div
-      ref={ref}
-      className="pl-6"
-      style={{
-        borderLeft: `2px solid ${visible ? "rgba(192, 53, 64, 0.6)" : "rgba(255, 255, 255, 0.06)"}`,
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(-20px)",
-        transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-      }}
-    >
-      <h3 className="text-[10px] font-bold text-white/25 uppercase tracking-[0.2em] mb-2 font-mono">
-        {label}
-      </h3>
-      <p className="text-[22px] font-extrabold text-white uppercase tracking-tight">
-        {value}
-      </p>
-      {sub && (
-        <p className="text-[11px] text-white/35 mt-1 uppercase tracking-[0.15em] font-mono">
-          {sub}
-        </p>
-      )}
-    </div>
-  );
+function PanelLabel({ children }: { children: React.ReactNode }) {
+  return <h2 className="eyebrow mb-10 text-accent-fg">{children}</h2>;
 }
 
-/* 
-     ABOUT PAGE
-    */
 export default function AboutPage() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const mouse = useMouse();
-
-  /* Horizontal scroll via mouse wheel */
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      if (e.deltaY !== 0 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        el.scrollBy({ left: e.deltaY * 1.5, behavior: "auto" });
-      }
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, []);
-
-  /* Scroll progress */
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const max = el.scrollWidth - el.clientWidth;
-      setProgress(max > 0 ? el.scrollLeft / max : 0);
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <>
-      {/*  SCROLL PROGRESS BAR  */}
-      <div
-        className="fixed top-0 left-0 h-[2px] z-[100]"
-        style={{
-          width: `${progress * 100}%`,
-          background: "linear-gradient(90deg, rgba(192, 53, 64, 0.8), rgba(224, 80, 96, 0.6))",
-          boxShadow: "0 0 12px rgba(192, 53, 64, 0.4)",
-          transition: "width 0.05s linear",
-        }}
-      />
+    <HorizontalScroll label="About Vidun Shanuka">
+      <Panel label="Identity" className="min-h-[100svh] items-center text-center hscroll:w-[60vw]">
+        {corners.map((position) => (
+          <span key={position} aria-hidden="true" className={`absolute size-8 border-accent/60 ${position}`} />
+        ))}
+        <p className="eyebrow absolute left-10 top-24 text-accent-fg">Identity</p>
+        <p
+          aria-hidden="true"
+          className="absolute right-6 top-1/2 hidden -translate-y-1/2 whitespace-nowrap [writing-mode:vertical-rl] font-mono text-[0.625rem] uppercase tracking-[0.4em] text-subtle xl:block"
+        >
+          Software Engineer • DevOps • Full Stack
+        </p>
 
-      {/* LAYER 1 — scrollable content */}
-      <main
-        ref={scrollRef}
-        className="relative z-[2] h-screen w-full overflow-x-auto overflow-y-hidden flex flex-nowrap items-stretch no-scrollbar"
-      >
-        {/* SECTION 1 — HERO (transparent → dots visible behind) */}
-        <section className="w-[100vw] md:w-[60vw] shrink-0 border-r border-white/[0.06] relative overflow-hidden cursor-none">
-          <InteractiveHero mouse={mouse} />
-        </section>
+        <HeroName lines={["Vidun", "Shanuka"]} className="text-[clamp(3.5rem,1rem+7.5vw,8.5rem)] leading-[0.85]" />
 
-        {/* SECTION 2 — BIOGRAPHY */}
-        <section className="w-[100vw] md:w-[50vw] shrink-0 border-r border-white/[0.06] bg-[#080808] p-12 md:p-20 flex flex-col justify-center relative overflow-hidden">
-          {/* Faint vertical accent */}
-          <div className="absolute left-0 top-[10%] bottom-[10%] w-px bg-gradient-to-b from-transparent via-[rgba(192,53,64,0.15)] to-transparent" />
+        <Reveal delay={0.9} className="mt-10 flex flex-col items-center gap-6">
+          <span aria-hidden="true" className="h-0.5 w-16 bg-accent" />
+          <p className="flex gap-3 font-mono text-xs uppercase tracking-[0.45em] text-muted">
+            Build <span className="text-accent-fg">•</span> Ship <span className="text-accent-fg">•</span> Scale
+          </p>
+        </Reveal>
 
-          <Reveal>
-            <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-12 block">
-              The Story
-            </span>
-          </Reveal>
+        <p aria-hidden="true" className="eyebrow absolute bottom-10 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-subtle hscroll:flex">
+          <span className="h-px w-6 bg-line-strong" />
+          Scroll to explore
+          <span className="h-px w-6 bg-line-strong" />
+        </p>
+      </Panel>
 
-          <div className="space-y-10">
-            <Reveal delay={150}>
-              <p className="text-2xl md:text-3xl font-light text-white/80 leading-normal">
-                I am currently a second-year student at the{" "}
-                <span className="text-white font-bold">
-                  University of Westminster
-                </span>{" "}
-                (IIT Sri Lanka).
-              </p>
-            </Reveal>
+      <Panel className="bg-surface/60 hscroll:w-[50vw]">
+        <Reveal>
+          <PanelLabel>The Story</PanelLabel>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="max-w-2xl text-[clamp(1.5rem,1rem+1.6vw,2.25rem)] font-light leading-snug text-fg/85">
+            {story.lead} <strong className="font-extrabold text-fg">{story.university}</strong> {story.leadSuffix}
+          </p>
+        </Reveal>
+        <Stagger className="mt-10 max-w-xl space-y-5" delay={0.2}>
+          {story.paragraphs.map((paragraph) => (
+            <StaggerItem key={paragraph}>
+              <p className="leading-relaxed text-muted">{paragraph}</p>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Panel>
 
-            <Reveal delay={300}>
-              <p className="text-white/40 text-sm md:text-base leading-loose max-w-xl">
-                My journey isn&apos;t just about writing code it&apos;s about
-                engineering solutions. From building Full stack applications
-                to orchestrating zero touch Kubernetes pipelines, I bridge the
-                gap between development and operations.
-                <br />
-                <br />
-                I believe in the &quot;Build, Ship, Scale&quot; philosophy.
-                Whether it&apos;s training an ML model or developing a software driven management system, my goal is to create
-                software that solves real world problems with precision and
-                speed.
-              </p>
-            </Reveal>
-          </div>
-        </section>
+      <Panel className="hscroll:w-[58vw]">
+        <Reveal>
+          <PanelLabel>Leadership, Teamwork & Achievements</PanelLabel>
+        </Reveal>
+        <Stagger className="grid max-w-3xl gap-8 hscroll:grid-cols-2 hscroll:gap-x-12" stagger={0.12}>
+          {achievements.map((group) => (
+            <StaggerItem key={group.title} className={group.items.length > 3 ? "hscroll:row-span-2" : ""}>
+              <h3 className="text-lg font-bold">{group.title}</h3>
+              <ul className="mt-4 space-y-2.5">
+                {group.items.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+                    <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Panel>
 
-        {/* SECTION 3 — LEADERSHIP, TEAMWORK & ACHIEVEMENTS */}
-        <section className="w-[100vw] md:w-[50vw] shrink-0 border-r border-white/[0.06] bg-[#070707] p-12 md:p-20 flex flex-col justify-center relative overflow-hidden text-white">
-          <Reveal>
-            <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-6 block">
-              Leadership, Teamwork & Achievements
-            </span>
-          </Reveal>
+      <Panel className="bg-surface/60 hscroll:w-[38vw]">
+        <Reveal>
+          <PanelLabel>Info</PanelLabel>
+        </Reveal>
+        <Stagger as="dl" className="space-y-10" stagger={0.12}>
+          {vitals.map(({ label, value, sub }) => (
+            <StaggerItem key={label} className="border-l-2 border-accent pl-6">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-subtle">{label}</dt>
+              <dd className="mt-2 text-2xl font-extrabold uppercase tracking-tight">{value}</dd>
+              {sub && <dd className="mt-1 font-mono text-xs uppercase tracking-[0.15em] text-muted">{sub}</dd>}
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Panel>
 
-          <div className="space-y-6">
-            <Reveal delay={120}>
-              <div>
-                <h3 className="text-white font-bold mb-3">Leadership & Teamwork</h3>
-                <ul className="list-disc list-inside text-sm space-y-2 text-white/85">
-                  <li>Technical Lead and Founder of Project CrackCode (Gamified Educational Platform)</li>
-                  <li>Team Leader | ModelX InterUniversity hackathon | Finalist</li>
-                  <li>Team Leader | IEEE Global hackathon | rank 1887 out of 8000+ teams globally</li>
-                  <li>Vice Captain / Open batsman / wicket keeper of School cricket Team</li>
-                  <li>Cricket captain of H&amp;M Cricket sports Club</li>
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={240}>
-              <div>
-                <h3 className="text-white font-bold mb-3">Awards</h3>
-                <ul className="list-disc list-inside text-sm space-y-2 text-white/85">
-                  <li>Award Winner at Annual School Sports Award Ceremony - Colour’s Night Event (2016, 2017, 2018)</li>
-                  <li>All Island certificate Holder in Cricket (SLSCA Tournaments) | Best Batsman Awards | Best All Arounder Awards</li>
-                  <li>Award Winner &amp; Bronze Medallist at Annual School Art competitions (2013, 2014, 2016, 2017)</li>
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={360}>
-              <div>
-                <h3 className="text-white font-bold mb-3">Languages</h3>
-                <p className="text-sm text-white/85">English (Fluent) &amp; Sinhala (Native)</p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* SECTION 4 — VITALS */}
-        <section className="w-[100vw] md:w-[40vw] shrink-0 border-r border-white/[0.06] bg-[#050505] p-12 flex flex-col justify-center">
-          <Reveal>
-            <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-16 block">
-              Info
-            </span>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-12">
-            <StatItem label="Location" value="Maththegoda, Colombo, Sri Lanka" delay={100} />
-            <StatItem
-              label="Education"
-              value="BCs (Hons) Computer Science"
-              sub="Informatics Institute of Technology"
-              delay={250}
-            />
-            <StatItem label="Focus" value="DevOps • ML • Full Stack" delay={400} />
-          </div>
-        </section>
-
-        {/* SECTION 5 — VISION (transparent → dots visible) */}
-        <section className="w-[100vw] md:w-[40vw] shrink-0 relative flex items-center justify-center overflow-hidden">
-          {/* Background texture */}
-          <div className="absolute inset-0 opacity-20">
-            <Image src="/strips/bg1.png" alt="Texture" fill className="object-cover" />
-          </div>
-
-          {/* Radial glow */}
-          <div
-            className="absolute rounded-full"
-            style={{
-              width: "60vw",
-              height: "60vw",
-              background: "radial-gradient(circle, rgba(192, 53, 64, 0.06) 0%, transparent 70%)",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              filter: "blur(40px)",
-            }}
-          />
-
-          <Reveal className="relative z-10 text-center">
-            <p className="text-[#C03540] text-xs font-bold uppercase tracking-[0.5em] mb-6">
-              Vision
-            </p>
-            <h2
-              className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter text-white leading-none"
-              style={{ textShadow: "0 0 80px rgba(192, 53, 64, 0.15)" }}
-            >
-              Build.
-              <br />
-              Ship.
-              <br />
-              Scale.
-            </h2>
-          </Reveal>
-        </section>
-      </main>
-    </>
+      <Panel label="Vision" className="items-center text-center hscroll:w-[42vw] hscroll:border-r-0">
+        <Image src={codeBg} alt="" fill placeholder="blur" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover opacity-10 grayscale dark:opacity-15" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--glow),transparent_65%)]" />
+        <Reveal className="relative">
+          <p className="eyebrow mb-6 text-accent-fg">Vision</p>
+          <p className="heading-display text-[clamp(3.5rem,2rem+5vw,7rem)] leading-[0.9]">
+            Build.
+            <br />
+            Ship.
+            <br />
+            <span className="text-accent-fg">Scale.</span>
+          </p>
+        </Reveal>
+      </Panel>
+    </HorizontalScroll>
   );
 }

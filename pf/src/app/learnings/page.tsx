@@ -1,101 +1,43 @@
-"use client";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
-import Link from "next/link";
-import { learnings as learningsData } from "@/data/projects";
+import type { Metadata } from "next";
+import HorizontalScroll from "@/components/motion/HorizontalScroll";
+import { Reveal } from "@/components/motion/Reveal";
+import Rise from "@/components/motion/Rise";
+import LearningCard from "@/components/ui/LearningCard";
+import { learnings } from "@/data/projects";
 
-gsap.registerPlugin(ScrollTrigger);
+const description = "Key technologies and insights gained through hands-on experience.";
+
+export const metadata: Metadata = {
+  title: "Learnings",
+  description,
+  alternates: { canonical: "/learnings" },
+};
 
 export default function LearningsPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (!trackRef.current || !containerRef.current) return;
-    const ctx = gsap.context(() => {
-      const scrollAmount = trackRef.current!.scrollWidth - window.innerWidth;
-      gsap.to(trackRef.current, {
-        x: -scrollAmount,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${scrollAmount}`,
-          scrub: 1,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, containerRef);
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill(true));
-      document.querySelectorAll(".pin-spacer").forEach(spacer => {
-        const parent = spacer.parentElement;
-        if (!parent) return;
-        while (spacer.firstChild) parent.insertBefore(spacer.firstChild, spacer);
-        parent.removeChild(spacer);
-      });
-      try { ctx.revert(); } catch (_) {}
-    };
-  }, []);
-
   return (
-    <main ref={containerRef} className="scroll-container flex items-center">
-      <div ref={trackRef} className="flex h-[75vh] px-[10vw] gap-8 items-center flex-nowrap mt-10">
-        
-        <div className="w-[350px] shrink-0 pr-10">
-          <span className="text-brand-red text-xs font-bold uppercase tracking-[0.4em] block mb-2">Module 05</span>
-          <h1 className="text-6xl font-black uppercase italic tracking-tighter leading-none mb-4">Learnings</h1>
-          <p className="text-[11px] text-white/50 uppercase tracking-widest leading-relaxed">
-            Key technologies and insights gained through hands-on experience.
+    <div className="pb-section pt-28 hscroll:pb-0 hscroll:pt-0">
+      <HorizontalScroll
+        label="Learnings"
+        trackClassName="container-page grid gap-4 sm:grid-cols-2 hscroll:max-w-none hscroll:items-center hscroll:gap-6 hscroll:px-[8vw]"
+      >
+        <Rise className="mb-8 sm:col-span-2 hscroll:mb-0 hscroll:w-[36rem] hscroll:shrink-0 hscroll:pr-16">
+          <p className="eyebrow mb-4 flex items-center gap-3 text-accent-fg">
+            <span>05</span>
+            <span aria-hidden="true" className="h-px w-8 bg-accent-fg/50" />
+            <span>What I Learn Through Projects</span>
           </p>
-        </div>
-
-        {learningsData.map((learning, i) => (
-          <Link key={i} href={`/learnings/${learning.slug}`}>
-            <div className="group relative w-[400px] h-full shrink-0 rounded-2xl border border-white/20 overflow-hidden cursor-pointer md:grayscale md:hover:grayscale-0 transition-all duration-700">
-              <div className="splash" />
-              
-              <div className="absolute inset-0 z-0">
-                <Image 
-                  src="/strips/bg1.png" 
-                  alt={learning.title} 
-                  fill 
-                  className="object-cover opacity-40 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-black/20" />
-              </div>
-
-              <div className="relative z-10 h-full p-8 flex flex-col justify-between">
-                <div />
-                <div>
-                  <span className="text-brand-red text-xs font-bold uppercase tracking-[0.4em] block mb-2">Learning {learning.label}</span>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-brand-red transition-colors duration-500">
-                    {learning.title}
-                  </h3>
-                  <p className="text-xs text-white/60 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    {learning.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    {learning.tags.map(tag => (
-                      <span key={tag} className="text-[9px] border border-white/20 px-2 py-1 uppercase text-white/60">{tag}</span>
-                    ))}
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-xs text-brand-red font-semibold uppercase tracking-widest flex items-center gap-2">
-                      <span>✨ Click to explore more</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
+          <h1 className="heading-display text-h1">Learnings</h1>
+          <p className="mt-5 max-w-sm text-lead text-muted">{description}</p>
+          <p aria-hidden="true" className="eyebrow mt-10 hidden text-subtle hscroll:block">
+            Scroll to explore →
+          </p>
+        </Rise>
+        {learnings.map((learning, i) => (
+          <Reveal key={learning.slug} delay={i * 0.06} className="hscroll:h-[30rem] hscroll:w-[24rem] hscroll:shrink-0">
+            <LearningCard learning={learning} headingLevel="h2" />
+          </Reveal>
         ))}
-
-        <div className="w-[10vw] shrink-0" />
-      </div>
-    </main>
+      </HorizontalScroll>
+    </div>
   );
 }

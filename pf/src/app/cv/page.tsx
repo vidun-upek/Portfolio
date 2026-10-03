@@ -1,28 +1,38 @@
-"use client";
+import { Download, ExternalLink } from "lucide-react";
+import type { Metadata } from "next";
+import Rise from "@/components/motion/Rise";
+import { buttonClass } from "@/components/ui/button";
+import { siteConfig } from "@/data/site";
 
-import React from "react";
+export const metadata: Metadata = {
+  title: "Curriculum Vitae",
+  description: "View or download the CV of Vidun Shanuka.",
+  alternates: { canonical: "/cv" },
+};
 
 export default function CVPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      <div className="max-w-7xl mx-auto py-8 px-4">
-        <h1 className="text-3xl font-bold mb-4">Curriculum Vitae</h1>
-        <p className="text-sm text-black/60 dark:text-white/60 mb-6">If your browser supports PDFs it will display here. Otherwise you can download the file.</p>
-
-        <div style={{ height: '80vh' }} className="border border-black/10 dark:border-white/10 rounded overflow-hidden">
-          <iframe
-            src="/cv.vidun.shanuka.pdf"
-            title="Curriculum Vitae"
-            style={{ width: '100%', height: '100%', border: 0 }}
-          />
+    <section className="container-page pb-section pt-28 md:pt-32">
+      <Rise className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="eyebrow mb-4 text-accent-fg">Resume</p>
+          <h1 className="heading-display text-h1">Curriculum Vitae</h1>
+          <p className="mt-4 max-w-lg text-muted">If your browser supports PDFs it will display here. Otherwise you can download the file.</p>
         </div>
-
-        <div className="mt-4">
-          <a href="/cv.vidun.shanuka.pdf" target="_blank" rel="noopener noreferrer" className="text-[rgb(192,53,64)] font-semibold">
-            Open CV in new tab / Download
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={siteConfig.cv} target="_blank" rel="noopener noreferrer" className={buttonClass("secondary")}>
+            <ExternalLink size={16} aria-hidden="true" />
+            Open in new tab
+          </a>
+          <a href={siteConfig.cv} download className={buttonClass("primary")}>
+            <Download size={16} aria-hidden="true" />
+            Download PDF
           </a>
         </div>
-      </div>
-    </div>
+      </Rise>
+      <Rise delay={0.1} className="h-[80vh] overflow-hidden rounded-xl border border-line bg-surface shadow-elev-3">
+        <iframe src={siteConfig.cv} title="Curriculum Vitae of Vidun Shanuka" className="size-full border-0" />
+      </Rise>
+    </section>
   );
 }
