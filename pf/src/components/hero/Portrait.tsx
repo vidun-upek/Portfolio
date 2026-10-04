@@ -10,8 +10,8 @@ const corners = ["left-3 top-3 border-l border-t", "right-3 top-3 border-r borde
 // Scale-only entrance keeps the image fully opaque, so it still counts as LCP immediately.
 export default function Portrait() {
   return (
-    <figure className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-none">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line bg-elevated shadow-elev-3">
+    <figure className="relative mx-auto aspect-[4/5] w-full max-w-sm sm:max-w-md lg:mr-0 lg:max-w-none fit:h-[min(72svh,42rem)] fit:w-auto">
+      <div className="relative size-full overflow-hidden rounded-lg border border-line bg-elevated shadow-elev-3">
         <m.div className="absolute inset-0" initial={{ scale: 1.08 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: easeOutExpo }}>
           <Image
             src={portrait}
@@ -25,7 +25,7 @@ export default function Portrait() {
         </m.div>
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         {corners.map((position) => (
-          <span key={position} aria-hidden="true" className={`absolute size-6 border-accent ${position}`} />
+          <span key={position} aria-hidden="true" className={`absolute size-5 border-accent ${position}`} />
         ))}
         <figcaption className="absolute inset-x-5 bottom-5 flex items-center justify-between font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-white/85">
           <span>Colombo, LK</span>
