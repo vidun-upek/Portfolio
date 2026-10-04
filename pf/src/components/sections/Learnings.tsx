@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import Spotlight from "@/components/motion/Spotlight";
 import { buttonClass } from "@/components/ui/button";
 import LearningCard from "@/components/ui/LearningCard";
 import Section from "@/components/ui/Section";
@@ -18,15 +19,17 @@ export default function Learnings() {
         description="Key technologies and insights gained through hands-on experience."
       />
 
-      <Stagger as="ul" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {learnings.map((learning) => (
-          <StaggerItem as="li" key={learning.slug}>
-            <LearningCard learning={learning} />
-          </StaggerItem>
-        ))}
-      </Stagger>
+      <Spotlight>
+        <Stagger as="ul" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {learnings.map((learning) => (
+            <StaggerItem as="li" key={learning.slug}>
+              <LearningCard learning={learning} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Spotlight>
 
-      <Reveal className="mt-10 flex justify-center">
+      <Reveal className="mt-8 flex justify-center">
         <Link href="/learnings" className={buttonClass("secondary")}>
           View all learnings
           <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
