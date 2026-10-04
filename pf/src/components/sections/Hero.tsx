@@ -13,17 +13,17 @@ const Accent = ({ children }: { children: React.ReactNode }) => <span className=
 
 export default function Hero() {
   return (
-    <section id="top" aria-label="Introduction" className="relative overflow-hidden pb-20 pt-28 md:pt-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pb-24">
+    <section id="top" aria-label="Introduction" className="relative overflow-hidden pb-16 pt-24 md:pt-28 fit:flex fit:min-h-svh fit:items-center fit:pb-8 fit:pt-20">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 right-0 size-[44rem] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_62%)]"
       />
 
-      <div className="container-page relative grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+      <div className="container-page relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className="lg:col-span-7">
           <p
             style={delay(0.05)}
-            className={`${rise} inline-flex items-center gap-2.5 rounded-full border border-accent-fg/30 bg-accent/10 px-3.5 py-1.5 text-xs font-semibold text-accent-fg`}
+            className={`${rise} inline-flex items-center gap-2.5 rounded-md border border-accent-fg/30 bg-accent/10 px-3.5 py-1.5 text-xs font-semibold text-accent-fg`}
           >
             <span aria-hidden="true" className="relative flex size-2">
               <span className="absolute inset-0 animate-ping-soft rounded-full bg-accent-fg motion-reduce:animate-none" />
@@ -31,27 +31,27 @@ export default function Hero() {
             </span>
             {profileData.status}
           </p>
-          <p style={delay(0.12)} className={`${rise} eyebrow mt-8 text-subtle`}>
+          <p style={delay(0.12)} className={`${rise} eyebrow mt-6 text-subtle fit:mt-[min(2rem,3.5vh)]`}>
             {profileData.subheading}
           </p>
 
-          <HeroName lines={["Vidun", "Shanuka"]} className="mt-5 text-display" delay={0.2} />
+          <HeroName lines={["Vidun", "Shanuka"]} className="mt-4 text-[clamp(3.25rem,15vw,4.75rem)] leading-[0.88] tracking-[-0.035em] lg:text-display" delay={0.2} />
 
-          <p style={delay(0.3)} className={`${rise} mt-8 max-w-xl text-lead text-muted`}>
+          <p style={delay(0.3)} className={`${rise} mt-6 max-w-xl text-lead text-muted fit:mt-[min(2rem,3.5vh)]`}>
             I <Accent>build</Accent>, <Accent>ship</Accent> &amp; <Accent>scale</Accent> software that{" "}
             <span className="font-semibold text-fg">solves real world problems</span>.
           </p>
 
-          <ul style={delay(0.4)} className={`${rise} mt-10 grid gap-3 sm:grid-cols-2`}>
+          <ul style={delay(0.4)} className={`${rise} mt-8 grid gap-2.5 sm:grid-cols-2 fit:mt-[min(2.5rem,4vh)]`}>
             {profileData.quickFacts.map(({ icon, label, value }) => {
               const Icon = iconMap[icon];
               return (
                 <li
                   key={label}
-                  className="flex items-start gap-3 rounded-lg border border-line bg-surface/60 p-4 backdrop-blur transition-colors hover:border-line-strong"
+                  className="flex items-start gap-3 rounded-lg border border-line bg-surface/60 p-3.5 backdrop-blur"
                 >
-                  <span className="grid size-9 shrink-0 place-items-center rounded-md bg-accent/10 text-accent-fg">
-                    <Icon size={17} strokeWidth={1.75} aria-hidden="true" />
+                  <span className="grid size-8 shrink-0 place-items-center rounded-md bg-accent/10 text-accent-fg">
+                    <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
                   </span>
                   <div className="min-w-0">
                     <p className="font-mono text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-subtle">{label}</p>
@@ -62,7 +62,7 @@ export default function Hero() {
             })}
           </ul>
 
-          <div style={delay(0.5)} className={`${rise} mt-10 flex flex-col gap-3 sm:flex-row`}>
+          <div style={delay(0.5)} className={`${rise} mt-8 flex flex-col gap-3 sm:flex-row fit:mt-[min(2.5rem,4vh)]`}>
             <Link href="/#contact" className={buttonClass("primary")}>
               Get In Touch
               <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
@@ -78,16 +78,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <Link
-        href="/#techstack"
-        aria-label="Scroll to tech stack"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-subtle transition-colors hover:text-fg lg:flex"
-      >
-        <span className="font-mono text-[0.625rem] uppercase tracking-[0.35em]">Scroll</span>
-        <span className="relative h-10 w-px overflow-hidden bg-line-strong">
-          <span className="absolute inset-x-0 top-0 h-1/2 animate-[scroll-cue_2s_var(--ease-out-expo)_infinite] bg-accent-fg motion-reduce:animate-none" />
-        </span>
-      </Link>
     </section>
   );
 }

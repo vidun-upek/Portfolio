@@ -45,7 +45,6 @@ export default async function LearningDetailPage({ params }: Props) {
   const index = learnings.findIndex((l) => l.slug === slug);
   if (!learning || index === -1) notFound();
 
-  const meta = learnings[index];
   const prev = learnings[index - 1];
   const next = learnings[index + 1];
   const facts = [
@@ -65,7 +64,7 @@ export default async function LearningDetailPage({ params }: Props) {
         </Rise>
         <Rise delay={0.12}>
           <p className="eyebrow text-accent-fg">
-            Learning {meta.label} — {learning.readTime}
+            {learning.category} — {learning.readTime}
           </p>
         </Rise>
         <Rise delay={0.19}>
@@ -94,10 +93,9 @@ export default async function LearningDetailPage({ params }: Props) {
 
       <ArticleSection title="Key Learnings">
         <Stagger as="ol" className="grid gap-4 md:grid-cols-2">
-          {learning.keyPoints.map((point, i) => (
+          {learning.keyPoints.map((point) => (
             <StaggerItem as="li" key={point.title} className="rounded-lg border border-line bg-surface/70 p-6 backdrop-blur transition-colors hover:border-accent-fg/40">
-              <span className="font-mono text-xs text-subtle">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-3 text-lg font-bold tracking-tight text-accent-fg">{point.title}</h3>
+              <h3 className="text-lg font-bold tracking-tight text-accent-fg">{point.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{point.description}</p>
             </StaggerItem>
           ))}

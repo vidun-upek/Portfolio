@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HorizontalScroll from "@/components/motion/HorizontalScroll";
 import { Reveal } from "@/components/motion/Reveal";
+import Spotlight from "@/components/motion/Spotlight";
 import Rise from "@/components/motion/Rise";
 import LearningCard from "@/components/ui/LearningCard";
 import { learnings } from "@/data/projects";
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function LearningsPage() {
   return (
     <div className="pb-section pt-28 hscroll:pb-0 hscroll:pt-0">
+      <Spotlight>
       <HorizontalScroll
         label="Learnings"
         trackClassName="container-page grid gap-4 sm:grid-cols-2 hscroll:max-w-none hscroll:items-center hscroll:gap-6 hscroll:px-[8vw]"
@@ -33,11 +35,12 @@ export default function LearningsPage() {
           </p>
         </Rise>
         {learnings.map((learning, i) => (
-          <Reveal key={learning.slug} delay={i * 0.06} className="hscroll:h-[30rem] hscroll:w-[24rem] hscroll:shrink-0">
+          <Reveal key={learning.slug} delay={i * 0.06} className="hscroll:w-[22rem] hscroll:shrink-0">
             <LearningCard learning={learning} headingLevel="h2" />
           </Reveal>
         ))}
       </HorizontalScroll>
+      </Spotlight>
     </div>
   );
 }

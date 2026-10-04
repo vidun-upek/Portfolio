@@ -10,7 +10,7 @@ export default function Contact({ headingLevel = "h2" }: { headingLevel?: "h1" |
   const Heading = headingLevel;
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden py-section">
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden py-section fit:flex fit:min-h-svh fit:scroll-mt-0 fit:items-center fit:pb-10 fit:pt-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-40 top-1/3 size-[36rem] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_65%)]"
@@ -45,7 +45,7 @@ export default function Contact({ headingLevel = "h2" }: { headingLevel?: "h1" |
               <a
                 href={link.href}
                 {...(isExternal(link.href) && { target: "_blank", rel: "noopener noreferrer" })}
-                className="group flex items-center gap-4 rounded-lg border border-line bg-surface/60 p-4 backdrop-blur transition-[border-color,background-color,transform] duration-300 hover:-translate-y-0.5 hover:border-accent-fg/40 hover:bg-surface sm:p-5"
+                className="group flex items-center gap-4 rounded-lg border border-line bg-surface/60 p-4 backdrop-blur transition-colors duration-300 hover:border-line-strong hover:bg-elevated sm:p-5"
               >
                 <span className="grid size-11 shrink-0 place-items-center rounded-md border border-line bg-elevated text-muted transition-colors group-hover:text-accent-fg">
                   <ContactIcon name={link.icon} />

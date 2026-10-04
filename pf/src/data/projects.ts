@@ -1,5 +1,4 @@
 import type { StaticImageData } from "next/image";
-import codeBg from "@/assets/images/code-bg.jpg";
 import awsCert from "@/assets/images/certs/aws.jpg";
 import backendCert from "@/assets/images/certs/backend.jpg";
 import devopsCert from "@/assets/images/certs/devops.jpg";
@@ -24,7 +23,7 @@ export type IconName =
 export type StripProject = {
   slug: string;
   title: string;
-  image: StaticImageData;
+  icon: IconName;
   category: string;
   description: string;
   tech: string[];
@@ -59,7 +58,6 @@ export type Certification = {
 
 export type Learning = {
   slug: string;
-  label: string;
   title: string;
   description: string;
   tags: string[];
@@ -78,7 +76,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "crackcode",
     title: "CrackCode",
-    image: codeBg,
+    icon: "ml",
     category: "Full Stack & ML",
     description: "Gamified Narrative Driven Educational Platform.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Redis", "Docker", "Kubernetes", "CI/CD"],
@@ -86,7 +84,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "hotelify",
     title: "Hotelify",
-    image: codeBg,
+    icon: "frontend",
     category: "Full Stack",
     description: "Seamless Experience for users to discover and book rooms, while offering a robust dashboard for hotel owners to manage their properties, track revenue, and handle room availability in real time.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Stripe", "Clerk"],
@@ -94,7 +92,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "dementia-insight",
     title: "Dementia Insight",
-    image: codeBg,
+    icon: "ml",
     category: "AI / ML",
     description: "This project is a submission for the MODELX hackathon. The goal is to build a binary classification model that predicts a person's risk of dementia using only non medical variables.",
     tech: ["Python", "pandas", "numpy", "matplotlib", "seaborn", "Scikit-Learn", "lightgbm", "pickle", "jupyter"],
@@ -102,7 +100,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "rentride",
     title: "RentRide",
-    image: codeBg,
+    icon: "devops",
     category: "Infrastructure, Full Stack",
     description: "Car Rental Website Integrated with Automated CI/CD and IaC pipelines for production grade systems.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind", "Docker", "Kubernetes", "CI/CD"],
@@ -110,7 +108,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "dockerlens",
     title: "Dockerlens",
-    image: codeBg,
+    icon: "devops",
     category: "DevOps, CI/CD",
     description: "Build a CI/CD pipeline that integrates Docker image scanning and vulnerability assessment into GitHub Workflows, ensuring secure and compliant container deployments.",
     tech: ["React", "Typescript", "NPM"],
@@ -118,7 +116,7 @@ export const stripProjects: StripProject[] = [
   {
     slug: "medpredict",
     title: "Medpredict",
-    image: codeBg,
+    icon: "ml",
     category: "AI / ML",
     description: "Build a predictive model to forecast the Cost of Medical Insurance using Random Forest Classification model",
     tech: ["Python", "pandas", "numpy", "matplotlib", "seaborn", "lightgbm", "Scikit-Learn", "jupyter"],
@@ -158,10 +156,10 @@ export const certifications: Certification[] = [
 // LEARNINGS DATA
 
 export const learnings: Learning[] = [
-  { slug: "react-typescript", label: "01", title: "React & TypeScript", description: "Building scalable, type safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
-  { slug: "full-stack-dev", label: "02", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end to end solutions.", tags: ["Node.js", "APIs", "Databases"] },
-  { slug: "cloud-devops", label: "03", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud native tools.", tags: ["AWS", "Docker", "CI/CD"] },
-  { slug: "machine-learning", label: "04", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
+  { slug: "react-typescript", title: "React & TypeScript", description: "Building scalable, type safe React applications with advanced hook patterns.", tags: ["React", "TypeScript", "Hooks"] },
+  { slug: "full-stack-dev", title: "Full Stack Dev", description: "Mastering both frontend and backend to deliver complete end to end solutions.", tags: ["Node.js", "APIs", "Databases"] },
+  { slug: "cloud-devops", title: "Cloud & DevOps", description: "Deploying reliable, scalable applications using cloud native tools.", tags: ["AWS", "Docker", "CI/CD"] },
+  { slug: "machine-learning", title: "Machine Learning", description: "Deep dive into neural networks, model training, and practical AI engineering.", tags: ["PyTorch", "Pandas", "LLMs"] },
 ];
 
 // PROFILE DATA
