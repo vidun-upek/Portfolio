@@ -1,8 +1,8 @@
-import { renderMonogram } from "@/lib/og";
+import { renderLogoIcon } from "@/lib/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default function AppleIcon() {
-  return renderMonogram(size.width, 0);
+  return renderLogoIcon(size.width, 0);
 }

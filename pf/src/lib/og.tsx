@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { LOGO_S, LOGO_TRANSFORM, LOGO_V } from "@/components/brand/logo-paths";
 
 type FontOptions = { family: string; weight: 400 | 600 | 700 | 900; italic?: boolean; text: string };
 
@@ -16,30 +17,25 @@ export async function loadGoogleFont({ family, weight, italic = false, text }: F
   }
 }
 
-export async function renderMonogram(size: number, radius: number) {
-  const font = await loadGoogleFont({ family: "Archivo", weight: 900, italic: true, text: "VS" });
+// Favicon/app icon: the navbar mark with the default (dark theme) crimson gradient.
+export function renderLogoIcon(size: number, radius: number) {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#c03540",
-          borderRadius: radius,
-          color: "#ffffff",
-          fontFamily: "Archivo",
-          fontStyle: "italic",
-          fontWeight: 900,
-          fontSize: size * 0.5,
-          letterSpacing: -size * 0.03,
-        }}
-      >
-        VS
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#0b0b0b", borderRadius: radius }}>
+        <svg viewBox="0 0 40 40" width={size} height={size}>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#c03540" />
+              <stop offset="1" stopColor="#ef5a66" />
+            </linearGradient>
+          </defs>
+          <g fill="none" strokeWidth="3.6" strokeLinecap="square" strokeLinejoin="miter" transform={LOGO_TRANSFORM}>
+            <path d={LOGO_V} stroke="#ffffff" />
+            <path d={LOGO_S} stroke="url(#g)" />
+          </g>
+        </svg>
       </div>
     ),
-    { width: size, height: size, fonts: font ? [font] : undefined },
+    { width: size, height: size },
   );
 }

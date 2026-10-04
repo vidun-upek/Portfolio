@@ -5,6 +5,7 @@ import { AnimatePresence, m } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import Logo from "@/components/brand/Logo";
 import { easeOutExpo } from "@/components/motion/Reveal";
 import { buttonClass } from "@/components/ui/button";
 import { navLinks, siteConfig, type NavLink } from "@/data/site";
@@ -60,9 +61,13 @@ export default function Navbar() {
         }`}
       >
         <nav aria-label="Primary" className="container-page flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="heading-display text-2xl tracking-tight" onClick={() => setOpen(false)}>
-            VS<span className="text-accent">.</span>
-            <span className="sr-only"> {siteConfig.name}, home</span>
+          <Link href="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
+            <Logo className="size-9 rounded-md ring-1 ring-line transition-transform duration-300 ease-out-expo group-hover:-rotate-6 group-active:scale-95" />
+            <span className="hidden flex-col leading-none sm:flex">
+              <span className="heading-display text-[0.95rem] tracking-tight">{siteConfig.name}</span>
+              <span className="mt-1 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-subtle">Build · Ship · Scale</span>
+            </span>
+            <span className="sr-only sm:hidden">{siteConfig.name}, home</span>
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">
@@ -80,7 +85,7 @@ export default function Navbar() {
                     {link.label}
                     <span
                       aria-hidden="true"
-                      className={`absolute inset-x-3 -bottom-0.5 h-0.5 origin-left rounded-full bg-accent transition-transform duration-300 ease-out-expo ${
+                      className={`absolute inset-x-3 -bottom-0.5 h-0.5 origin-left rounded-full bg-brand transition-transform duration-300 ease-out-expo ${
                         active ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
