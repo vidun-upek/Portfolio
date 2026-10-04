@@ -11,7 +11,6 @@ export default function TechStack() {
         index="01"
         eyebrow="Tools / Languages / Frameworks"
         title="Tech Stack"
-        description="Comprehensive collection of technologies, frameworks, and tools I've mastered across full-stack development, cloud infrastructure, and AI engineering."
       />
       <Reveal>
         <TechStackTabs />
