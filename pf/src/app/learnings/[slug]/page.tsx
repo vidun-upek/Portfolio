@@ -1,179 +1,167 @@
-"use client";
-
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { use } from "react";
+import { notFound } from "next/navigation";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import Rise from "@/components/motion/Rise";
+import Chip from "@/components/ui/Chip";
 import { learningsContent } from "@/data/learnings-content";
 import { learnings } from "@/data/projects";
 
-interface LearningDetailPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+type Props = { params: Promise<{ slug: string }> };
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return learnings.map(({ slug }) => ({ slug }));
 }
 
-export default function LearningDetailPage({ params }: LearningDetailPageProps) {
-  const { slug } = use(params);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const learning = learningsContent[slug];
-  const learningMeta = learnings.find(l => l.slug === slug);
+  if (!learning) return {};
+  return {
+    title: learning.title,
+    description: learning.subtitle,
+    alternates: { canonical: `/learnings/${slug}` },
+    openGraph: { type: "article", title: learning.title, description: learning.subtitle },
+  };
+}
 
-  if (!learning) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-4xl font-black text-white mb-4 uppercase">Learning Not Found</h1>
-          <p className="text-white/60 mb-8">The learning content you're looking for doesn't exist.</p>
-          <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 border border-[#C03540] text-[#C03540] font-semibold uppercase text-xs tracking-widest hover:bg-[#C03540]/10 transition-all duration-300 rounded-lg">
-            ← Back Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
+function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="border-t border-line py-14 md:py-20">
+      <Reveal>
+        <h2 className="heading-display mb-10 text-h2">{title}</h2>
+      </Reveal>
+      {children}
+    </section>
+  );
+}
+
+export default async function LearningDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const learning = learningsContent[slug];
+  const index = learnings.findIndex((l) => l.slug === slug);
+  if (!learning || index === -1) notFound();
+
+  const prev = learnings[index - 1];
+  const next = learnings[index + 1];
+  const facts = [
+    { label: "Category", value: learning.category },
+    { label: "Reading Time", value: learning.readTime },
+    { label: "Published", value: learning.date },
+  ];
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="pt-12 pb-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <span className="text-[#C03540] text-xs font-bold uppercase tracking-[0.4em] block mb-6">Learning {learningMeta?.label} — {learning.readTime}</span>
-          
-          <h1 className="text-5xl md:text-7xl font-black uppercase leading-tight mb-6 italic tracking-tighter">
-            {learning.title}
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-white/70 font-semibold leading-relaxed mb-8">
-            {learning.subtitle}
-          </p>
-
-          <div className="flex flex-wrap gap-4 text-sm text-white/50">
-            <div>
-              <span className="block text-white/30 text-xs uppercase tracking-wider mb-1">Category</span>
-              <p className="font-semibold">{learning.category}</p>
-            </div>
-            <div>
-              <span className="block text-white/30 text-xs uppercase tracking-wider mb-1">Reading Time</span>
-              <p className="font-semibold">{learning.readTime}</p>
-            </div>
-            <div>
-              <span className="block text-white/30 text-xs uppercase tracking-wider mb-1">Published</span>
-              <p className="font-semibold">{learning.date}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction */}
-      <section className="py-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black uppercase mb-8 tracking-tight">Introduction</h2>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-8">
-            <p className="text-lg text-white/80 leading-relaxed">
-              {learning.intro}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Learnings */}
-      <section className="py-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black uppercase mb-12 tracking-tight">Key Learnings</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {learning.keyPoints.map((point, idx) => (
-              <div 
-                key={idx}
-                className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-[#C03540]/50 hover:bg-white/8 transition-all duration-300"
-              >
-                <h3 className="text-lg font-black text-[#C03540] mb-3 uppercase tracking-tight">
-                  {point.title}
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  {point.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Tools Used */}
-      <section className="py-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black uppercase mb-12 tracking-tight">Tools & Technologies</h2>
-          <div className="space-y-6">
-            {learning.techTools.map((tool, idx) => (
-              <div key={idx} className="border-l-4 border-[#C03540] pl-6">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {tool.name}
-                </h3>
-                <p className="text-white/70">
-                  {tool.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section className="py-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black uppercase mb-12 tracking-tight">How I Used This in Projects</h2>
-          <div className="space-y-8">
-            {learning.projects.map((project, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-lg p-8 hover:border-[#C03540]/50 transition-all duration-300">
-                <h3 className="text-2xl font-black text-white mb-3 uppercase tracking-tight flex items-start gap-3">
-                  <span className="text-[#C03540] text-lg">→</span>
-                  {project.name}
-                </h3>
-                <p className="text-white/70 leading-relaxed mb-5">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tools.map(tool => (
-                    <span 
-                      key={tool}
-                      className="text-xs px-3 py-1 bg-[#C03540]/10 border border-[#C03540]/50 text-[#C03540] rounded-full font-semibold uppercase tracking-wide"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tags */}
-      <section className="py-16 px-6 md:px-12 border-b border-white/10">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-xs font-bold uppercase tracking-[0.4em] text-white/50 mb-6 block">Skills & Tags</h3>
-          <div className="flex flex-wrap gap-3">
-            {learning.tags.map(tag => (
-              <span 
-                key={tag}
-                className="text-sm px-4 py-2 border border-[#C03540] text-[#C03540] rounded-full font-semibold uppercase tracking-wide hover:bg-[#C03540]/10 transition-all duration-300"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer CTA */}
-      <section className="py-16 px-6 md:px-12">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-white/60 mb-8 text-sm uppercase tracking-widest">Want to explore more?</p>
-          <Link 
-            href="/" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#C03540] text-white font-black uppercase text-sm tracking-widest hover:bg-[#D44050] transition-all duration-300 rounded-lg"
-          >
-            ← Back to Portfolio
+    <article className="container-page max-w-4xl pb-section pt-28 md:pt-32">
+      <header className="pb-14 md:pb-20">
+        <Rise delay={0.05}>
+          <Link href="/learnings" className="group mb-10 inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-fg">
+            <ArrowLeft size={16} aria-hidden="true" className="transition-transform group-hover:-translate-x-0.5" />
+            All learnings
           </Link>
-        </div>
+        </Rise>
+        <Rise delay={0.12}>
+          <p className="eyebrow text-accent-fg">
+            {learning.category} — {learning.readTime}
+          </p>
+        </Rise>
+        <Rise delay={0.19}>
+          <h1 className="heading-display mt-5 text-h1">{learning.title}</h1>
+        </Rise>
+        <Rise delay={0.26}>
+          <p className="mt-6 text-lead text-muted">{learning.subtitle}</p>
+        </Rise>
+        <Rise delay={0.33}>
+          <dl className="mt-10 grid grid-cols-1 gap-4 rounded-lg border border-line bg-surface/70 p-5 backdrop-blur sm:grid-cols-3">
+            {facts.map(({ label, value }) => (
+              <div key={label}>
+                <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-subtle">{label}</dt>
+                <dd className="mt-1.5 text-sm font-semibold">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </Rise>
+      </header>
+
+      <ArticleSection title="Introduction">
+        <Reveal>
+          <p className="border-l-2 border-accent pl-6 text-lead text-fg/90">{learning.intro}</p>
+        </Reveal>
+      </ArticleSection>
+
+      <ArticleSection title="Key Learnings">
+        <Stagger as="ol" className="grid gap-4 md:grid-cols-2">
+          {learning.keyPoints.map((point) => (
+            <StaggerItem as="li" key={point.title} className="rounded-lg border border-line bg-surface/70 p-6 backdrop-blur transition-colors hover:border-accent-fg/40">
+              <h3 className="text-lg font-bold tracking-tight text-accent-fg">{point.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{point.description}</p>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </ArticleSection>
+
+      <ArticleSection title="Tools & Technologies">
+        <Stagger as="dl" className="divide-y divide-line rounded-lg border border-line bg-surface/70 backdrop-blur">
+          {learning.techTools.map((tool) => (
+            <StaggerItem key={tool.name} className="grid gap-1 p-5 sm:grid-cols-[12rem_1fr] sm:gap-6 sm:p-6">
+              <dt className="font-semibold">{tool.name}</dt>
+              <dd className="text-sm leading-relaxed text-muted">{tool.description}</dd>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </ArticleSection>
+
+      <ArticleSection title="How I Used This in Projects">
+        <Stagger className="space-y-4">
+          {learning.projects.map((project) => (
+            <StaggerItem key={project.name} as="article" className="rounded-lg border border-line bg-surface/70 p-6 backdrop-blur transition-colors hover:border-line-strong md:p-8">
+              <h3 className="text-xl font-bold tracking-tight">{project.name}</h3>
+              <p className="mt-3 leading-relaxed text-muted">{project.description}</p>
+              <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Tools used">
+                {project.tools.map((tool) => (
+                  <li key={tool}>
+                    <Chip tone="accent">{tool}</Chip>
+                  </li>
+                ))}
+              </ul>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </ArticleSection>
+
+      <section className="border-t border-line py-14">
+        <h2 className="eyebrow mb-6 text-subtle">Skills & Tags</h2>
+        <ul className="flex flex-wrap gap-2">
+          {learning.tags.map((tag) => (
+            <li key={tag}>
+              <Chip tone="accent">{tag}</Chip>
+            </li>
+          ))}
+        </ul>
       </section>
-    </main>
+
+      <nav aria-label="More learnings" className="grid gap-4 border-t border-line pt-14 sm:grid-cols-2">
+        {prev && (
+          <Link href={`/learnings/${prev.slug}`} className="group rounded-lg border border-line p-6 transition-colors hover:border-accent-fg/40">
+            <span className="flex items-center gap-2 text-sm text-subtle">
+              <ArrowLeft size={14} aria-hidden="true" className="transition-transform group-hover:-translate-x-0.5" />
+              Previous
+            </span>
+            <span className="heading-display mt-2 block text-xl group-hover:text-accent-fg">{prev.title}</span>
+          </Link>
+        )}
+        {next && (
+          <Link href={`/learnings/${next.slug}`} className="group rounded-lg border border-line p-6 text-right transition-colors hover:border-accent-fg/40 sm:col-start-2">
+            <span className="flex items-center justify-end gap-2 text-sm text-subtle">
+              Next
+              <ArrowRight size={14} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
+            </span>
+            <span className="heading-display mt-2 block text-xl group-hover:text-accent-fg">{next.title}</span>
+          </Link>
+        )}
+      </nav>
+    </article>
   );
 }
