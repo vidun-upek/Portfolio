@@ -21,7 +21,7 @@ export default function Education() {
         <Stagger
           as="ol"
           stagger={0.12}
-          className="relative space-y-3 before:absolute before:bottom-6 before:left-[5px] before:top-6 before:w-px before:bg-gradient-to-b before:from-accent before:via-line-strong before:to-transparent"
+          className="relative space-y-3 before:absolute before:bottom-6 before:left-[5px] before:top-6 before:w-px before:bg-gradient-to-b before:from-(--brand-2) before:via-line-strong before:to-transparent"
         >
           {education.map((edu) => (
             <StaggerItem as="li" key={edu.id} className="relative pl-7 sm:pl-9">

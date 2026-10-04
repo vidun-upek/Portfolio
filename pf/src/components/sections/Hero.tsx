@@ -18,16 +18,20 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 right-0 size-[44rem] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_62%)]"
       />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-48 top-1/3 hidden size-[36rem] rounded-full bg-[radial-gradient(circle,rgb(250_204_21/0.22),transparent_65%)] light:block"
+      />
 
       <div className="container-page relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className="lg:col-span-7">
           <p
             style={delay(0.05)}
-            className={`${rise} inline-flex items-center gap-2.5 rounded-md border border-accent-fg/30 bg-accent/10 px-3.5 py-1.5 text-xs font-semibold text-accent-fg`}
+            className={`${rise} inline-flex items-center gap-2.5 rounded-md border border-accent-fg/30 bg-accent/10 px-3.5 py-1.5 text-xs font-semibold text-accent-fg light:text-[#9a3412]`}
           >
             <span aria-hidden="true" className="relative flex size-2">
               <span className="absolute inset-0 animate-ping-soft rounded-full bg-accent-fg motion-reduce:animate-none" />
-              <span className="relative size-2 rounded-full bg-accent-fg" />
+              <span className="relative size-2 rounded-full bg-brand" />
             </span>
             {profileData.status}
           </p>
@@ -35,7 +39,7 @@ export default function Hero() {
             {profileData.subheading}
           </p>
 
-          <HeroName lines={["Vidun", "Shanuka"]} className="mt-4 text-[clamp(3.25rem,15vw,4.75rem)] leading-[0.88] tracking-[-0.035em] lg:text-display" delay={0.2} />
+          <HeroName lines={["Vidun", "Shanuka"]} accentLine={1} className="mt-4 text-[clamp(3.25rem,15vw,4.75rem)] leading-[0.88] tracking-[-0.035em] lg:text-display" delay={0.2} />
 
           <p style={delay(0.3)} className={`${rise} mt-6 max-w-xl text-lead text-muted fit:mt-[min(2rem,3.5vh)]`}>
             I <Accent>build</Accent>, <Accent>ship</Accent> &amp; <Accent>scale</Accent> software that{" "}

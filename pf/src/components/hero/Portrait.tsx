@@ -10,7 +10,7 @@ const corners = ["left-3 top-3 border-l border-t", "right-3 top-3 border-r borde
 // Scale-only entrance keeps the image fully opaque, so it still counts as LCP immediately.
 export default function Portrait() {
   return (
-    <figure className="relative mx-auto aspect-[4/5] w-full max-w-sm sm:max-w-md lg:mr-0 lg:max-w-none fit:h-[min(72svh,42rem)] fit:w-auto">
+    <figure className="relative mx-auto aspect-[4/5] w-full max-w-sm sm:max-w-md lg:mr-0 lg:max-w-none fit:max-w-[calc(min(72svh,42rem)*0.8)]">
       <div className="relative size-full overflow-hidden rounded-lg border border-line bg-elevated shadow-elev-3">
         <m.div className="absolute inset-0" initial={{ scale: 1.08 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: easeOutExpo }}>
           <Image

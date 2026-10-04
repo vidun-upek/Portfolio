@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
 @custom-variant fit (@media (min-width: 64rem) and (min-height: 40rem));
 @custom-variant hscroll (@media (min-width: 64rem) and (min-height: 42.5rem) and (prefers-reduced-motion: no-preference));
 
@@ -25,26 +26,34 @@
   --elev-3: 0 24px 60px -16px rgb(0 0 0 / 0.75), 0 0 0 1px rgb(255 255 255 / 0.04);
   --glow: rgb(192 53 64 / 0.18);
   --spot: rgb(239 90 102 / 0.09);
+  --brand-1: #c03540;
+  --brand-2: #e0505e;
+  --brand-3: #ef5a66;
+  --brand-gradient: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
 }
 
+/* Light theme: warm white and black with a sunrise yellow → orange → red accent system */
 .light {
-  --bg: #fafaf9;
+  --bg: #fffaf2;
   --surface: #ffffff;
-  --elevated: #f4f4f5;
-  --fg: #0a0a0b;
-  --muted: #52525b;
-  --subtle: #6b6b73;
-  --line: rgb(0 0 0 / 0.08);
-  --line-strong: rgb(0 0 0 / 0.16);
-  --accent: #c03540;
-  --accent-hover: #a82c36;
-  --accent-fg: #b02e39;
-  --dot: rgb(0 0 0 / 0.07);
-  --elev-1: 0 1px 2px rgb(0 0 0 / 0.06);
-  --elev-2: 0 8px 24px -10px rgb(0 0 0 / 0.14), 0 2px 6px rgb(0 0 0 / 0.05);
-  --elev-3: 0 24px 60px -20px rgb(0 0 0 / 0.22), 0 0 0 1px rgb(0 0 0 / 0.03);
-  --glow: rgb(192 53 64 / 0.1);
-  --spot: rgb(192 53 64 / 0.06);
+  --elevated: #fff2e0;
+  --fg: #0b0b0b;
+  --muted: #4a3f35;
+  --subtle: #6e5f52;
+  --line: rgb(60 30 0 / 0.1);
+  --line-strong: rgb(60 30 0 / 0.2);
+  --accent: #d7301a;
+  --accent-hover: #b92a16;
+  --accent-fg: #c2410c;
+  --dot: rgb(194 65 12 / 0.13);
+  --elev-1: 0 1px 2px rgb(120 50 0 / 0.08);
+  --elev-2: 0 8px 24px -10px rgb(120 50 0 / 0.18), 0 2px 6px rgb(120 50 0 / 0.06);
+  --elev-3: 0 24px 60px -20px rgb(120 50 0 / 0.28), 0 0 0 1px rgb(120 50 0 / 0.04);
+  --glow: rgb(249 115 22 / 0.2);
+  --spot: rgb(249 115 22 / 0.13);
+  --brand-1: #facc15;
+  --brand-2: #f97316;
+  --brand-3: #dc2626;
 }
 
 @theme inline {
@@ -152,6 +161,11 @@
     color: var(--on-accent);
   }
 
+  .light ::selection {
+    background-color: #fde047;
+    color: #0b0b0b;
+  }
+
   :focus-visible {
     outline: 2px solid var(--accent-fg);
     outline-offset: 3px;
@@ -213,6 +227,10 @@ html.theme-transition *::after {
   :where([data-spotlight]:hover) > & {
     opacity: 1;
   }
+}
+
+@utility bg-brand {
+  background-image: var(--brand-gradient);
 }
 
 @utility no-scrollbar {

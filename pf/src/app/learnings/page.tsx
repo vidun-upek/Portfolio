@@ -25,7 +25,7 @@ export default function LearningsPage() {
         <Rise className="mb-8 sm:col-span-2 hscroll:mb-0 hscroll:w-[36rem] hscroll:shrink-0 hscroll:pr-16">
           <p className="eyebrow mb-4 flex items-center gap-3 text-accent-fg">
             <span>05</span>
-            <span aria-hidden="true" className="h-px w-8 bg-accent-fg/50" />
+            <span aria-hidden="true" className="h-px w-8 bg-brand" />
             <span>What I Learn Through Projects</span>
           </p>
           <h1 className="heading-display text-h1">Learnings</h1>

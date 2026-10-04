@@ -19,7 +19,7 @@ export default function Contact({ headingLevel = "h2" }: { headingLevel?: "h1" |
         <Reveal className="lg:col-span-6">
           <p className="eyebrow mb-4 flex items-center gap-3 text-accent-fg">
             <span>06</span>
-            <span aria-hidden="true" className="h-px w-8 bg-accent-fg/50" />
+            <span aria-hidden="true" className="h-px w-8 bg-brand" />
             <span>Contact</span>
           </p>
           <Heading id="contact-title" className="heading-display mb-6 text-h1">

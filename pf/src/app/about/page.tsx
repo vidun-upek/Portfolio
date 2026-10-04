@@ -44,7 +44,7 @@ export default function AboutPage() {
           Software Engineer • DevOps • Full Stack
         </p>
 
-        <HeroName lines={["Vidun", "Shanuka"]} className="text-[clamp(3.5rem,1rem+7.5vw,8.5rem)] leading-[0.85]" />
+        <HeroName lines={["Vidun", "Shanuka"]} accentLine={1} className="text-[clamp(3.5rem,1rem+7.5vw,8.5rem)] leading-[0.85]" />
 
         <Reveal delay={0.9} className="mt-10 flex flex-col items-center gap-6">
           <span aria-hidden="true" className="h-0.5 w-16 bg-accent" />

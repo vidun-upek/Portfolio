@@ -23,7 +23,7 @@ export default function ThemeToggle() {
       aria-label="Toggle colour theme"
       className="relative grid size-10 place-items-center rounded-md border border-line text-muted transition-colors hover:border-line-strong hover:text-fg"
     >
-      <Sun size={18} strokeWidth={1.75} aria-hidden="true" className="absolute transition-transform duration-500 ease-out-expo rotate-90 scale-0 [.light_&]:rotate-0 [.light_&]:scale-100" />
+      <Sun size={18} strokeWidth={1.75} aria-hidden="true" className="absolute transition-transform duration-500 ease-out-expo rotate-90 scale-0 [.light_&]:rotate-0 [.light_&]:scale-100 [.light_&]:text-accent-fg" />
       <Moon size={18} strokeWidth={1.75} aria-hidden="true" className="absolute transition-transform duration-500 ease-out-expo rotate-0 scale-100 [.light_&]:-rotate-90 [.light_&]:scale-0" />
     </button>
   );

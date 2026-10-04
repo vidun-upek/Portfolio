@@ -10,7 +10,7 @@ export default function ScrollProgress() {
     <m.div
       aria-hidden="true"
       style={{ scaleX }}
-      className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-accent via-accent-fg to-accent"
+      className="absolute inset-x-0 bottom-0 h-px origin-left bg-brand"
     />
   );
 }
